@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Winstub Le Tonnelier · Exemple de site réalisé par Alsaweb</title>
+<meta name="description" content="Exemple de démonstration réalisé par Alsaweb pour un restaurant fictif. Ce commerce n'existe pas.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bois:#3a2418;--vin:#7b2331;--creme:#f7f1e6;--papier:#fffaf1;--encre:#24170f;--gris:#6f6157;--ligne:#e3d6c3}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Work Sans',system-ui,sans-serif;color:var(--encre);background:var(--creme);line-height:1.6;font-size:17px}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.demo{background:var(--encre);color:#efe4d3;font-size:13px;text-align:center;padding:7px 14px}
+.demo a{color:#fff;font-weight:600}
+header{position:absolute;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(18px,4vw,48px);color:#fff}
+.marque{font-family:'DM Serif Display',serif;font-size:24px;text-decoration:none;letter-spacing:.01em}
+header nav{display:flex;gap:22px;font-size:15px;font-weight:500}
+header nav a{text-decoration:none;opacity:.9}
+@media(max-width:640px){header nav a:not(.resa){display:none}}
+.resa{border:1.5px solid #fff;border-radius:2px;padding:7px 14px}
+.hero{position:relative;min-height:min(88vh,760px);display:flex;align-items:flex-end;color:#fff}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,4,.82),rgba(20,10,4,.1) 60%,rgba(20,10,4,.4)),linear-gradient(to right,rgba(20,10,4,.55),rgba(20,10,4,0) 65%)}
+.hero-txt{position:relative;z-index:2;padding:0 clamp(18px,4vw,48px) clamp(36px,7vw,72px);max-width:760px}
+.hero small{text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:600}
+.hero h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(44px,8vw,92px);line-height:.98;margin:10px 0 16px}
+.hero h1 em{font-style:italic}
+.hero p{font-size:18px;max-width:30em;opacity:.95}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-block;background:var(--vin);color:#fff;text-decoration:none;font-weight:600;padding:13px 22px;border-radius:2px}
+.btn.clair{background:transparent;border:1.5px solid currentColor}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+section{padding:clamp(56px,9vw,104px) 0}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,72px);align-items:center}
+@media(max-width:800px){.intro{grid-template-columns:1fr}}
+.intro h2,.carte h2,.infos h2{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(32px,4.6vw,50px);line-height:1.05;margin-bottom:18px}
+.intro p{color:var(--gris);margin-bottom:14px}
+.intro img{aspect-ratio:4/5;object-fit:cover;width:100%;max-height:560px}
+.carte{background:var(--papier);border-top:1px solid var(--ligne);border-bottom:1px solid var(--ligne)}
+.carte-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 64px;margin-top:28px}
+@media(max-width:760px){.carte-grid{grid-template-columns:1fr}}
+.plat{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:16px 0;border-bottom:1px dotted #cbb9a2}
+.plat b{font-family:'DM Serif Display',serif;font-weight:400;font-size:21px}
+.plat span{font-variant-numeric:tabular-nums;font-weight:600;color:var(--vin)}
+.plat p{grid-column:1/-1;color:var(--gris);font-size:15px}
+.carte .note{margin-top:22px;color:var(--gris);font-size:14px}
+.bande{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:260px 260px;gap:6px;padding:6px}
+.bande img{width:100%;height:100%;object-fit:cover}
+.bande img:first-child{grid-row:span 2}
+@media(max-width:700px){.bande{grid-template-columns:1fr 1fr;grid-template-rows:200px 160px 160px}.bande img:first-child{grid-column:span 2;grid-row:auto}}
+.infos-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px;margin-top:10px}
+@media(max-width:800px){.infos-grid{grid-template-columns:1fr}}
+.infos h3{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--vin);margin-bottom:10px}
+.infos dl{display:grid;grid-template-columns:auto 1fr;gap:4px 18px}
+.infos dt{font-weight:600}
+.infos dd{color:var(--gris)}
+.infos p{color:var(--gris)}
+footer{background:var(--bois);color:#d8c7b0;padding:34px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+<div class="demo">Exemple de démonstration réalisé par <a href="../index.html">Alsaweb</a> · ce restaurant est fictif</div>
+<header>
+  <a class="marque" href="#">Le Tonnelier</a>
+  <nav><a href="#carte">La carte</a><a href="#infos">Horaires</a><a class="resa" href="#infos">Réserver</a></nav>
+</header>
+
+<div class="hero">
+  <img src="https://images.pexels.com/photos/2628533/pexels-photo-2628533.jpeg?auto=compress&cs=tinysrgb&w=1800" width="1800" height="1200" alt="Maisons à colombages au bord de l'Ill, dans la Petite France à Strasbourg">
+  <div class="hero-txt">
+    <small>Winstub · Petite France, Strasbourg</small>
+    <h1>La cuisine de <em>chez nous</em>, sans chichis.</h1>
+    <p>Tartes flambées, baeckeoffe du jeudi et vins d'Alsace au pichet, dans une salle boisée à deux pas de l'Ill.</p>
+    <div class="btns"><a class="btn" href="#infos">Réserver une table</a><a class="btn clair" href="#carte">Voir la carte</a></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap intro">
+    <div>
+      <h2>Une winstub comme on les aime.</h2>
+      <p>Des banquettes en bois, des nappes à carreaux le midi, et une carte courte qui change avec les saisons. Ici, le munster vient de la vallée et la choucroute de Krautergersheim.</p>
+      <p>Le jeudi, le baeckeoffe cuit toute la matinée dans sa terrine scellée. Pensez à le réserver la veille.</p>
+    </div>
+    <img src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=1000" width="1000" height="1250" loading="lazy" alt="Salle de restaurant avec chaises en bois et tables dressées">
+  </div>
+</section>
+
+<section class="carte" id="carte">
+  <div class="wrap">
+    <h2>La carte</h2>
+    <div class="carte-grid">
+      <div class="plat"><b>Tarte flambée traditionnelle</b><span>11 €</span><p>Crème, oignons, lardons, cuite au feu de bois.</p></div>
+      <div class="plat"><b>Presskopf maison</b><span>9 €</span><p>Vinaigrette aux échalotes, salade de saison.</p></div>
+      <div class="plat"><b>Choucroute garnie</b><span>21 €</span><p>Cinq garnitures, pommes vapeur, raifort.</p></div>
+      <div class="plat"><b>Baeckeoffe du jeudi</b><span>22 €</span><p>Trois viandes marinées au riesling, sur réservation.</p></div>
+      <div class="plat"><b>Munster rôti</b><span>14 €</span><p>Pommes de terre en robe des champs, cumin.</p></div>
+      <div class="plat"><b>Kougelhopf glacé</b><span>8 €</span><p>Au marc de gewurztraminer.</p></div>
+    </div>
+    <p class="note">Plat du jour le midi en semaine. Vins d'Alsace au verre, au pichet ou à la bouteille.</p>
+  </div>
+</section>
+
+<div class="bande" aria-label="Photos de la winstub">
+  <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1200" width="1200" height="800" loading="lazy" alt="Serveur apportant deux assiettes en salle">
+  <img src="https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="1200" loading="lazy" alt="Longue table dressée pour un repas de groupe">
+  <img src="https://images.pexels.com/photos/1813504/pexels-photo-1813504.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="1200" loading="lazy" alt="Planche de charcuterie et fromages">
+  <img src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="530" loading="lazy" alt="Verres à vin sur une table, lumière tamisée">
+  <img src="https://images.pexels.com/photos/18623402/pexels-photo-18623402.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="1000" loading="lazy" alt="Coin de salle avec suspensions et rideaux">
+</div>
+
+<section class="infos" id="infos">
+  <div class="wrap">
+    <h2>Venir nous voir</h2>
+    <div class="infos-grid">
+      <div><h3>Horaires</h3><dl><dt>Mar – sam</dt><dd>11 h 45 – 14 h · 18 h 30 – 22 h</dd><dt>Dimanche</dt><dd>11 h 45 – 14 h 30</dd><dt>Lundi</dt><dd>Fermé</dd></dl></div>
+      <div><h3>Réserver</h3><p>Par téléphone, du mardi au samedi.</p><div class="btns"><a class="btn" href="#">Appeler la winstub</a></div></div>
+      <div><h3>Adresse</h3><p>Quartier de la Petite France, Strasbourg.<br>Tram A et D, arrêt Musée d'Art Moderne.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Winstub Le Tonnelier · commerce fictif</span><span>Photos d'illustration Pexels · Site d'exemple par <a href="../index.html">Alsaweb</a></span></div></footer>
+</body>
+</html>
