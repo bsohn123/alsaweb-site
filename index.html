@@ -259,32 +259,84 @@ nav{position:sticky;top:0;z-index:50;background:rgba(246,239,233,.94);backdrop-f
 
 /* Contact */
 .contact{background:var(--pierre)}
-.contact .titre{max-width:600px;margin:0 auto 36px;text-align:center}
-.form{max-width:620px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+.contact h2{font-size:clamp(1.9rem,3.8vw,2.7rem);margin-bottom:14px;text-wrap:balance}
+.contact .intro{color:var(--encre-2);font-size:1.06rem;max-width:30em;margin-bottom:30px}
+.deroule{list-style:none;counter-reset:d;margin-bottom:30px}
+.deroule li{counter-increment:d;position:relative;padding:0 0 18px 50px}
+.deroule li::before{content:counter(d);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--encre);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:1.05rem}
+.deroule li:not(:last-child)::after{content:"";position:absolute;left:16.5px;top:36px;bottom:2px;width:1.5px;background:var(--ligne)}
+.deroule strong{display:block;font-family:var(--serif);font-weight:600;font-size:1.2rem;line-height:1.3}
+.deroule span{color:var(--encre-2);font-size:.95rem}
+.apercu{display:flex;align-items:flex-end;gap:16px}
+.apercu .tel{width:132px;flex:none;border:4px solid var(--encre);border-radius:18px;overflow:hidden;background:var(--encre);box-shadow:0 16px 30px -16px rgba(42,33,28,.55)}
+.apercu .tel img{width:100%;aspect-ratio:300/600;object-fit:cover;object-position:top}
+.apercu p{font-size:.88rem;color:var(--encre-2);max-width:15em;padding-bottom:6px}
+/* Variante : étapes en bandeau au-dessus du formulaire */
+.contact.bandeau .contact-grid{grid-template-columns:1fr;gap:0;max-width:680px;margin:0 auto}
+.contact.bandeau .entete{text-align:center}
+.contact.bandeau .intro{margin:0 auto 26px}
+.contact.bandeau .deroule{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;text-align:left}
+.contact.bandeau .deroule li{padding:0 0 0 44px}
+.contact.bandeau .deroule li::after{display:none}
+.contact.bandeau .apercu{display:none}
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr;gap:28px}
+  .apercu{display:none}
+  .deroule{margin-bottom:0}
+  .contact.bandeau .deroule{grid-template-columns:1fr;gap:12px}
+}
+/* Carte du formulaire */
+.carte{background:var(--blanc);border-radius:14px;box-shadow:0 1px 2px rgba(42,33,28,.06),0 22px 44px -26px rgba(90,50,35,.35);padding:30px 32px 28px}
+@media(max-width:560px){.carte{padding:24px 18px 22px;margin:0 -6px}}
+.progression{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.progression .etiquette{font-size:.85rem;font-weight:600;color:var(--encre-2)}
+.progression .barre{flex:1;max-width:180px;height:4px;border-radius:4px;background:var(--pierre);overflow:hidden}
+.progression .barre i{display:block;height:100%;width:50%;background:var(--email);border-radius:4px;transition:width .3s ease}
+.etape-2 .progression .barre i{width:100%}
+.form{max-width:none;margin:0}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:560px){.form-row{grid-template-columns:1fr;gap:0}}
 .field{margin-bottom:18px;display:flex;flex-direction:column;border:none;min-width:0}
 fieldset.field legend{padding:0;float:left;width:100%}
 fieldset.field .choix{clear:both}
-.field label,.field legend{font-size:.92rem;font-weight:600;margin-bottom:7px;color:var(--encre)}
+.field label,.field legend{font-size:.95rem;font-weight:600;margin-bottom:8px;color:var(--encre)}
 .field .opt{font-weight:400;color:var(--encre-2)}
-.field input[type=text],.field input[type=email],.field input[type=tel],.field textarea{font-family:var(--sans);font-size:1rem;color:var(--encre);background:#fff;border:1.5px solid var(--ligne);border-radius:8px;padding:12px 14px;width:100%;transition:border-color .15s ease}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--email)}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=url],.field textarea{font-family:var(--sans);font-size:1rem;color:var(--encre);background:#fff;border:1.5px solid #D9C8B9;border-radius:8px;padding:12px 14px;width:100%;transition:border-color .15s ease}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--sapin);box-shadow:0 0 0 3px rgba(59,90,71,.15)}
 .field textarea{resize:vertical}
+.field.invalide input,.field.invalide textarea{border-color:#B23B26}
+.err{display:none;margin-top:6px;font-size:.86rem;color:#A3361F}
+.field.invalide .err{display:block}
 .choix{display:flex;flex-wrap:wrap;gap:8px}
 .choix label{margin:0;font-weight:500;font-size:.95rem}
 .choix input{position:absolute;opacity:0;width:1px;height:1px}
-.choix span{display:inline-block;padding:9px 15px;border:1.5px solid var(--ligne);border-radius:999px;background:var(--blanc);cursor:pointer;transition:border-color .15s ease,background .15s ease}
+.choix span{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border:1.5px solid #D9C8B9;border-radius:999px;background:#fff;cursor:pointer;transition:border-color .15s ease,background .15s ease,color .15s ease}
+.choix span::before{content:"";width:0;height:12px;margin-right:-7px;background:no-repeat center/12px 12px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4 4.8 9 10 3' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");transition:width .15s ease,margin .15s ease}
 .choix label:hover span{border-color:var(--email)}
 .choix input:checked + span{background:var(--email);border-color:var(--email);color:#fff}
+.choix input:checked + span::before{width:12px;margin-right:0}
 .choix input:focus-visible + span{outline:3px solid var(--email);outline-offset:2px}
-.form-foot{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:10px;text-align:center}
-.form-rgpd{font-size:.84rem;color:var(--encre-2);max-width:30em}
-.ou-direct{margin-top:28px;text-align:center;font-size:.96rem;color:var(--encre-2)}
-.form-merci{max-width:620px;margin:0 auto;text-align:center;background:var(--blanc);border:1.5px solid var(--sapin);border-radius:10px;padding:36px 28px}
+.field.invalide .choix span{border-color:#D58A7A}
+.cache{display:none}
+.form-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
+.form-actions .btn{min-width:220px}
+.retour{background:none;border:none;font:inherit;font-size:.95rem;color:var(--encre-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px 2px}
+.retour:hover{color:var(--encre)}
+.rassure{margin-top:12px;font-size:.92rem;color:var(--encre)}
+.form-rgpd{margin-top:4px;font-size:.8rem;color:var(--encre-2)}
+@media(max-width:560px){
+  .form-actions{flex-direction:column;align-items:stretch;gap:10px}
+  .form-actions .btn{width:100%;min-width:0;text-align:center}
+  .rassure,.form-rgpd{text-align:center}
+}
+.js-etapes .etape-a-2{display:none}
+.js-etapes.etape-2 .etape-a-1{display:none}
+.js-etapes.etape-2 .etape-a-2{display:block}
+.form-merci{text-align:center;padding:16px 4px}
 .form-merci h3{font-size:1.6rem;margin-bottom:8px}
 .form-merci p{color:var(--encre-2)}
-.form-erreur{margin-top:14px;text-align:center;color:#A3361F;font-size:.94rem}
+.form-erreur{margin-top:14px;color:#A3361F;font-size:.94rem}
 
 /* Pied de page */
 footer{background:var(--encre);color:var(--sombre-texte-2);font-size:.95rem;position:relative}
@@ -583,68 +635,111 @@ footer h3{font-family:var(--sans);font-size:.95rem;font-weight:600;color:#fff;ma
 </section>
 
 <section class="contact" id="contact">
-  <div class="wrap">
-    <div class="titre">
+  <div class="wrap contact-grid">
+    <div class="entete">
       <h2>Votre maquette gratuite vous attend.</h2>
-      <p>Parlez-moi de votre établissement en une minute. Je vous réponds sous 24 h, et la maquette arrive sous 5 jours, sans engagement ni carte bancaire.</p>
+      <p class="intro">Parlez-moi de votre établissement en une minute. Voici ce qui se passe ensuite :</p>
+      <ol class="deroule">
+        <li><strong>Je vous recontacte sous 24 h</strong><span>Par téléphone, WhatsApp ou e-mail, comme vous préférez.</span></li>
+        <li><strong>Votre maquette arrive sous 5 jours</strong><span>Un lien à ouvrir sur votre téléphone.</span></li>
+        <li><strong>Vous décidez, sans engagement</strong><span>Elle vous plaît : je vous fais un devis. Sinon, on s'arrête là.</span></li>
+      </ol>
+      <div class="apercu" aria-hidden="true">
+        <div class="tel"><img src="exemples/gite-telephone.jpg" width="300" height="650" loading="lazy" alt=""></div>
+        <p>Une maquette ressemble à ça : votre établissement, sur votre téléphone.</p>
+      </div>
     </div>
 
-    <form class="form" id="contact-form" action="https://formspree.io/f/xkjwjlqd" method="POST">
-      <fieldset class="field">
-        <legend>Votre activité</legend>
-        <div class="choix">
-          <label><input type="radio" name="activite" value="Restaurant" required><span>Restaurant</span></label>
-          <label><input type="radio" name="activite" value="Commerce"><span>Commerce</span></label>
-          <label><input type="radio" name="activite" value="Artisan"><span>Artisan</span></label>
-          <label><input type="radio" name="activite" value="Gîte ou hébergement"><span>Gîte ou hébergement</span></label>
-          <label><input type="radio" name="activite" value="Autre"><span>Autre</span></label>
+    <div class="carte">
+      <form class="form" id="contact-form" action="https://formspree.io/f/xkjwjlqd" method="POST" novalidate>
+        <div class="progression" aria-live="polite">
+          <span class="etiquette" id="etape-libelle">Étape 1 sur 2</span>
+          <span class="barre" aria-hidden="true"><i></i></span>
         </div>
-      </fieldset>
-      <fieldset class="field">
-        <legend>Avez-vous déjà un site ?</legend>
-        <div class="choix">
-          <label><input type="radio" name="site_actuel" value="Oui" required><span>Oui</span></label>
-          <label><input type="radio" name="site_actuel" value="Non"><span>Non</span></label>
-          <label><input type="radio" name="site_actuel" value="Seulement Facebook ou Google"><span>Seulement Facebook ou Google</span></label>
-        </div>
-      </fieldset>
-      <div class="form-row">
-        <div class="field">
-          <label for="nom">Votre nom</label>
-          <input type="text" id="nom" name="nom" required autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="etablissement">Nom de l'établissement</label>
-          <input type="text" id="etablissement" name="etablissement" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="field">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required autocomplete="email">
-        </div>
-        <div class="field">
-          <label for="tel">Téléphone <span class="opt">(facultatif)</span></label>
-          <input type="tel" id="tel" name="telephone" autocomplete="tel">
-        </div>
-      </div>
-      <div class="field">
-        <label for="message">Un mot sur votre projet <span class="opt">(facultatif)</span></label>
-        <textarea id="message" name="message" rows="3" placeholder="Par exemple : je voudrais mettre ma carte en ligne et recevoir des réservations."></textarea>
-      </div>
-      <input type="hidden" name="_subject" value="Nouvelle demande de maquette Alsaweb">
-      <div class="form-foot">
-        <button type="submit" class="btn">Recevoir ma maquette gratuite</button>
-        <p class="form-rgpd">Vos informations servent uniquement à répondre à votre demande. Voir les <a href="mentions-legales#donnees">mentions légales</a>.</p>
-      </div>
-    </form>
 
-    <div class="form-merci" id="form-merci" hidden>
-      <h3>Merci, c'est bien reçu.</h3>
-      <p>Je vous réponds sous 24 h, puis je vous envoie le lien de votre maquette sous 5 jours.</p>
+        <div class="etape-a-1">
+          <fieldset class="field" data-requis="activite">
+            <legend>Votre activité</legend>
+            <div class="choix">
+              <label><input type="radio" name="activite" value="Restaurant"><span>Restaurant</span></label>
+              <label><input type="radio" name="activite" value="Commerce"><span>Commerce</span></label>
+              <label><input type="radio" name="activite" value="Artisan"><span>Artisan</span></label>
+              <label><input type="radio" name="activite" value="Gîte ou hébergement"><span>Gîte ou hébergement</span></label>
+              <label><input type="radio" name="activite" value="Autre"><span>Autre</span></label>
+            </div>
+            <p class="err">Choisissez votre activité.</p>
+          </fieldset>
+          <fieldset class="field" data-requis="site_actuel">
+            <legend>Avez-vous déjà un site ?</legend>
+            <div class="choix">
+              <label><input type="radio" name="site_actuel" value="Oui"><span>Oui</span></label>
+              <label><input type="radio" name="site_actuel" value="Non"><span>Non</span></label>
+              <label><input type="radio" name="site_actuel" value="Seulement Facebook ou Google"><span>Seulement Facebook ou Google</span></label>
+            </div>
+            <p class="err">Indiquez si vous avez déjà un site.</p>
+          </fieldset>
+          <div class="field cache" id="champ-site">
+            <label for="site_adresse">Adresse de votre site <span class="opt">(facultatif)</span></label>
+            <input type="url" id="site_adresse" name="site_adresse" inputmode="url" autocomplete="url" placeholder="www.votre-commerce.fr">
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn" id="continuer">Continuer</button>
+          </div>
+        </div>
+
+        <div class="etape-a-2">
+          <div class="form-row">
+            <div class="field" data-requis="nom">
+              <label for="nom">Prénom et nom</label>
+              <input type="text" id="nom" name="nom" autocomplete="name">
+              <p class="err">Indiquez votre prénom et votre nom.</p>
+            </div>
+            <div class="field" data-requis="etablissement">
+              <label for="etablissement">Nom de l'établissement</label>
+              <input type="text" id="etablissement" name="etablissement" autocomplete="organization">
+              <p class="err">Indiquez le nom de votre établissement.</p>
+            </div>
+          </div>
+          <fieldset class="field" data-requis="preference">
+            <legend>Comment préférez-vous être recontacté ?</legend>
+            <div class="choix">
+              <label><input type="radio" name="preference" value="Téléphone"><span>Téléphone</span></label>
+              <label><input type="radio" name="preference" value="WhatsApp"><span>WhatsApp</span></label>
+              <label><input type="radio" name="preference" value="E-mail"><span>E-mail</span></label>
+            </div>
+            <p class="err">Choisissez comment je vous recontacte.</p>
+          </fieldset>
+          <div class="form-row">
+            <div class="field" data-requis="email">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" autocomplete="email" inputmode="email">
+              <p class="err">Indiquez votre e-mail pour recevoir la maquette.</p>
+            </div>
+            <div class="field" data-requis="telephone">
+              <label for="tel">Téléphone <span class="opt" id="tel-opt">(facultatif)</span></label>
+              <input type="tel" id="tel" name="telephone" autocomplete="tel" inputmode="tel">
+              <p class="err">Indiquez votre numéro pour que je vous appelle.</p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Un mot sur votre projet <span class="opt">(facultatif)</span></label>
+            <textarea id="message" name="message" rows="3" placeholder="Par exemple : je voudrais mettre ma carte en ligne et recevoir des réservations."></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="Nouvelle demande de maquette Alsaweb">
+          <div class="form-actions">
+            <button type="submit" class="btn">Recevoir ma maquette gratuite</button>
+            <button type="button" class="retour" id="retour">Retour</button>
+          </div>
+          <p class="rassure">Sans engagement, réponse sous 24 h.</p>
+          <p class="form-rgpd">Vos informations servent uniquement à répondre à votre demande (<a href="mentions-legales#donnees">données personnelles</a>).</p>
+        </div>
+      </form>
+
+      <div class="form-merci" id="form-merci" hidden tabindex="-1">
+        <h3>Merci, c'est bien reçu.</h3>
+        <p id="merci-texte">Je vous recontacte sous 24 h, puis la maquette arrive sous 5 jours.</p>
+      </div>
     </div>
-
-    <p class="ou-direct">Ou directement : <a href="tel:+33750482176" class="nowrap">07 50 48 21 76</a>, <a href="https://wa.me/33750482176?text=Bonjour%2C%20je%20voudrais%20une%20maquette%20gratuite%20pour%20mon%20%C3%A9tablissement." class="nowrap" rel="noopener">WhatsApp</a> ou <a href="mailto:contact@alsaweb.fr" class="nowrap">contact@alsaweb.fr</a></p>
   </div>
 </section>
 
@@ -733,7 +828,51 @@ footer h3{font-family:var(--sans);font-size:.95rem;font-weight:600;color:#fff;ma
       }).catch(function(){ erreur(null); });
     });
   }
-  brancher('contact-form', 'form-merci', function(m){ m.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+  // Formulaire de maquette en 2 étapes, avec messages d'erreur en français
+  var cf = document.getElementById('contact-form');
+  if(cf){
+    cf.classList.add('js-etapes');
+    var libelle = document.getElementById('etape-libelle');
+    var champSite = document.getElementById('champ-site');
+    var telOpt = document.getElementById('tel-opt');
+    function val(n){ var el = cf.querySelector('[name="'+n+'"]:checked') || (cf.querySelector('[name="'+n+'"]:not([type=radio])')); return el ? el.value.trim() : ''; }
+    function marquer(n, ok){ var f = cf.querySelector('[data-requis="'+n+'"]'); if(f) f.classList.toggle('invalide', !ok); return ok; }
+    function emailOk(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+    function telRequis(){ var p = val('preference'); return p === 'Téléphone' || p === 'WhatsApp'; }
+    function verifier(etape){
+      var ok = true, champs = etape === 1 ? ['activite','site_actuel'] : ['nom','etablissement','preference','email','telephone'];
+      champs.forEach(function(n){
+        var v = val(n), bon = !!v;
+        if(n === 'email'){ bon = emailOk(v); var e = cf.querySelector('[data-requis="email"] .err'); e.textContent = v ? "Cette adresse e-mail semble incomplète." : "Indiquez votre e-mail pour recevoir la maquette."; }
+        if(n === 'telephone'){ bon = telRequis() ? v.replace(/\D/g,'').length >= 10 : true; var t = cf.querySelector('[data-requis="telephone"] .err'); t.textContent = v ? "Ce numéro semble incomplet." : "Indiquez votre numéro pour que je vous " + (val('preference') === 'WhatsApp' ? "écrive sur WhatsApp." : "appelle."); }
+        if(!marquer(n, bon) && ok){ ok = false; var premier = cf.querySelector('[data-requis="'+n+'"] input'); if(premier) premier.focus(); }
+      });
+      return ok;
+    }
+    cf.addEventListener('change', function(e){
+      var n = e.target.name;
+      if(n === 'site_actuel') champSite.classList.toggle('cache', e.target.value !== 'Oui');
+      if(n === 'preference') telOpt.textContent = telRequis() ? '' : '(facultatif)';
+      var f = e.target.closest('.invalide'); if(f && val(n)) f.classList.remove('invalide');
+    });
+    cf.addEventListener('input', function(e){ var f = e.target.closest('.invalide'); if(f && e.target.value.trim()) f.classList.remove('invalide'); });
+    function allerA(n){
+      cf.classList.toggle('etape-2', n === 2);
+      libelle.textContent = 'Étape ' + n + ' sur 2';
+      var cible = n === 2 ? document.getElementById('nom') : cf.querySelector('[name="activite"]');
+      var carte = cf.closest('.carte'); if(carte && carte.getBoundingClientRect().top < 0) carte.scrollIntoView({ block: 'start' });
+      if(cible) cible.focus({ preventScroll: true });
+    }
+    document.getElementById('continuer').addEventListener('click', function(){ if(verifier(1)) allerA(2); });
+    document.getElementById('retour').addEventListener('click', function(){ allerA(1); });
+    cf.addEventListener('submit', function(e){ if(!verifier(2)){ e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+  }
+  brancher('contact-form', 'form-merci', function(m){
+    var p = cf ? (cf.querySelector('[name="preference"]:checked') || {}).value : '';
+    var par = p === 'Téléphone' ? 'par téléphone' : p === 'WhatsApp' ? 'sur WhatsApp' : 'par e-mail';
+    var t = document.getElementById('merci-texte'); if(t) t.textContent = 'Je vous recontacte ' + par + ' sous 24 h, puis la maquette arrive sous 5 jours.';
+    m.focus({ preventScroll: true }); m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
   brancher('audit-form', 'audit-merci');
 
   // La barre d'appel se retire quand le formulaire de contact est à l'écran
