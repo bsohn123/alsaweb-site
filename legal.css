@@ -1,18 +1,19 @@
 :root{
-  --papier:#FBFBF9;
-  --pierre:#EEECE7;
-  --encre:#1A2130;
-  --encre-2:#4B5263;
-  --email:#1D3E78;
-  --ligne:#D9DBDF;
-  --blanc:#FFFFFF;
+  --papier:#F6EFE9;
+  --pierre:#EFE4DA;
+  --encre:#2A211C;
+  --encre-2:#5C4E45;
+  --email:#AC5B49;
+  --sapin:#3B5A47;
+  --ligne:#E0D2C6;
+  --blanc:#FFFDFB;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Figtree',system-ui,sans-serif;background:var(--papier);color:var(--encre);line-height:1.65;font-size:17px}
-a{color:var(--email)}
+a{color:var(--sapin)}
 a:focus-visible{outline:3px solid var(--email);outline-offset:3px;border-radius:4px}
 
-nav{position:sticky;top:0;z-index:50;background:rgba(251,251,249,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--ligne)}
+nav{position:sticky;top:0;z-index:50;background:rgba(246,239,233,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--ligne)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;max-width:1120px;margin:0 auto}
 .logo{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:1.4rem;color:var(--encre);text-decoration:none;display:flex;align-items:center;gap:10px}
 .logo-mark{width:40px;height:40px;flex:none;background:url(logo.png) center/cover no-repeat}
@@ -45,6 +46,6 @@ dl.fiche dt{color:var(--encre-2);font-size:.92rem}
 dl.fiche dd{font-weight:500}
 @media(max-width:560px){dl.fiche{grid-template-columns:1fr;gap:2px}dl.fiche dd{margin-bottom:10px}}
 
-footer{background:var(--encre);color:#B9BFCC;padding:30px 0;font-size:.88rem}
+footer{background:var(--encre);color:#B9A899;padding:30px 0;font-size:.88rem}
 .footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1120px;margin:0 auto;padding:0 24px}
-footer a{color:#DDE2EA}
+footer a{color:#E4D8CD}
