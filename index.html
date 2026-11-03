@@ -288,14 +288,11 @@ fieldset.field .choix{clear:both}
 
 /* Pied de page */
 footer{background:var(--encre);color:var(--sombre-texte-2);font-size:.95rem;position:relative}
-.toits{position:absolute;left:0;bottom:calc(100% - 1px);display:block;width:100%;height:clamp(64px,8.4vw,120px);pointer-events:none}
-.toits path{fill:var(--encre)}
-.contact{padding-bottom:calc(88px + clamp(64px,8.4vw,120px))}
 footer a{color:var(--sombre-texte);text-decoration:none}
 footer a:hover{text-decoration:underline;text-underline-offset:3px}
 footer p{margin-bottom:6px}
 /* Dernier appel */
-.appel{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;padding:30px 0 44px;border-bottom:1px solid var(--sombre-ligne)}
+.appel{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;padding:56px 0 44px;border-bottom:1px solid var(--sombre-ligne)}
 .appel h2{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:500;color:#fff;margin-bottom:12px}
 .appel .numero{display:inline-block;font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,4.6vw,3.3rem);line-height:1;color:#fff;white-space:nowrap;letter-spacing:-.01em}
 .appel .numero:hover{color:#F1D3C6;text-decoration:none}
@@ -321,7 +318,6 @@ footer h3{font-family:var(--sans);font-size:.95rem;font-weight:600;color:#fff;ma
 .pied-bas{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:32px;padding:20px 0 36px;border-top:1px solid var(--sombre-ligne);font-size:.85rem}
 .pied-bas p{margin:0}
 @media(max-width:980px){.pied{grid-template-columns:1fr 1fr;gap:32px 28px}}
-@media(max-width:760px){.contact{padding-bottom:calc(60px + 64px)}}
 @media(max-width:560px){
   .pied{grid-template-columns:1fr}
   .appel{padding:30px 0 34px}
@@ -653,7 +649,6 @@ footer h3{font-family:var(--sans);font-size:.95rem;font-weight:600;color:#fff;ma
 </section>
 
 <footer>
-  <svg class="toits" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><path d="M0,120 L0,98 L28.0,67.2 L56,98 L56,88 L88.5,54 L121,88 L121,92 L146.0,61.0 L155.0,72.2 L155.0,63.2 L161.0,63.2 L161.0,79.6 L171,92 L171,100 L204.5,66 L216.6,78.2 L216.6,69.2 L222.6,69.2 L222.6,84.3 L238,100 L238,87 L272.5,53 L307,87 L307,89 L339.5,55 L351.2,67.2 L351.2,58.2 L357.2,58.2 L357.2,73.5 L372,89 L372,89 L392.0,61.0 L399.2,71.1 L399.2,62.1 L405.2,62.1 L405.2,79.5 L412,89 L412,89 L437.5,55 L463,89 L463,91 L493.5,57 L524,91 L524,98 L561.0,64 L574.3,76.2 L574.3,67.2 L580.3,67.2 L580.3,81.8 L598,98 L598,86 L632.0,52 L666,86 L666,82 L706,62 L730,62 L730,50 L736,50 L736,36 L740,36 L740,28 L743,28 L746.5,4 L750,28 L753,28 L753,36 L757,36 L757,50 L763,50 L763,62 L798,62 L842,82 L842,95 L866.5,61 L875.3,73.2 L875.3,64.2 L881.3,64.2 L881.3,81.6 L891,95 L891,94 L926.5,60 L939.3,72.2 L939.3,63.2 L945.3,63.2 L945.3,78.0 L962,94 L962,87 L984.0,62.8 L1006,87 L1006,92 L1043.0,58 L1056.3,70.2 L1056.3,61.2 L1062.3,61.2 L1062.3,75.8 L1080,92 L1080,91 L1110.5,57 L1121.5,69.2 L1121.5,60.2 L1127.5,60.2 L1127.5,75.9 L1141,91 L1141,94 L1174.5,60 L1186.6,72.2 L1186.6,63.2 L1192.6,63.2 L1192.6,78.3 L1208,94 L1208,85 L1230.5,60.2 L1238.6,69.2 L1238.6,60.2 L1244.6,60.2 L1244.6,75.8 L1253,85 L1253,97 L1276.5,67.9 L1285.0,78.4 L1285.0,69.4 L1291.0,69.4 L1291.0,85.8 L1300,97 L1300,99 L1320.0,71.0 L1340,99 L1340,95 L1359.5,73.5 L1379,95 L1379,99 L1405.0,65 L1431,99 L1431,98 L1464.0,64 L1475.9,76.2 L1475.9,67.2 L1481.9,67.2 L1481.9,82.4 L1497,98 L1497,85 L1528.0,51 L1539.2,63.2 L1539.2,54.2 L1545.2,54.2 L1545.2,69.8 L1559,85 L1559,120 Z"/></svg>
   <div class="wrap">
     <div class="appel">
       <div>
