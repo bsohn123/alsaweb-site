@@ -7,6 +7,9 @@
 /exemples/*
   X-Robots-Tag: noindex
 
+/instagram/*
+  X-Robots-Tag: noindex
+
 /*.jpg
   Cache-Control: public, max-age=2592000
 

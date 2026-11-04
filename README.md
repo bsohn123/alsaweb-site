@@ -8,6 +8,7 @@ Site statique en HTML et CSS, sans étape de compilation.
 
 - `index.html` : la page d'accueil
 - `exemples/` : trois démos de commerces fictifs (non indexées)
+- `instagram/` : visuels des posts Instagram, lus par Make au moment de la publication (non indexés)
 - `404.html` : page affichée pour une adresse inconnue
 - `_headers` : en-têtes HTTP (sécurité, cache des images)
 - `wrangler.jsonc`, `.assetsignore` : configuration Cloudflare
