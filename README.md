@@ -7,7 +7,7 @@ Site statique en HTML et CSS, sans étape de compilation.
 ## Contenu
 
 - `index.html` : la page d'accueil
-- `exemples/` : trois démos de commerces fictifs (non indexées)
+- `exemples/` : quatre démos de commerces fictifs (non indexées) ; `exemples/auberge/` a son propre dossier `photos/`
 - `instagram/` : visuels des posts Instagram, lus par Make au moment de la publication (non indexés)
 - `404.html` : page affichée pour une adresse inconnue
 - `_headers` : en-têtes HTTP (sécurité, cache des images)
