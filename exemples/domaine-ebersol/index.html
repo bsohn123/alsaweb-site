@@ -10,7 +10,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%237a1f2b'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' text-anchor='middle' fill='%23fff'%3EE%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="seq/d001.webp">
+<link rel="preload" as="image" href="seq/h001.webp">
 <style>
 /*
 VOICE: calme, viticole, haut de gamme — peu de mots, beaucoup d'air, gestes précis.
@@ -108,7 +108,7 @@ body.menu-open #menu .mfoot{opacity:1;transition-delay:.6s}
 /* vol */
 #vol{position:relative;height:960vh;background:#1d140f}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-#seq{position:absolute;inset:0;width:100%;height:100%;display:block;background:#2a1d14 url(seq/d001.webp) center/cover}
+#seq{position:absolute;inset:0;width:100%;height:100%;display:block;background:#2a1d14 url(seq/h001.webp) center/cover}
 .stage::after{content:'';position:absolute;inset:auto 0 0;height:60%;background:linear-gradient(transparent,rgba(22,12,6,.62));pointer-events:none}
 .chap{position:absolute;z-index:2;left:max(5vw,18px);bottom:clamp(76px,12vh,130px);max-width:min(620px,86vw);color:#fff;opacity:0;text-shadow:0 2px 22px rgba(20,10,4,.45);pointer-events:none}
 .chap.on{pointer-events:auto}
@@ -448,7 +448,7 @@ footer{background:#1d140f;color:#e9dcc7;padding:clamp(56px,8vw,96px) max(5vw,18p
   const endIntro=()=>{if(introDone)return;introDone=true;intro.classList.add('out');document.documentElement.classList.remove('locked');lenis&&lenis.start();setTimeout(()=>intro.remove(),1400);dirty=true;};
 
   /* séquence du vol */
-  const N=361;let kind=innerWidth/innerHeight<1?'m':'d',gen=0;const src=i=>`seq/${kind}${String(i+1).padStart(3,'0')}.webp`;
+  const N=361;let kind=innerWidth/innerHeight<1?'m':'d',gen=0;const src=i=>`seq/${kind==='d'?'h':'m'}${String(i+1).padStart(3,'0')}.webp`;
   const cv=$('#seq'),ctx=cv.getContext('2d'),vol=$('#vol'),head=$('#top'),cue=$('#cue');
   const chaps=$$('.chap'),frames=new Array(N);let loaded=0,dirty=true;
   // chargement : une passe grossière (1 image sur 12), puis les images les plus proches de la position du scroll, en priorité devant
