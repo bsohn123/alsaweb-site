@@ -3,4 +3,9 @@ README.md
 wrangler.jsonc
 .wrangler
 node_modules
-.gitignore
+src
+agent
+tests
+.dev.vars
+package.json
+package-lock.json
