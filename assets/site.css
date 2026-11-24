@@ -105,10 +105,13 @@ p{margin:0}
 .etape-vous{background:transparent;border:2px dashed #4C6858}
 .etape-vous .etape-corps{padding:34px 30px}
 
+/* Les sections qui suivent la route passent devant elle */
+.route ~ section,.route ~ .bandeau-immersif{position:relative;z-index:1}
+
 /* La route — version animée (grand écran) */
 @media (min-width:960px){
   .route.anime{height:520vh;padding:0}
-  .route.anime .route-scene{position:sticky;top:72px;height:calc(100vh - 72px);grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:48px}
+  .route.anime .route-scene{overflow:hidden;position:sticky;top:72px;height:calc(100vh - 72px);grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:48px}
   .route.anime .route-carte{max-width:none;height:min(78vh,720px)}
   .route.anime .route-carte svg{height:100%;width:auto;margin-inline:auto}
   .route.anime .vehicule{display:block}
@@ -161,6 +164,51 @@ fieldset.champ{border:0;margin:0 0 18px;padding:0;min-width:0}
 .merci{display:grid;gap:14px}
 .merci h3{font-size:34px}
 .merci .adresse-finale{font:600 17px var(--borne);color:var(--gres-fonce);word-break:break-all}
+
+/* Maquette : aperçu en direct et formulaire en deux étapes */
+.maquette-gauche .chapeau{max-width:34em}
+.apercu{margin:32px 0 0;border:1px solid var(--filet-clair);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 34px 60px -40px rgba(28,38,32,.55)}
+.apercu-barre{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#EFE6DD}
+.apercu-barre i{width:9px;height:9px;border-radius:50%;background:#D3C4B7}
+.apercu-barre .adresse{margin-left:8px;flex:1;min-width:0;background:#fff;border-radius:7px;padding:6px 12px;font:500 13px var(--borne);color:var(--encre);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apercu-barre b{color:var(--gres-fonce);font-weight:600}
+.apercu-site{position:relative;aspect-ratio:16/10;background:#2B1D16;overflow:hidden}
+.apercu-site img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s ease}
+.apercu-site::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,12,10,.78) 0%,rgba(15,12,10,.15) 55%,rgba(15,12,10,.45) 100%)}
+.apercu-nav{position:absolute;z-index:1;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 20px;color:#fff;font-size:13px}
+.apercu-nav #apercu-marque{font-family:var(--titre);font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apercu-liens{display:flex;gap:14px;flex:none;color:#F1E9E0}
+.apercu-texte{position:absolute;z-index:1;left:22px;right:22px;bottom:22px;color:#fff}
+.apercu-texte #apercu-accroche{font-size:14px;color:#F1E9E0}
+.apercu-texte .nom{font-family:var(--titre);font-size:clamp(30px,3.6vw,46px);line-height:1;margin-top:6px;overflow-wrap:anywhere}
+.apercu-texte .cta{display:inline-block;margin-top:14px;background:#fff;color:var(--encre);border-radius:999px;padding:9px 16px;font-weight:600;font-size:14px}
+.apercu figcaption{padding:12px 16px;font-size:14px;color:var(--encre-2);border-top:1px solid var(--filet-clair)}
+@media (max-width:560px){.apercu-liens{display:none}}
+.etapes-nuit{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.etapes-nuit li{border-top:2px solid var(--encre);padding-top:12px}
+.etapes-nuit b{display:block;font-family:var(--titre);font-weight:400;font-size:24px;line-height:1.1;color:var(--gres-fonce);margin-bottom:4px}
+.etapes-nuit span{font-size:15px;line-height:1.45;color:var(--encre-2)}
+@media (max-width:560px){.etapes-nuit{grid-template-columns:1fr;gap:14px}}
+.progression{list-style:none;margin:0 0 26px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.progression li{padding-top:10px;border-top:3px solid #E5D9CD;font-size:15px;font-weight:600;color:var(--encre-2)}
+.progression li.fait{border-top-color:var(--encre);color:var(--encre)}
+.progression li[aria-current="step"]{border-top-color:var(--gres-fonce);color:var(--encre)}
+fieldset.form-etape{border:0;margin:0;padding:0;min-width:0}
+.js-etapes [data-etape="2"]{display:none}
+.js-etapes.etape-2 [data-etape="1"]{display:none}
+.js-etapes.etape-2 [data-etape="2"]{display:block}
+.actions-form{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:8px}
+.rassure-form{font-size:14px;color:var(--encre-2)}
+.lien-retour{background:none;border:0;padding:12px 4px;min-height:44px;font:600 15px var(--texte);color:var(--encre-2);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.lien-retour:hover{color:var(--encre)}
+.precision{margin:4px 0 20px;border-top:1px solid #EEE4DA;border-bottom:1px solid #EEE4DA}
+.precision summary{list-style:none;cursor:pointer;display:flex;justify-content:flex-start;gap:6px;align-items:center;min-height:52px;font-weight:600;font-size:15px}
+.precision summary::-webkit-details-marker{display:none}
+.precision summary::after{margin-left:auto;content:"+";font-family:var(--titre);font-size:26px;line-height:1;color:var(--gres-fonce);transition:transform .2s}
+.precision[open] summary::after{transform:rotate(45deg)}
+.precision[open]{padding-bottom:4px}
+.formulaire .puces label{padding:8px 13px;font-size:15px}
+@media (min-width:901px){#formulaire-maquette{position:sticky;top:96px}}
 
 /* Carte en direct */
 .carte-direct .enveloppe{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:center}
@@ -342,4 +390,14 @@ fieldset.champ{border:0;margin:0 0 18px;padding:0;min-width:0}
 @media (max-width:720px){
   .chapitre{bottom:112px}
   .legende-vol{left:var(--marge);right:auto;bottom:92px;font-size:12px}
+}
+/* Sur téléphone : le formulaire passe juste sous le titre, l'aperçu ensuite */
+@media (max-width:900px){
+  #maquette .enveloppe{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  #maquette .maquette-gauche{display:contents}
+  #maquette .titre-bloc{order:1}
+  #maquette .chapeau{order:2}
+  #formulaire-maquette{order:3;margin-top:28px}
+  #maquette .apercu{order:4}
+  #maquette .etapes-nuit{order:5}
 }

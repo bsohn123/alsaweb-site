@@ -176,52 +176,68 @@
 
 <section class="maquette clair bloc" id="maquette" aria-labelledby="titre-maquette">
   <div class="enveloppe">
-    <div>
+    <div class="maquette-gauche">
       <h2 class="titre-bloc" id="titre-maquette">Votre maquette, dès demain matin.</h2>
-      <p class="chapeau">Décrivez votre commerce en une minute. Pendant la nuit, une première version de votre site est préparée, à votre nom. Je la relis, puis vous la recevez par e-mail, à une adresse privée rien qu'à vous.</p>
-      <ol class="deroule">
-        <li><span class="quand">Ce soir</span><p><strong>Vous remplissez le formulaire</strong><span>Activité, nom, commune : rien de plus n'est nécessaire.</span></p></li>
-        <li><span class="quand">La nuit</span><p><strong>La maquette est préparée</strong><span>Avec votre nom, votre activité et des photos d'ambiance de la région.</span></p></li>
-        <li><span class="quand">Demain</span><p><strong>Je la relis et vous l'envoie</strong><span>Un lien à ouvrir sur votre téléphone, que vous pouvez montrer à qui vous voulez.</span></p></li>
-        <li><span class="quand">Ensuite</span><p><strong>Vous décidez</strong><span>Elle vous plaît : devis à prix fixe. Sinon, on s'arrête là.</span></p></li>
+      <p class="chapeau">Décrivez votre commerce en une minute : l'aperçu ci-dessous se construit pendant que vous tapez. La vraie maquette, relue par moi, arrive par e-mail le lendemain.</p>
+
+      <figure class="apercu" aria-label="Aperçu de votre futur site, mis à jour pendant la saisie">
+        <div class="apercu-barre" aria-hidden="true"><i></i><i></i><i></i><span class="adresse"><b id="apercu-slug">votre-commerce</b>.alsaweb.fr</span></div>
+        <div class="apercu-site">
+          <img id="apercu-photo" src="exemples/auberge/photos/salle-800.webp" width="800" height="533" alt="" loading="lazy">
+          <div class="apercu-nav" aria-hidden="true"><span id="apercu-marque">Votre commerce</span><span class="apercu-liens"><span id="apercu-l1">La carte</span><span id="apercu-l2">Le lieu</span><span id="apercu-l3">Réserver</span></span></div>
+          <div class="apercu-texte">
+            <p id="apercu-accroche">Cuisine de saison, en Alsace</p>
+            <p class="nom" id="apercu-nom">Votre commerce</p>
+            <span class="cta" id="apercu-cta">Réserver une table</span>
+          </div>
+        </div>
+        <figcaption>Aperçu instantané. Votre maquette est faite à la main, avec vos informations.</figcaption>
+      </figure>
+
+      <ol class="etapes-nuit">
+        <li><b>Ce soir</b><span>Vous décrivez votre commerce.</span></li>
+        <li><b>Cette nuit</b><span>Votre maquette est préparée.</span></li>
+        <li><b>Demain</b><span>Je la relis et vous l'envoie.</span></li>
       </ol>
-      <div class="navigateur" aria-hidden="true">
-        <div class="barre"><i></i><i></i><i></i><span class="adresse"><b id="apercu-slug">votre-commerce</b>.alsaweb.fr</span></div>
-        <div class="ecran"><span class="nom" id="apercu-nom">Votre commerce</span><i style="width:72%"></i><i style="width:54%"></i><i style="width:64%;height:90px;margin-top:6px"></i></div>
-      </div>
     </div>
 
     <div class="formulaire" id="formulaire-maquette">
+      <ol class="progression" id="progression" aria-label="Étapes du formulaire">
+        <li aria-current="step">1. Votre commerce</li>
+        <li>2. Où vous l'envoyer</li>
+      </ol>
       <form id="form-maquette" action="/api/maquette" data-secours="https://formspree.io/f/xkjwjlqd" data-merci="merci-maquette" data-offre="maquette" method="POST" novalidate>
-        <h3>Ma maquette gratuite</h3>
-        <p class="aide">Sans engagement, sans carte bancaire. Tous les champs sont obligatoires, sauf mention contraire.</p>
-
-        <fieldset class="champ" data-requis="activite">
-          <legend>Votre activité</legend>
-          <div class="puces">
-            <input type="radio" id="act-resto" name="activite" value="Restaurant"><label for="act-resto">Restaurant</label>
-            <input type="radio" id="act-commerce" name="activite" value="Commerce"><label for="act-commerce">Commerce</label>
-            <input type="radio" id="act-artisan" name="activite" value="Artisan"><label for="act-artisan">Artisan</label>
-            <input type="radio" id="act-heberg" name="activite" value="Hébergement"><label for="act-heberg">Hébergement</label>
-            <input type="radio" id="act-autre" name="activite" value="Autre"><label for="act-autre">Autre</label>
-          </div>
-          <span class="erreur">Choisissez votre activité.</span>
-        </fieldset>
-
-        <div class="duo">
+        <fieldset class="form-etape" data-etape="1">
+          <legend class="sr">Votre commerce</legend>
+          <fieldset class="champ" data-requis="activite">
+            <legend>Votre activité</legend>
+            <div class="puces">
+              <input type="radio" id="act-resto" name="activite" value="Restaurant"><label for="act-resto">Restaurant</label>
+              <input type="radio" id="act-commerce" name="activite" value="Commerce"><label for="act-commerce">Commerce</label>
+              <input type="radio" id="act-artisan" name="activite" value="Artisan"><label for="act-artisan">Artisan</label>
+              <input type="radio" id="act-heberg" name="activite" value="Hébergement"><label for="act-heberg">Hébergement</label>
+              <input type="radio" id="act-autre" name="activite" value="Autre"><label for="act-autre">Autre</label>
+            </div>
+            <span class="erreur">Choisissez votre activité.</span>
+          </fieldset>
           <div class="champ" data-requis="etablissement">
             <label for="etablissement">Nom de l'établissement</label>
-            <input type="text" id="etablissement" name="etablissement" autocomplete="organization" maxlength="80">
+            <input type="text" id="etablissement" name="etablissement" autocomplete="organization" maxlength="80" placeholder="Winstub du Cerf">
             <span class="erreur">Indiquez le nom de votre établissement.</span>
           </div>
           <div class="champ" data-requis="commune">
             <label for="commune">Commune</label>
-            <input type="text" id="commune" name="commune" autocomplete="address-level2" maxlength="60" placeholder="Ex. Obernai">
+            <input type="text" id="commune" name="commune" autocomplete="address-level2" maxlength="60" placeholder="Obernai">
             <span class="erreur">Indiquez votre commune.</span>
           </div>
-        </div>
+          <div class="actions-form">
+            <button class="btn btn-gres" type="button" id="continuer">Continuer</button>
+            <span class="rassure-form">Gratuit, sans engagement, sans carte bancaire.</span>
+          </div>
+        </fieldset>
 
-        <div class="duo">
+        <fieldset class="form-etape" data-etape="2">
+          <legend class="sr">Où vous envoyer la maquette</legend>
           <div class="champ" data-requis="nom">
             <label for="nom">Prénom et nom</label>
             <input type="text" id="nom" name="nom" autocomplete="name" maxlength="80">
@@ -229,36 +245,36 @@
           </div>
           <div class="champ" data-requis="email">
             <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="120">
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="120" placeholder="vous@votre-commerce.fr">
             <span class="erreur">Indiquez l'e-mail où recevoir la maquette.</span>
           </div>
-        </div>
-
-        <div class="duo">
           <div class="champ">
             <label for="telephone">Téléphone <span class="opt">(facultatif)</span></label>
             <input type="tel" id="telephone" name="telephone" autocomplete="tel" inputmode="tel" maxlength="30">
           </div>
-          <div class="champ">
-            <label for="site_actuel">Site actuel <span class="opt">(facultatif)</span></label>
-            <input type="text" id="site_actuel" name="site_actuel" inputmode="url" maxlength="200" placeholder="www.votre-commerce.fr">
+          <details class="precision">
+            <summary>Ajouter une précision <span class="opt">(facultatif)</span></summary>
+            <div class="champ">
+              <label for="site_actuel">Votre site actuel</label>
+              <input type="text" id="site_actuel" name="site_actuel" inputmode="url" maxlength="200" placeholder="www.votre-commerce.fr">
+            </div>
+            <div class="champ">
+              <label for="message">Ce qui compte pour vous</label>
+              <textarea id="message" name="message" rows="3" maxlength="1200" placeholder="Mettre la carte en ligne et recevoir des réservations."></textarea>
+            </div>
+          </details>
+          <div class="pot" aria-hidden="true"><label for="site_web">Ne pas remplir</label><input type="text" id="site_web" name="site_web" tabindex="-1" autocomplete="off"></div>
+          <div class="actions-form">
+            <button class="btn btn-gres" type="submit">Recevoir ma maquette</button>
+            <button class="lien-retour" type="button" id="retour">Retour</button>
           </div>
-        </div>
-
-        <div class="champ">
-          <label for="message">Ce qui compte pour vous <span class="opt">(facultatif)</span></label>
-          <textarea id="message" name="message" rows="3" maxlength="1200" placeholder="Par exemple : mettre la carte en ligne et recevoir des réservations."></textarea>
-        </div>
-
-        <div class="pot" aria-hidden="true"><label for="site_web">Ne pas remplir</label><input type="text" id="site_web" name="site_web" tabindex="-1" autocomplete="off"></div>
-
-        <button class="btn btn-gres" type="submit">Recevoir ma maquette</button>
-        <p class="consent">Vos informations servent uniquement à préparer votre maquette et à vous la transmettre (<a href="mentions-legales#donnees">données personnelles</a>).</p>
+          <p class="consent">Vos informations servent uniquement à préparer votre maquette et à vous la transmettre (<a href="mentions-legales#donnees">données personnelles</a>).</p>
+        </fieldset>
       </form>
 
       <div class="merci" id="merci-maquette" hidden tabindex="-1">
         <h3>C'est parti.</h3>
-        <p id="merci-texte">Votre maquette est préparée cette nuit. Je la relis, puis vous la recevez par e-mail à cette adresse :</p>
+        <p id="merci-texte">Votre maquette est préparée cette nuit. Je la relis, puis vous la recevez par e-mail, à cette adresse :</p>
         <p class="adresse-finale" id="merci-adresse"></p>
         <p>Si une information me manque, je vous écris sous 24 h.</p>
       </div>
