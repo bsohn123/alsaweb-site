@@ -102,8 +102,23 @@
 
   // Mini-audit : Formspree, comme avant
   var audit = document.getElementById('audit-form');
+  var rapportSite = document.getElementById('rapport-site');
+  var auditSite = document.getElementById('audit-site');
+  // L'en-tête de l'exemple de rapport reprend l'adresse tapée
+  if (auditSite && rapportSite) auditSite.addEventListener('input', function () {
+    rapportSite.textContent = auditSite.value.trim().replace(/^https?:\/\//, '').replace(/\/$/, '') || 'www.votre-commerce.fr';
+  });
   if (audit) audit.addEventListener('submit', function (e) {
     e.preventDefault();
+    var prec0 = audit.querySelector('.form-erreur'); if (prec0) prec0.remove();
+    var site = audit.querySelector('[name="site"]').value.trim(), mail = audit.querySelector('[name="email"]').value.trim();
+    if (!site || !emailOk(mail)) {
+      var pe = document.createElement('p'); pe.className = 'form-erreur'; pe.setAttribute('role', 'alert');
+      pe.textContent = !site ? "Indiquez l'adresse de votre site." : 'Indiquez un e-mail valide pour recevoir le rapport.';
+      audit.appendChild(pe);
+      (site ? audit.querySelector('[name="email"]') : auditSite).focus();
+      return;
+    }
     var btn = audit.querySelector('button[type="submit"]'), libelle = btn.textContent;
     var prec = audit.querySelector('.form-erreur'); if (prec) prec.remove();
     btn.disabled = true; btn.textContent = 'Envoi en cours…';

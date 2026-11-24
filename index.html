@@ -352,40 +352,42 @@
 
 <section class="audit clair bloc" id="audit" aria-labelledby="titre-audit">
   <div class="enveloppe">
-    <div>
-      <h2 class="titre-bloc" id="titre-audit">Vous avez déjà un site ? Faites-le vérifier.</h2>
-      <p class="chapeau">Je passe votre site au crible, sur ordinateur et sur téléphone, et je vous envoie par e-mail les points à corriger, expliqués simplement. Vous en faites ce que vous voulez, même sans travailler avec moi.</p>
-      <ul class="points">
-        <li>Vitesse de chargement</li>
-        <li>Affichage sur téléphone</li>
-        <li>Mentions légales et cookies</li>
-        <li>Référencement sur Google</li>
-        <li>Liens cassés</li>
-        <li>Numéro et adresse cliquables</li>
-      </ul>
+    <div class="audit-tete">
+      <h2 class="titre-bloc" id="titre-audit">Votre site actuel, passé au crible.</h2>
+      <p class="chapeau">Gratuit et sans engagement. Je vérifie votre site sur ordinateur et sur téléphone, puis je vous envoie par e-mail, sous 48 h, les points à corriger, expliqués simplement. Vous en faites ce que vous voulez, même sans travailler avec moi.</p>
     </div>
-    <div class="formulaire">
-      <form id="audit-form" action="https://formspree.io/f/xkjwjlqd" method="POST">
-        <input type="hidden" name="_subject" value="Mini-audit demandé sur alsaweb.fr">
-        <div class="champ">
-          <label for="audit-site">Adresse de votre site</label>
-          <input type="text" id="audit-site" name="site" required inputmode="url" placeholder="www.votre-commerce.fr">
-        </div>
-        <div class="champ">
-          <label for="audit-email">Votre e-mail</label>
-          <input type="email" id="audit-email" name="email" required autocomplete="email">
-        </div>
-        <div class="champ">
-          <label for="audit-etab">Nom de l'établissement <span class="opt">(facultatif)</span></label>
-          <input type="text" id="audit-etab" name="etablissement">
-        </div>
-        <button class="btn btn-gres" type="submit">Recevoir mon mini-audit</button>
-        <p class="consent">Le mini-audit arrive par e-mail sous 48 h. Votre adresse sert uniquement à vous l'envoyer.</p>
-      </form>
-      <div class="merci" id="audit-merci" hidden tabindex="-1">
-        <h3>C'est noté.</h3>
-        <p>Je regarde votre site et je vous envoie le mini-audit par e-mail sous 48 h.</p>
+
+    <form class="audit-barre" id="audit-form" action="https://formspree.io/f/xkjwjlqd" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Mini-audit demandé sur alsaweb.fr">
+      <div class="champ">
+        <label for="audit-site">Adresse de votre site</label>
+        <input type="text" id="audit-site" name="site" required inputmode="url" autocomplete="url" placeholder="www.votre-commerce.fr">
       </div>
+      <div class="champ">
+        <label for="audit-email">Votre e-mail</label>
+        <input type="email" id="audit-email" name="email" required autocomplete="email" inputmode="email" placeholder="vous@votre-commerce.fr">
+      </div>
+      <button class="btn btn-gres" type="submit">Recevoir mon mini-audit</button>
+      <p class="consent">Votre adresse sert uniquement à vous envoyer le rapport.</p>
+    </form>
+    <div class="merci audit-merci" id="audit-merci" hidden tabindex="-1">
+      <h3>C'est noté.</h3>
+      <p>Je regarde votre site et je vous envoie le mini-audit par e-mail sous 48 h.</p>
+    </div>
+
+    <div class="rapport" aria-label="Exemple de rapport de mini-audit">
+      <div class="rapport-tete">
+        <p>Rapport pour <span id="rapport-site">www.votre-commerce.fr</span></p>
+        <span class="rapport-exemple">Exemple</span>
+      </div>
+      <ul class="rapport-lignes">
+        <li><span>Vitesse de chargement</span><span class="statut a-revoir">À revoir</span></li>
+        <li><span>Affichage sur téléphone</span><span class="statut a-revoir">À revoir</span></li>
+        <li><span>Mentions légales et cookies</span><span class="statut correct">Correct</span></li>
+        <li><span>Référencement sur Google</span><span class="statut a-revoir">À revoir</span></li>
+        <li><span>Liens cassés</span><span class="statut correct">Correct</span></li>
+        <li><span>Numéro et adresse cliquables</span><span class="statut a-revoir">Absent</span></li>
+      </ul>
     </div>
   </div>
 </section>
