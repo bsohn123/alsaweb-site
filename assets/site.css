@@ -250,21 +250,52 @@ fieldset.form-etape{border:0;margin:0;padding:0;min-width:0}
 .bandeau-immersif h2{font-size:clamp(44px,7vw,96px);max-width:12ch}
 .bandeau-immersif p{margin:20px 0 28px;font-size:19px;max-width:40em;color:#DCE3DE}
 
-/* Tarifs en panneaux */
-.panneaux{display:grid;gap:16px;margin-top:48px;max-width:960px}
-.panneau{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.3fr) auto;align-items:center;gap:12px 28px;padding:22px 30px;border-radius:12px;border:4px solid var(--encre);background:#fff;color:var(--encre);text-decoration:none;transition:transform .2s}
-.panneau:hover{transform:translateX(6px)}
-.panneau .direction{font-weight:700;font-size:clamp(22px,2.4vw,30px);display:flex;align-items:center;gap:12px}
-.panneau .direction svg{width:28px;height:28px;flex:none}
-.panneau .detail{font-size:15px;line-height:1.45;color:var(--encre-2)}
-.panneau .prix{font-family:var(--titre);font-size:clamp(32px,3.4vw,44px);white-space:nowrap}
-.panneau.vert{background:#1F4A33;border-color:#1F4A33;color:#fff;margin-left:clamp(0px,5vw,64px)}
-.panneau.vert .detail{color:#D5E3DA}
-.panneau.gres{background:var(--gres-fonce);border-color:var(--gres-fonce);color:#fff;margin-left:clamp(0px,10vw,128px)}
-.panneau.gres .detail{color:#F6DCD3}
-@media (max-width:720px){.panneau{grid-template-columns:1fr auto;padding:18px 20px}.panneau .direction{white-space:nowrap;font-size:21px}.panneau .detail{grid-column:1/-1;grid-row:2}.panneau.vert,.panneau.gres{margin-left:0}.panneau:hover{transform:none}}
-.entretien{margin-top:28px;max-width:62ch;color:var(--encre-2)}
-.entretien strong{color:var(--encre)}
+/* Tarifs : « Quelle route pour vous ? » */
+.tarifs-tete{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px clamp(32px,6vw,96px);align-items:end}
+.tarifs-tete .chapeau{margin-top:0}
+@media (max-width:900px){.tarifs-tete{grid-template-columns:1fr}}
+.besoins{margin-top:40px}
+.besoins-titre{font-weight:600;font-size:17px;margin-bottom:12px}
+.besoins-puces{display:flex;flex-wrap:wrap;gap:8px}
+.besoin{min-height:44px;padding:9px 16px;border-radius:999px;border:1.5px solid #CDBFB1;background:#fff;color:var(--encre);font:500 15px var(--texte);cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.besoin:hover{border-color:var(--encre)}
+.besoin[aria-pressed="true"]{background:var(--encre);border-color:var(--encre);color:var(--papier)}
+.route-offres{--g:20px;--col:calc((100% - 2 * var(--g)) / 3);--pas:calc(var(--col) + var(--g));position:relative;height:48px;margin:36px 0 12px}
+.route-offres .voie{position:absolute;top:18px;height:12px;left:calc(var(--col) / 2);right:calc(var(--col) / 2);background:#E5D9CD;border-radius:999px}
+.route-offres .parcours{position:absolute;top:22px;height:4px;left:calc(var(--col) / 2);width:calc(var(--n) * var(--pas));background:var(--gres-fonce);border-radius:999px;transition:width .5s ease}
+.route-offres .borne-offre{position:absolute;top:16px;left:calc(var(--col) / 2 + var(--i) * var(--pas) - 8px);width:16px;height:16px;border-radius:50%;background:#fff;border:2.5px solid var(--encre);box-sizing:border-box}
+.route-offres .point-offre{position:absolute;top:10px;left:calc(var(--col) / 2 + var(--n) * var(--pas) - 14px);width:28px;height:28px;border-radius:50%;background:var(--gres-fonce);border:4px solid #fff;box-shadow:0 0 0 8px rgba(154,63,46,.16);box-sizing:border-box;transition:left .5s ease}
+.offres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+.offre{background:#fff;border:1px solid var(--filet-clair);border-radius:20px;padding:22px 24px 26px;color:var(--encre);transition:background-color .35s,color .35s,transform .35s,border-color .35s}
+.offre.choisie{background:#1F4A33;border-color:#1F4A33;color:#fff;transform:translateY(-8px)}
+.offre-tag{min-height:20px;font-size:14px;font-weight:600;color:#F0B9A5}
+.offre h3{font-family:var(--texte);font-weight:700;font-size:22px;letter-spacing:0;margin:6px 0 10px}
+.offre-prix{font-family:var(--titre);font-size:clamp(40px,4vw,52px);line-height:1}
+.offre-prix span{font-family:var(--texte);font-size:16px;color:var(--encre-2)}
+.offre.choisie .offre-prix span{color:#CFE0D5}
+.offre-pour{margin:10px 0 18px;padding-bottom:16px;border-bottom:1px solid var(--filet-clair);color:var(--encre-2);font-size:15px}
+.offre.choisie .offre-pour{color:#CFE0D5;border-bottom-color:#356349}
+.offre ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:15px;line-height:1.4}
+.offre li{position:relative;padding-left:24px}
+.offre li::before{content:"";position:absolute;left:2px;top:5px;width:11px;height:6px;border-left:2px solid var(--gres-fonce);border-bottom:2px solid var(--gres-fonce);transform:rotate(-45deg)}
+.offre.choisie li::before{border-color:#F0B9A5}
+.offre li a{color:inherit;text-underline-offset:3px}
+.tranquillite{display:flex;gap:18px;align-items:flex-start;margin-top:28px;padding:20px 24px;background:#fff;border:1px solid var(--filet-clair);border-radius:18px}
+.tranquillite p{font-size:15px;line-height:1.5;color:var(--encre-2);max-width:72ch}
+.tranquillite p strong{color:var(--encre);font-size:17px}
+.tranquillite p+p{margin-top:4px}
+.interrupteur{flex:none;position:relative;width:52px;height:30px;margin-top:2px;border-radius:999px;border:0;background:#CDBFB1;cursor:pointer;transition:background-color .2s}
+.interrupteur::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s}
+.interrupteur[aria-checked="true"]{background:var(--gres-fonce)}
+.interrupteur[aria-checked="true"]::after{left:26px}
+.bilan{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:24px}
+.bilan p{font-size:19px}
+@media (max-width:760px){
+  .route-offres{display:none}
+  .offres{grid-template-columns:1fr}
+  .offre.choisie{transform:none}
+  .bilan .btn{width:100%}
+}
 
 /* Qui */
 .qui .enveloppe{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px)}

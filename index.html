@@ -326,26 +326,84 @@
 
 <section class="tarifs clair bloc" id="tarifs" aria-labelledby="titre-tarifs">
   <div class="enveloppe">
-    <h2 class="titre-bloc" id="titre-tarifs">Trois routes, un seul chauffeur.</h2>
-    <p class="chapeau">Chaque projet commence par une maquette gratuite. Le prix du devis est le prix payé : TVA non applicable, aucun supplément caché.</p>
-    <div class="panneaux">
-      <a class="panneau" href="#maquette">
-        <span class="direction"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg>Essentiel</span>
-        <span class="detail">Une page pour les artisans et indépendants : horaires, contact, itinéraire, fiche Google et nom de domaine.</span>
-        <span class="prix">790 €</span>
-      </a>
-      <a class="panneau vert" href="#maquette">
-        <span class="direction">Vitrine Pro<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
-        <span class="detail">3 à 5 pages pour les restaurants et boutiques : carte ou catalogue, galerie, réservation ou devis, référencement local.</span>
-        <span class="prix">1 490 €</span>
-      </a>
-      <a class="panneau gres" href="#maquette">
-        <span class="direction"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6"/></svg>Sur-mesure</span>
-        <span class="detail">Réservation avancée, paiement en ligne, site en français, allemand et anglais, refonte, offre immersive.</span>
-        <span class="prix">Sur devis</span>
-      </a>
+    <div class="tarifs-tete">
+      <h2 class="titre-bloc" id="titre-tarifs">Trois routes, un seul chauffeur.</h2>
+      <p class="chapeau">Chaque projet commence par une maquette gratuite. Le prix du devis est le prix payé : TVA non applicable, aucun supplément caché.</p>
     </div>
-    <p class="entretien"><strong>Forfait tranquillité, dès 35 € par mois.</strong> Hébergement, nom de domaine, modifications courantes, sauvegardes et sécurité compris. Intervention sous 48 h, résiliable à tout moment. Sans forfait, comptez environ 30 € par an pour le nom de domaine et l'hébergement ; le montant exact figure sur le devis.</p>
+
+    <div class="besoins" id="besoins" hidden>
+      <p class="besoins-titre" id="besoins-titre">De quoi avez-vous besoin ? Cochez, la route vous mène à la bonne formule.</p>
+      <div class="besoins-puces" role="group" aria-labelledby="besoins-titre">
+        <button type="button" class="besoin" aria-pressed="false" data-niveau="0">Horaires et contact</button>
+        <button type="button" class="besoin" aria-pressed="false" data-niveau="1">Carte ou catalogue</button>
+        <button type="button" class="besoin" aria-pressed="false" data-niveau="1">Galerie photos</button>
+        <button type="button" class="besoin" aria-pressed="false" data-niveau="1">Réservation ou devis</button>
+        <button type="button" class="besoin" aria-pressed="false" data-niveau="2">Plusieurs langues</button>
+        <button type="button" class="besoin" aria-pressed="false" data-niveau="2">Paiement en ligne</button>
+      </div>
+    </div>
+
+    <div class="route-offres" id="route-offres" style="--n:1" aria-hidden="true">
+      <span class="voie"></span><span class="parcours"></span>
+      <span class="borne-offre" style="--i:0"></span><span class="borne-offre" style="--i:1"></span><span class="borne-offre" style="--i:2"></span>
+      <span class="point-offre"></span>
+    </div>
+
+    <div class="offres" id="offres">
+      <article class="offre" data-niveau="0">
+        <p class="offre-tag"></p>
+        <h3>Essentiel</h3>
+        <p class="offre-prix">790 €<span> une fois</span></p>
+        <p class="offre-pour">Artisans et indépendants</p>
+        <ul>
+          <li>Un site d'une page</li>
+          <li>Adapté au téléphone et à la tablette</li>
+          <li>Horaires, contact, itinéraire</li>
+          <li>Relié à votre fiche Google</li>
+          <li>Nom de domaine et mise en ligne</li>
+        </ul>
+      </article>
+      <article class="offre choisie" data-niveau="1">
+        <p class="offre-tag">Le choix des restaurants</p>
+        <h3>Vitrine Pro</h3>
+        <p class="offre-prix">1 490 €<span> une fois</span></p>
+        <p class="offre-pour">Restaurants et boutiques</p>
+        <ul>
+          <li>Site de 3 à 5 pages</li>
+          <li>Carte ou catalogue intégré</li>
+          <li>Galerie photos</li>
+          <li>Réservation ou demande de devis</li>
+          <li>Référencement local soigné</li>
+          <li>Prise en main expliquée</li>
+        </ul>
+      </article>
+      <article class="offre" data-niveau="2">
+        <p class="offre-tag"></p>
+        <h3>Sur-mesure</h3>
+        <p class="offre-prix">Sur devis</p>
+        <p class="offre-pour">Projets particuliers</p>
+        <ul>
+          <li>Réservation en ligne avancée</li>
+          <li>Boutique et paiement en ligne</li>
+          <li>Site en français, allemand, anglais</li>
+          <li>Refonte d'un site existant</li>
+          <li><a href="/immersif">Offre immersive</a> pour hôtels et domaines</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="tranquillite">
+      <button type="button" class="interrupteur" id="interrupteur-forfait" role="switch" aria-checked="false" aria-labelledby="forfait-titre"></button>
+      <div>
+        <p id="forfait-titre"><strong>Ajouter le forfait tranquillité, dès 35 € par mois</strong></p>
+        <p>Hébergement, nom de domaine, modifications courantes, sauvegardes et sécurité. Intervention sous 48 h, résiliable à tout moment. Sans forfait, comptez environ 30 € par an pour le nom de domaine et l'hébergement ; le montant exact figure sur le devis.</p>
+      </div>
+    </div>
+
+    <div class="bilan">
+      <p id="bilan" aria-live="polite">Votre route : <strong>Vitrine Pro</strong>, 1 490 € une fois.</p>
+      <a class="btn btn-gres" href="#maquette">Recevoir ma maquette</a>
+    </div>
   </div>
 </section>
 
@@ -490,6 +548,7 @@
 
 <script src="/assets/route.js" defer></script>
 <script src="/assets/carte.js" defer></script>
+<script src="/assets/tarifs.js" defer></script>
 <script src="/assets/formulaires.js" defer></script>
 </body>
 </html>
