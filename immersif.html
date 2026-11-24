@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site immersif pour hôtels et domaines de mariage en Alsace | Alsaweb</title>
+<meta name="description" content="Un site qui fait visiter votre hôtel ou votre domaine de réception avant la visite : vol au-dessus du lieu au fil du défilement, déroulé du grand jour, demandes de visite qualifiées. Alsace, sur devis.">
+<link rel="canonical" href="https://alsaweb.fr/immersif">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#13221A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Alsaweb">
+<meta property="og:url" content="https://alsaweb.fr/immersif">
+<meta property="og:title" content="Faites visiter votre lieu avant la visite | Alsaweb">
+<meta property="og:description" content="L'offre immersive d'Alsaweb pour les hôtels et les domaines de mariage d'Alsace.">
+<meta property="og:image" content="https://alsaweb.fr/exemples/domaine-ebersol/img/tasting.webp">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Site immersif pour hôtels et domaines de réception",
+  "serviceType": "Création de site internet",
+  "provider": { "@type": "ProfessionalService", "name": "Alsaweb", "url": "https://alsaweb.fr/", "telephone": "+33750482176" },
+  "areaServed": { "@type": "AdministrativeArea", "name": "Alsace" },
+  "url": "https://alsaweb.fr/immersif"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="exemples/domaine-ebersol/seq/h001.webp">
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<header class="entete" id="entete">
+  <div class="enveloppe">
+    <a class="logo" href="/" aria-label="Alsaweb, retour à l'accueil"><img src="logo.png" width="34" height="34" alt="">Alsaweb</a>
+    <nav class="nav" aria-label="Navigation">
+      <a href="/">Accueil</a>
+      <a href="#jour">Le grand jour</a>
+      <a href="#offre">L'offre</a>
+      <a class="btn btn-gres" href="#demo">Demander une démonstration</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="vol" id="vol" aria-labelledby="titre-vol">
+  <div class="vol-scene">
+    <img class="vol-fixe" src="exemples/domaine-ebersol/seq/h300.webp" width="1152" height="644" alt="Vue aérienne d'un domaine au milieu des vignes d'automne, au-dessus d'un village alsacien">
+    <canvas id="vol-canvas" aria-hidden="true"></canvas>
+    <div class="chapitre visible" data-debut="0" data-fin="0.2">
+      <h1 id="titre-vol">Faites visiter avant la visite.</h1>
+      <p>L'offre immersive d'Alsaweb, pour les hôtels et les domaines de mariage d'Alsace. Faites défiler : vous survolez le lieu.</p>
+    </div>
+    <div class="chapitre" data-debut="0.27" data-fin="0.5">
+      <h2>Vos futurs mariés arrivent par le ciel.</h2>
+      <p>Le village, le coteau, le bâtiment : ils comprennent où se trouve le lieu avant même de lire une ligne.</p>
+    </div>
+    <div class="chapitre" data-debut="0.56" data-fin="0.78">
+      <h2>Ils découvrent le domaine comme le jour J.</h2>
+      <p>Le défilement guide le vol : chacun avance à son rythme, revient en arrière, s'attarde.</p>
+    </div>
+    <div class="chapitre" data-debut="0.86" data-fin="1.01">
+      <h2>Et ils demandent une visite, déjà convaincus.</h2>
+      <p><a class="btn btn-gres" href="#demo">Demander une démonstration</a></p>
+    </div>
+    <p class="legende-vol">Exemple : le Domaine Ebersol, site de démonstration d'Alsaweb.</p>
+    <div class="vol-progres" id="vol-progres"></div>
+  </div>
+</section>
+
+<section class="bloc" aria-labelledby="titre-pourquoi">
+  <div class="enveloppe">
+    <h2 class="titre-bloc" id="titre-pourquoi">Un lieu de réception se choisit d'abord sur un écran.</h2>
+    <p class="chapeau">Avant de prendre rendez-vous, les couples comparent des dizaines de lieux depuis leur canapé. Des photos fixes se ressemblent toutes. Un vol au-dessus de votre domaine, non.</p>
+    <div class="arguments">
+      <div><h3>Le lieu en mouvement</h3><p>Une séquence aérienne pilotée par le défilement, légère à charger, nette sur ordinateur comme sur téléphone.</p></div>
+      <div><h3>La journée racontée</h3><p>Cérémonie, vin d'honneur, dîner, soirée : chaque espace est présenté au moment où il servira.</p></div>
+      <div><h3>Des demandes qui ont du sens</h3><p>Date, nombre d'invités, type d'événement : vous recevez des demandes de visite précises, pas des « c'est combien ? ».</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="clair bloc" id="jour" aria-labelledby="titre-jour">
+  <div class="enveloppe">
+    <h2 class="titre-bloc" id="titre-jour">Le grand jour, heure par heure.</h2>
+    <p class="chapeau">Chaque moment de la journée a sa place, ses photos et ses informations pratiques. Choisissez une heure.</p>
+    <div class="jour">
+      <div class="heures" role="tablist" aria-label="Les moments de la journée">
+        <button role="tab" id="t-ceremonie" aria-selected="true" aria-controls="p-moment" data-img="exemples/domaine-ebersol/seq/h240.webp" data-titre="La cérémonie, face au coteau" data-texte="Sur la pelouse, entre les rangs de vigne et le village. Le site indique l'espace, l'orientation au fil de l'après-midi et la solution de repli en cas de pluie." data-alt="Le domaine vu du ciel, un long bâtiment de bois posé au milieu des vignes d'automne"><b>15 h</b><span>La cérémonie</span></button>
+        <button role="tab" id="t-vin" aria-selected="false" aria-controls="p-moment" tabindex="-1" data-img="exemples/domaine-ebersol/seq/h361.webp" data-titre="Le vin d'honneur, au coucher du soleil" data-texte="La terrasse, les verres posés sur les tables hautes, le clocher au loin. On y montre la capacité debout et l'heure à laquelle la lumière est la plus belle." data-alt="Terrasse de béton face au village au coucher du soleil, deux verres de vin blanc sur une table haute"><b>17 h 30</b><span>Le vin d'honneur</span></button>
+        <button role="tab" id="t-diner" aria-selected="false" aria-controls="p-moment" tabindex="-1" data-img="exemples/domaine-ebersol/img/tasting.webp" data-titre="Le dîner, derrière la grande baie" data-texte="La salle, sa longue table et sa vue sur les vignes. Plans de table possibles, nombre de couverts assis, traiteurs avec qui le lieu travaille." data-alt="Salle aux murs de bois sombre, longue table en bois clair et grande baie vitrée sur les vignes"><b>20 h</b><span>Le dîner</span></button>
+        <button role="tab" id="t-soiree" aria-selected="false" aria-controls="p-moment" tabindex="-1" data-img="exemples/domaine-ebersol/img/cellar.webp" data-titre="La soirée, dans la cave voûtée" data-texte="Les foudres sculptés, la lumière des bougies. Horaires, musique, hébergement des invités : les questions que tous les couples posent trouvent leur réponse avant la visite." data-alt="Cave voûtée en pierre avec de grands tonneaux sculptés éclairés à la bougie"><b>23 h</b><span>La soirée</span></button>
+      </div>
+      <div class="moment" role="tabpanel" id="p-moment" aria-labelledby="t-ceremonie">
+        <figure>
+          <img id="moment-img" src="exemples/domaine-ebersol/seq/h240.webp" width="1152" height="644" alt="Le domaine vu du ciel, un long bâtiment de bois posé au milieu des vignes d'automne">
+          <figcaption><strong id="moment-titre">La cérémonie, face au coteau</strong><span id="moment-texte">Sur la pelouse, entre les rangs de vigne et le village. Le site indique l'espace, l'orientation au fil de l'après-midi et la solution de repli en cas de pluie.</span></figcaption>
+        </figure>
+        <p class="note-demo">Images du Domaine Ebersol, domaine fictif créé pour la démonstration. Votre site utilise les images de votre lieu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="offre" aria-labelledby="titre-offre">
+  <div class="enveloppe">
+    <h2 class="titre-bloc" id="titre-offre">Ce que comprend l'offre.</h2>
+    <ul class="contenu-offre">
+      <li><strong>Le vol au fil du défilement</strong><span>Prises de vue aériennes de votre lieu, ou séquence réalisée à partir de vos photos et vidéos existantes, selon le lieu.</span></li>
+      <li><strong>Le déroulé du grand jour</strong><span>Chaque espace présenté au moment où il sert, avec ses capacités et ses équipements.</span></li>
+      <li><strong>Les dates encore libres</strong><span>Un calendrier que vous mettez à jour vous-même, pour éviter les demandes impossibles.</span></li>
+      <li><strong>Une demande de visite précise</strong><span>Date souhaitée, nombre d'invités, type d'événement : tout arrive dans votre boîte mail.</span></li>
+      <li><strong>En français, allemand et anglais</strong><span>Pour les couples d'Alsace, du Bade-Wurtemberg et de Suisse.</span></li>
+      <li><strong>Rapide malgré les images</strong><span>Les images se chargent au fur et à mesure du vol : la page s'affiche tout de suite, même en 4G.</span></li>
+      <li><strong>Trouvé sur Google</strong><span>Référencement sur « lieu de mariage » et « hôtel » dans votre secteur, données structurées comprises.</span></li>
+      <li><strong>Vos chambres, pour les hôtels</strong><span>Chaque chambre visitée en images, et un lien direct vers votre moteur de réservation.</span></li>
+    </ul>
+    <div class="prix-immersif">
+      <b>Sur devis</b>
+      <p>Le prix dépend du lieu et des prises de vue. Comme pour tous les sites Alsaweb, vous voyez une démonstration avant de signer, et le prix du devis est le prix payé.</p>
+    </div>
+  </div>
+</section>
+
+<section class="maquette clair bloc" id="demo" aria-labelledby="titre-demo">
+  <div class="enveloppe">
+    <div>
+      <h2 class="titre-bloc" id="titre-demo">Voyons ce que votre lieu donnerait.</h2>
+      <p class="chapeau">Dites-moi en une minute qui vous êtes. Je vous appelle sous 24 h pour organiser une démonstration, sur place ou en visio, avec une première idée pour votre lieu.</p>
+      <ol class="deroule">
+        <li><span class="quand">Sous 24 h</span><p><strong>Je vous appelle</strong><span>Pour comprendre votre lieu, votre clientèle et vos saisons.</span></p></li>
+        <li><span class="quand">Ensuite</span><p><strong>La démonstration</strong><span>Sur place, à partir de vos images ; je vous montre le principe appliqué à votre lieu.</span></p></li>
+        <li><span class="quand">Enfin</span><p><strong>Vous décidez</strong><span>Devis à prix fixe, ou on s'arrête là, sans engagement.</span></p></li>
+      </ol>
+    </div>
+
+    <div class="formulaire">
+      <form id="form-demo" action="/api/maquette" data-secours="https://formspree.io/f/xkjwjlqd" data-merci="merci-demo" data-offre="immersif" data-merci-secours="Merci, c'est bien reçu. Je vous appelle sous 24 h pour organiser la démonstration." method="POST" novalidate>
+        <h3>Demander une démonstration</h3>
+        <p class="aide">Sans engagement. Tous les champs sont obligatoires, sauf mention contraire.</p>
+        <fieldset class="champ" data-requis="activite">
+          <legend>Votre lieu</legend>
+          <div class="puces">
+            <input type="radio" id="lieu-hotel" name="activite" value="Hôtel"><label for="lieu-hotel">Hôtel</label>
+            <input type="radio" id="lieu-domaine" name="activite" value="Domaine de réception"><label for="lieu-domaine">Domaine de réception</label>
+          </div>
+          <span class="erreur">Choisissez le type de lieu.</span>
+        </fieldset>
+        <div class="duo">
+          <div class="champ" data-requis="etablissement">
+            <label for="d-etablissement">Nom du lieu</label>
+            <input type="text" id="d-etablissement" name="etablissement" autocomplete="organization" maxlength="80">
+            <span class="erreur">Indiquez le nom du lieu.</span>
+          </div>
+          <div class="champ" data-requis="commune">
+            <label for="d-commune">Commune</label>
+            <input type="text" id="d-commune" name="commune" autocomplete="address-level2" maxlength="60">
+            <span class="erreur">Indiquez la commune.</span>
+          </div>
+        </div>
+        <div class="duo">
+          <div class="champ" data-requis="nom">
+            <label for="d-nom">Prénom et nom</label>
+            <input type="text" id="d-nom" name="nom" autocomplete="name" maxlength="80">
+            <span class="erreur">Indiquez votre prénom et votre nom.</span>
+          </div>
+          <div class="champ" data-requis="email">
+            <label for="d-email">E-mail</label>
+            <input type="email" id="d-email" name="email" autocomplete="email" inputmode="email" maxlength="120">
+            <span class="erreur">Indiquez votre e-mail.</span>
+          </div>
+        </div>
+        <div class="duo">
+          <div class="champ">
+            <label for="d-telephone">Téléphone <span class="opt">(facultatif)</span></label>
+            <input type="tel" id="d-telephone" name="telephone" autocomplete="tel" inputmode="tel" maxlength="30">
+          </div>
+          <div class="champ">
+            <label for="d-capacite">Capacité <span class="opt">(facultatif)</span></label>
+            <input type="text" id="d-capacite" name="capacite" maxlength="40" placeholder="Ex. 150 invités, 24 chambres">
+          </div>
+        </div>
+        <div class="champ">
+          <label for="d-site">Site actuel <span class="opt">(facultatif)</span></label>
+          <input type="text" id="d-site" name="site_actuel" inputmode="url" maxlength="200">
+        </div>
+        <div class="pot" aria-hidden="true"><label for="d-site-web">Ne pas remplir</label><input type="text" id="d-site-web" name="site_web" tabindex="-1" autocomplete="off"></div>
+        <button class="btn btn-gres" type="submit">Demander ma démonstration</button>
+        <p class="consent">Vos informations servent uniquement à organiser la démonstration (<a href="mentions-legales#donnees">données personnelles</a>).</p>
+      </form>
+      <div class="merci" id="merci-demo" hidden tabindex="-1">
+        <h3>Merci, c'est noté.</h3>
+        <p id="merci-texte">Je vous appelle sous 24 h pour organiser la démonstration, sur place ou en visio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="pied">
+  <div class="enveloppe">
+    <div class="pied-haut">
+      <h2>Votre lieu mérite <span>mieux que dix photos.</span></h2>
+      <div>
+        <p style="color:var(--brume);margin-bottom:6px">Une question ? Je réponds moi-même.</p>
+        <a class="numero" href="tel:+33750482176">07 50 48 21 76</a>
+        <p style="margin-top:12px"><a href="mailto:contact@alsaweb.fr">contact@alsaweb.fr</a></p>
+      </div>
+    </div>
+    <div class="mentions" style="margin-top:32px">
+      <p>© 2026 Alsaweb, Holtzheim. SIRET 106 470 875 00019. <a href="mentions-legales">Mentions légales</a>, <a href="cgv">CGV</a>.</p>
+      <p><a href="/">Retour à l'accueil</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="barre-mobile" id="barre-mobile">
+  <a class="btn btn-trait" href="tel:+33750482176">Appeler</a>
+  <a class="btn btn-gres" href="#demo">Démonstration</a>
+</div>
+
+<script src="/assets/immersif.js" defer></script>
+<script src="/assets/formulaires.js" defer></script>
+</body>
+</html>

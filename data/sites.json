@@ -1,0 +1,11 @@
+{
+  "_lisez_moi": "Une entrée dans 'sites' = une épingle sur la carte de l'accueil. Uniquement des sites clients réels et en ligne. mise_en_ligne au format AAAA-MM-JJ : l'épingle clignote pendant 30 jours. Coordonnées : clic droit sur Google Maps, puis copier.",
+  "atelier": {
+    "nom": "L'atelier Alsaweb",
+    "activite": "Création de sites",
+    "commune": "Holtzheim",
+    "lat": 48.5567,
+    "lon": 7.6447
+  },
+  "sites": []
+}
