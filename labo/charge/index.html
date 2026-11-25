@@ -148,6 +148,12 @@ p,h1,h2,h3,ol,ul{margin:0}
 fieldset{border:0;margin:0;padding:0;min-width:0}
 legend{padding:0;margin-bottom:8px}
 .merci{display:flex;flex-direction:column;gap:16px;align-items:flex-start;animation:rec 520ms var(--expo) both}
+.essais{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.essais a{display:flex;flex-direction:column;gap:4px;padding:18px 0;border-bottom:1px solid var(--line-dark);color:var(--bg);text-decoration:none}
+.essais li:first-child a{padding-top:0}
+.essais b{font-size:19px}
+.essais span{font-size:15px;line-height:1.5;color:var(--soft-dark)}
+.essais a:hover b{color:var(--accent)}
 
 @keyframes rise{from{transform:translateY(28px);opacity:0}to{transform:none;opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -167,7 +173,7 @@ legend{padding:0;margin-bottom:8px}
 </head>
 <body>
 
-<p class="labo-note" id="labo-note" hidden><span>Charge est un projet personnel de Baptiste, Alsaweb. Page de démonstration.</span><a href="/immersif#labo">Retour au site d'Alsaweb</a></p>
+<p class="labo-note" id="labo-note" hidden><span>Charge est un projet personnel de Baptiste, Alsaweb. Page de démonstration.</span><a href="/#labo">Retour au site d'Alsaweb</a></p>
 
 <section class="hero noir">
   <div class="hero-lignes" aria-hidden="true"></div>
@@ -179,7 +185,7 @@ legend{padding:0;margin-bottom:8px}
         <a href="#duel">Le duel</a>
         <a href="#fonctions">Tout ce qu'elle fait</a>
       </nav>
-      <a href="#demo" class="btn btn-trait">Demander une démo</a>
+      <a href="#seance" class="btn btn-trait">Essayer la démo</a>
     </header>
     <div class="hero-corps">
       <svg class="mot" viewBox="0 0 1000 250" aria-hidden="true">
@@ -192,8 +198,8 @@ legend{padding:0;margin-bottom:8px}
           <h1 class="d"><span class="sr">Charge : </span>L'appli de muscu qui calcule ta prochaine série.</h1>
           <p class="chapeau">Charges, repos, records : Charge s'occupe des chiffres, toi tu soulèves. Sans compte, sans App Store, et tes données restent sur ton iPhone.</p>
           <div class="hero-cta">
-            <a href="#demo" class="btn btn-orange btn-big">Demander une démo</a>
-            <a href="#seance" class="btn btn-trait" style="height:60px;padding:0 24px;font-size:16px">Essayer une séance ici</a>
+            <a href="#seance" class="btn btn-orange btn-big">Essayer une séance</a>
+            <a href="#duel" class="btn btn-trait" style="height:60px;padding:0 24px;font-size:16px">Voir le duel</a>
           </div>
         </div>
         <div class="compteur" aria-hidden="true">
@@ -294,28 +300,16 @@ legend{padding:0;margin-bottom:8px}
 <section class="section demo noir" id="demo">
   <div class="env">
     <div class="col">
-      <h2 class="d n62" style="font-size:clamp(56px,6.4vw,96px)">Essaie-la avec 8 semaines de séances.</h2>
-      <p class="chapeau" style="color:var(--soft-dark)">On t'envoie le lien de la démo. L'appli s'ouvre avec deux mois de séances fictives : tu testes tout sans rien saisir, puis tu repars de zéro quand tu veux.</p>
+      <h2 class="d n62" style="font-size:clamp(56px,6.4vw,96px)">Essaie-la tout de suite, ici.</h2>
+      <p class="chapeau" style="color:var(--soft-dark)">Le téléphone en haut de page, c'est la vraie interface de Charge, en accéléré. Pas de compte, rien à installer, rien à remplir.</p>
     </div>
     <div class="panneau">
-      <form id="form-demo" novalidate style="display:flex;flex-direction:column;gap:22px">
-        <label class="champ"><span class="eb">Prénom</span><input type="text" id="prenom" autocomplete="given-name" maxlength="40"></label>
-        <label class="champ" id="champ-mail"><span class="eb">E-mail</span><input type="email" id="email" autocomplete="email" inputmode="email" maxlength="120" aria-describedby="err-mail"></label>
-        <p id="err-mail" hidden style="margin-top:-12px;font-size:15px;color:#FF8A5C">Il manque une adresse e-mail valide pour t'envoyer le lien.</p>
-        <fieldset><legend class="eb">Tu t'entraînes</legend>
-          <div class="choix" id="freqs">
-            <button type="button" aria-pressed="false">1 à 2 fois</button><button type="button" aria-pressed="true">3 à 4 fois</button><button type="button" aria-pressed="false">5 fois et plus</button>
-          </div>
-        </fieldset>
-        <button type="submit" class="btn btn-orange btn-big" style="height:64px;font-size:22px">Demander une démo</button>
-        <p style="font-size:13px;color:var(--muted-dark)">Page de démonstration : rien n'est envoyé.</p>
-      </form>
-      <div class="merci" id="merci" hidden aria-live="polite">
-        <span class="tag" style="background:var(--accent);color:var(--ink);font-size:13px;padding:4px 8px">Envoyé</span>
-        <span class="d n62" style="font-size:64px" id="merci-titre">À toi de jouer.</span>
-        <p style="font-size:17px;line-height:1.55;color:var(--soft-dark)" id="merci-texte"></p>
-        <button type="button" class="btn btn-trait" id="changer" style="height:48px">Changer d'adresse</button>
-      </div>
+      <ol class="essais">
+        <li><a href="#seance"><b>Valide une série</b><span>Le chrono de repos démarre, puis le record s'affiche en grand.</span></a></li>
+        <li><a href="#duel"><b>Choisis ton fantôme</b><span>Il y a 3 semaines, la dernière fois ou ton record : le verdict change.</span></a></li>
+        <li><a href="#forme"><b>Regarde ta forme du jour</b><span>Sommeil, récupération, protéines : la séance s'adapte.</span></a></li>
+      </ol>
+      <a href="#seance" class="btn btn-orange btn-big" style="height:64px;font-size:22px;width:100%;margin-top:28px">Lancer une séance</a>
     </div>
   </div>
 </section>
@@ -536,26 +530,6 @@ legend{padding:0;margin-bottom:8px}
     io.observe($('duel')); io.observe($('forme'));
   }
 
-  /* ---------- Demande de démo (simulée) ---------- */
-  var form = $('form-demo'), email = $('email'), champMail = $('champ-mail'), err = $('err-mail'), freqs = $('freqs');
-  freqs.addEventListener('click', function (ev) {
-    var b = ev.target.closest('button'); if (!b) return;
-    Array.prototype.forEach.call(freqs.children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-  });
-  email.addEventListener('input', function () { err.hidden = true; email.removeAttribute('aria-invalid'); });
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    if (!/\S+@\S+\.\S+/.test(email.value)) {
-      err.hidden = false; email.setAttribute('aria-invalid', 'true');
-      if (!calme) relancer(champMail, 'shake');
-      email.focus(); return;
-    }
-    var p = $('prenom').value.trim();
-    $('merci-titre').textContent = 'À toi de jouer' + (p ? ', ' + p : '') + '.';
-    $('merci-texte').textContent = 'Le lien part à ' + email.value.trim() + '. Ouvre-le sur ton iPhone dans Safari, puis Partager et « Sur l’écran d’accueil » pour l’installer.';
-    form.hidden = true; $('merci').hidden = false; $('changer').focus();
-  });
-  $('changer').addEventListener('click', function () { $('merci').hidden = true; form.hidden = false; email.focus(); });
 })();
 </script>
 </body>

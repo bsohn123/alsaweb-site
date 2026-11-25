@@ -8,10 +8,10 @@ HTML, CSS et JavaScript sans étape de compilation, plus un petit Worker Cloudfl
 ## Contenu
 
 - `index.html` : l'accueil. La route qui se trace au défilement (grand écran), le formulaire de maquette automatique, la carte en direct, les tarifs, le mini-audit, la FAQ.
-- `immersif.html` (servi sur `/immersif`) : l'offre premium pour les hôtels, gîtes et domaines. Le vol réutilise les images de la démo `exemples/le-gres-rose/seq/` (réglage par les attributs `data-*` de `#vol`, voir `assets/immersif.js`).
-- `labo/charge/` : la page de présentation de Charge (projet personnel, pas un client), en HTML autonome. Ouverte en plein écran depuis le bloc « Le labo » de `/immersif` (fenêtre `#labo-fenetre`, chargée seulement au clic), non indexée (en-tête `/labo/*`). `apercu.webp` est l'image du bloc.
+- `immersif.html` (servi sur `/immersif`) : l'offre premium pour les hôtels, gîtes et domaines. Le vol réutilise les images de la démo `exemples/le-gres-rose/seq/` sur ordinateur, et `seq-m/` sur téléphone (recadrées en portrait, une image sur deux : environ 2 Mo au lieu de 7). Réglage par les attributs `data-*` de `#vol`, voir `assets/immersif.js`.
+- `labo/charge/` : la page de présentation de Charge (projet personnel, pas un client), en HTML autonome. Ouverte en plein écran depuis le bloc « Le labo » de l'accueil (fenêtre `#labo-fenetre`, `assets/labo.js`, chargée seulement au clic), non indexée (en-tête `/labo/*`). `apercu.webp` est l'image du bloc.
 - `exemples/le-gres-rose/` : la démo d'hôtel immersif (hôtel fictif, visuels IA). Polices hébergées sur place, non indexée (en-tête `/exemples/*`).
-- `assets/` : `site.css` (commun aux deux pages), `route.js`, `carte.js`, `formulaires.js`, `immersif.js`.
+- `assets/` : `site.css` (commun aux deux pages), `route.js`, `carte.js`, `formulaires.js`, `immersif.js`, `labo.js`, `menu.js` (menu sur téléphone).
 - `data/sites.json` : les épingles de la carte en direct.
 - `src/worker.js` : le Worker (API de maquette, relecture, maquettes privées). Non publié comme fichier.
 - `agent/maquette-de-nuit.md` : le prompt de l'agent qui prépare les maquettes la nuit. Non publié.
@@ -20,11 +20,19 @@ HTML, CSS et JavaScript sans étape de compilation, plus un petit Worker Cloudfl
 ## Déploiement sur Cloudflare
 
 Inchangé : chaque push sur `main` redéploie (`npx wrangler deploy`).
+
+**À chaque modification d'un fichier de `assets/`** (ou de `legal.css`), changez le `?v=AAAAMMJJ` qui suit son nom dans les pages,
+pour que les visiteurs déjà venus reçoivent la nouvelle version. Les en-têtes (`_headers`) demandent aussi au navigateur de revérifier ces fichiers à chaque visite.
 Tel quel, le site fonctionne dès le premier push : tant que la maquette automatique n'est pas activée,
 le formulaire de maquette envoie la demande à Formspree, comme avant. Aucune demande n'est perdue.
 
+## Photo de l'accueil
+
+Le bloc « Vous parlez à celui qui construit votre site » affiche `img/baptiste.jpg` dès que le fichier existe (carré, environ 600 × 600 px). Sans fichier, l'emplacement se retire tout seul.
+
 ## Carte en direct
 
+Tant que `sites` est vide, la section carte et ses liens restent cachés (attribut `data-carte`) : la carte apparaît d'elle-même avec le premier client.
 Quand un site client est mis en ligne, ajoutez une entrée dans `data/sites.json`, puis push :
 
 ```json

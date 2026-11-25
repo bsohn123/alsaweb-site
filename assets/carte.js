@@ -1,5 +1,6 @@
 /* Carte en direct : lit /data/sites.json et plante une épingle par site client en ligne.
-   Pour ajouter un site : une entrée de plus dans data/sites.json, puis push. */
+   Pour ajouter un site : une entrée de plus dans data/sites.json, puis push.
+   Tant qu'il n'y a aucun site client, la section et ses liens (attribut data-carte) restent cachés. */
 (function () {
   var svg = document.getElementById('carte-svg');
   var groupe = document.getElementById('epingles');
@@ -83,6 +84,9 @@
       var compte = document.getElementById('compte');
       var liste = document.getElementById('liste-sites');
       if (sites.length) {
+        // La carte n'apparaît qu'à partir du premier site client en ligne
+        // (cachée par défaut dans index.html, avec ses liens de menu).
+        Array.prototype.forEach.call(document.querySelectorAll('[data-carte]'), function (e) { e.hidden = false; });
         compte.textContent = sites.length === 1 ? '1 site en ligne en Alsace, et le prochain se prépare.' : sites.length + ' sites en ligne en Alsace.';
         sites.slice(0, 5).forEach(function (s) {
           var li = document.createElement('li');
