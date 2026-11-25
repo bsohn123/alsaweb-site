@@ -64,7 +64,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20261125b">
+<link rel="stylesheet" href="/assets/site.css?v=20261125c">
 </head>
 <body>
 
@@ -520,9 +520,10 @@
   <div class="enveloppe">
     <div class="pied-haut">
       <h2>Prochaine sortie : <span>votre commerce.</span></h2>
-      <div>
+      <div class="pied-contact">
         <p style="color:var(--brume);margin-bottom:6px">Une question ? Je réponds moi-même.</p>
         <a class="numero" href="tel:+33750482176">07 50 48 21 76</a>
+        <p class="pied-rappel">Si je suis en rendez-vous, je vous rappelle sous 24 h.</p>
         <div class="actions" style="margin-top:18px">
           <a class="btn btn-gres" href="#maquette">Recevoir ma maquette</a>
           <a class="btn btn-trait" href="https://wa.me/33750482176?text=Bonjour%2C%20je%20voudrais%20une%20maquette%20gratuite%20pour%20mon%20%C3%A9tablissement." rel="noopener">Écrire sur WhatsApp</a>
@@ -531,12 +532,12 @@
     </div>
     <div class="pied-grille">
       <div>
-        <h3>Alsaweb</h3>
+        <p class="pied-marque"><img src="logo.png" width="30" height="30" alt="">Alsaweb</p>
         <p>Sites internet pour les restaurants, commerces et artisans d'Alsace.</p>
         <ul style="margin-top:12px">
           <li><a href="mailto:contact@alsaweb.fr">contact@alsaweb.fr</a></li>
-          <li><a href="https://www.instagram.com/alsaweb.fr/" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.linkedin.com/in/baptiste-sohn/" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/alsaweb.fr/" rel="noopener">Instagram <span>@alsaweb.fr</span></a></li>
+          <li><a href="https://www.linkedin.com/in/baptiste-sohn/" rel="noopener">LinkedIn <span>Baptiste Sohn</span></a></li>
         </ul>
       </div>
       <div>
@@ -553,7 +554,7 @@
       </div>
       <div>
         <h3>Zone d'intervention</h3>
-        <p>Strasbourg, Eurométropole, Molsheim, Obernai, Sélestat, Haguenau, Saverne, et tout le Bas-Rhin. Rendez-vous sur place ou en visio.</p>
+        <p>Tout le Bas-Rhin, autour de Strasbourg. Rendez-vous sur place ou en visio.</p>
       </div>
       <div>
         <h3>Informations</h3>
@@ -566,7 +567,7 @@
     </div>
     <div class="mentions">
       <p>© 2026 Alsaweb, Holtzheim. SIRET 106 470 875 00019. TVA non applicable, art. 293 B du CGI.</p>
-      <p>Contours de l'Alsace : IGN, via france-geojson.</p>
+      <p data-carte hidden>Contours de l'Alsace : IGN, via france-geojson.</p>
     </div>
   </div>
 </footer>
@@ -586,7 +587,7 @@
 </div>
 
 <script src="/assets/route.js?v=20261125" defer></script>
-<script src="/assets/carte.js?v=20261125" defer></script>
+<script src="/assets/carte.js?v=20261125c" defer></script>
 <script src="/assets/tarifs.js?v=20261125" defer></script>
 <script src="/assets/menu.js?v=20261125" defer></script>
 <script src="/assets/formulaires.js?v=20261125" defer></script>
