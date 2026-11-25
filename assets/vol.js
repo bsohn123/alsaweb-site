@@ -18,9 +18,10 @@
        versImage: function (t) { return t; },        // facultatif : position -> avancée du film
        cadrage: function (t) { return 0.5; },        // facultatif : cadrage horizontal (0 à 1)
        rendu: function (t) { ... },                  // facultatif : appelé à chaque dessin
-       charge: function (nb, total) { ... }          // facultatif : avancement du téléchargement
+       charge: function (nb, total) { ... },         // facultatif : avancement du téléchargement
+       lissage: 0.16                                 // facultatif : plus haut = suit plus vite
      });
-     vol.reveiller() après un défilement, vol.redimensionner() après un redimensionnement
+     vol.reveiller() après un défilement, vol.rafraichir() pour forcer un dessin, vol.redimensionner() après un redimensionnement
      (le moteur écoute déjà scroll et resize). */
 (function () {
   'use strict';
@@ -175,6 +176,7 @@
     window.addEventListener('scroll', reveiller, { passive: true });
     window.addEventListener('resize', redimensionner);
     redimensionner();
-    return { reveiller: reveiller, redimensionner: redimensionner, position: function () { return cur; } };
+    function rafraichir() { aDessiner = true; reveiller(); }
+    return { reveiller: reveiller, rafraichir: rafraichir, redimensionner: redimensionner, position: function () { return cur; } };
   };
 })();
