@@ -22,8 +22,14 @@
 /*.webp
   Cache-Control: public, max-age=2592000
 
+# Feuilles de style et scripts : le navigateur redemande toujours s'ils ont changé
+# (réponse « 304 » très légère sinon). Évite d'afficher un ancien CSS après une mise en ligne.
+# Dans les pages, chaque fichier porte aussi un ?v=AAAAMMJJ à changer à chaque modification.
 /assets/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
+
+/legal.css
+  Cache-Control: public, max-age=0, must-revalidate
 
 /data/*
   Cache-Control: no-cache

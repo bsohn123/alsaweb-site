@@ -64,17 +64,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=20261125">
 </head>
 <body>
 
 <header class="entete" id="entete">
   <div class="enveloppe">
     <a class="logo" href="#top" aria-label="Alsaweb, haut de page"><img src="logo.png" width="34" height="34" alt="">Alsaweb</a>
-    <span class="borne coord" aria-hidden="true">Km 0 : 48,557° N 7,645° E, Holtzheim</span>
-    <nav class="nav" aria-label="Navigation principale">
+    <button type="button" class="menu-bouton" id="menu-bouton" aria-expanded="false" aria-controls="nav-principale">Menu<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path class="l1" d="M2 5h14"/><path class="l2" d="M2 13h14"/></svg></button>
+    <nav class="nav" id="nav-principale" aria-label="Navigation principale">
       <a href="#route">Exemples</a>
-      <a href="#carte">La carte</a>
+      <a href="#carte" data-carte hidden>La carte</a>
       <a href="/immersif">Hôtels et domaines</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#questions">Questions</a>
@@ -93,12 +93,17 @@
     </div>
     <div>
       <div class="actions">
-        <a class="btn btn-gres" href="#maquette">Recevoir ma maquette demain</a>
+        <a class="btn btn-gres" href="#maquette">Recevoir ma maquette gratuite</a>
         <a class="btn btn-trait" href="#route">Voir les exemples</a>
       </div>
       <p class="rassure">Gratuite et sans engagement. Réponse sous 24 h.</p>
     </div>
   </div>
+  <figure class="heros-vitrine" aria-hidden="true">
+    <div class="ecran"><img src="exemples/ebersol-ordinateur.jpg" width="1000" height="625" alt="" loading="lazy"></div>
+    <div class="tel"><img src="exemples/auberge-telephone.jpg" width="300" height="650" alt="" loading="lazy"></div>
+    <figcaption class="borne">Deux étapes de la route : le domaine et l'auberge</figcaption>
+  </figure>
 </section>
 
 <section class="route" id="route" aria-labelledby="titre-route">
@@ -165,7 +170,7 @@
         <div class="etape-corps">
           <span class="borne km">Étape 4</span>
           <h3>La prochaine étape, c'est votre commerce.</h3>
-          <p>Décrivez votre établissement en une minute : votre maquette arrive par e-mail dès le lendemain, à votre nom et à une adresse rien qu'à vous.</p>
+          <p>Décrivez votre établissement en une minute : votre maquette arrive par e-mail, en général dès le lendemain, à votre nom et à une adresse rien qu'à vous.</p>
           <p style="margin-top:22px"><a class="btn btn-gres" href="#maquette">Recevoir ma maquette</a></p>
         </div>
       </li>
@@ -177,8 +182,8 @@
 <section class="maquette clair bloc" id="maquette" aria-labelledby="titre-maquette">
   <div class="enveloppe">
     <div class="maquette-gauche">
-      <h2 class="titre-bloc" id="titre-maquette">Votre maquette, dès demain matin.</h2>
-      <p class="chapeau">Décrivez votre commerce en une minute : l'aperçu ci-dessous se construit pendant que vous tapez. La vraie maquette, relue par moi, arrive par e-mail le lendemain.</p>
+      <h2 class="titre-bloc" id="titre-maquette">Votre maquette, dès le lendemain.</h2>
+      <p class="chapeau">Décrivez votre commerce en une minute : l'aperçu ci-dessous se construit pendant que vous tapez. La vraie maquette, relue par moi, arrive par e-mail en général dès le lendemain, au plus tard sous 5 jours.</p>
 
       <figure class="apercu" aria-label="Aperçu de votre futur site, mis à jour pendant la saisie">
         <div class="apercu-barre" aria-hidden="true"><i></i><i></i><i></i><span class="adresse"><b id="apercu-slug">votre-commerce</b>.alsaweb.fr</span></div>
@@ -191,13 +196,13 @@
             <span class="cta" id="apercu-cta">Réserver une table</span>
           </div>
         </div>
-        <figcaption>Aperçu instantané. Votre maquette est faite à la main, avec vos informations.</figcaption>
+        <figcaption>Aperçu instantané. La vraie maquette est préparée avec vos informations, puis relue et corrigée par moi.</figcaption>
       </figure>
 
       <ol class="etapes-nuit">
         <li><b>Ce soir</b><span>Vous décrivez votre commerce.</span></li>
         <li><b>Cette nuit</b><span>Votre maquette est préparée.</span></li>
-        <li><b>Demain</b><span>Je la relis et vous l'envoie.</span></li>
+        <li><b>Le lendemain</b><span>Je la relis et vous l'envoie (au plus tard sous 5 jours).</span></li>
       </ol>
     </div>
 
@@ -282,7 +287,7 @@
   </div>
 </section>
 
-<section class="carte-direct bloc" id="carte" aria-labelledby="titre-carte">
+<section class="carte-direct bloc" id="carte" aria-labelledby="titre-carte" data-carte hidden>
   <div class="enveloppe">
     <div class="alsace" id="alsace">
       <svg viewBox="0 0 599 1040" role="img" aria-labelledby="carte-titre" data-lon0="6.84102" data-lat1="49.07788" data-k="0.665882" data-s="603.2600" data-pad="20" id="carte-svg">
@@ -415,12 +420,36 @@
         <p>Je m'appelle Baptiste Sohn. Je suis développeur à Holtzheim, à côté de Strasbourg, et j'ai créé Alsaweb pour les restaurateurs, commerçants et artisans de la région.</p>
         <p>Pas d'agence ni d'intermédiaire : du premier appel à la mise en ligne, puis pour chaque modification, vous avez affaire à moi. Et je m'engage sur des délais.</p>
       </div>
+      <!-- La photo s'affiche dès que le fichier img/baptiste.jpg existe (carré, 600 × 600 px conseillé). Sans fichier, le bloc se retire tout seul. -->
+      <figure class="qui-photo">
+        <img src="/img/baptiste.jpg" width="120" height="120" alt="Baptiste Sohn, fondateur d'Alsaweb" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption><b>Baptiste Sohn</b><span>Fondateur d'Alsaweb, à Holtzheim</span></figcaption>
+      </figure>
     </div>
     <ul class="engagements">
       <li><b>24 h</b><span>pour répondre à votre demande</span></li>
       <li><b>J+1</b><span>pour recevoir votre maquette, relue par moi (au plus tard sous 5 jours)</span></li>
       <li><b>48 h</b><span>pour intervenir sur votre site, avec le forfait tranquillité</span></li>
     </ul>
+  </div>
+</section>
+
+<section class="bloc labo" id="labo" aria-labelledby="titre-labo">
+  <div class="enveloppe">
+    <div>
+      <h2 class="titre-bloc" id="titre-labo">Le labo.</h2>
+      <p class="chapeau">Quand je ne fais pas de sites, je développe mes propres outils. Charge est une appli de musculation que j'ai conçue et codée de A à Z. Sa page de présentation montre jusqu'où un site peut aller quand on pousse l'interactif.</p>
+      <ul class="labo-essais">
+        <li><strong>Un téléphone qui répond</strong><span>On change la charge, on valide la série : le chrono de repos démarre, puis le record s'affiche en plein écran.</span></li>
+        <li><strong>Un duel à choisir</strong><span>Selon l'adversaire choisi, les barres se réajustent et le verdict change.</span></li>
+        <li><strong>Une ouverture chorégraphiée</strong><span>Le nom se trace puis se remplit comme une jauge, pendant qu'un compteur monte.</span></li>
+      </ul>
+      <p class="labo-actions"><a class="btn btn-gres" href="/labo/charge/" data-labo-ouvrir>Essayer la page de Charge</a></p>
+      <p class="note-labo">Projet personnel, pas une réalisation client. Votre site garde votre identité : ce bloc montre seulement ce qu'il est possible de faire.</p>
+    </div>
+    <a class="labo-apercu" href="/labo/charge/" data-labo-ouvrir tabindex="-1" aria-hidden="true">
+      <img src="/labo/charge/apercu.webp?v=20261125" width="1600" height="1000" loading="lazy" alt="">
+    </a>
   </div>
 </section>
 
@@ -514,10 +543,11 @@
         <h3>Navigation</h3>
         <ul>
           <li><a href="#route">Exemples</a></li>
-          <li><a href="#carte">La carte</a></li>
+          <li data-carte hidden><a href="#carte">La carte</a></li>
           <li><a href="/immersif">Hôtels et domaines</a></li>
           <li><a href="#tarifs">Tarifs</a></li>
           <li><a href="#audit">Mini-audit gratuit</a></li>
+          <li><a href="#labo">Le labo</a></li>
           <li><a href="#questions">Questions</a></li>
         </ul>
       </div>
@@ -541,14 +571,25 @@
   </div>
 </footer>
 
+<dialog class="labo-fenetre" id="labo-fenetre" aria-labelledby="labo-fenetre-titre">
+  <div class="labo-barre">
+    <p id="labo-fenetre-titre"><b>Charge</b>, projet personnel de Baptiste</p>
+    <a href="/labo/charge/" target="_blank" rel="noopener">Ouvrir dans un onglet</a>
+    <button type="button" class="labo-fermer" aria-label="Fermer et revenir au site"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3 L15 15 M15 3 L3 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <iframe title="Page de présentation de Charge" data-src="/labo/charge/"></iframe>
+</dialog>
+
 <div class="barre-mobile" id="barre-mobile">
   <a class="btn btn-trait" href="tel:+33750482176">Appeler</a>
   <a class="btn btn-gres" href="#maquette">Ma maquette</a>
 </div>
 
-<script src="/assets/route.js" defer></script>
-<script src="/assets/carte.js" defer></script>
-<script src="/assets/tarifs.js" defer></script>
-<script src="/assets/formulaires.js" defer></script>
+<script src="/assets/route.js?v=20261125" defer></script>
+<script src="/assets/carte.js?v=20261125" defer></script>
+<script src="/assets/tarifs.js?v=20261125" defer></script>
+<script src="/assets/menu.js?v=20261125" defer></script>
+<script src="/assets/formulaires.js?v=20261125" defer></script>
+<script src="/assets/labo.js?v=20261125" defer></script>
 </body>
 </html>

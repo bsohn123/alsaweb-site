@@ -1,7 +1,9 @@
 /* Offre immersive : vol au-dessus du lieu piloté par le défilement, puis la visite de la démo en onglets.
    Par défaut, le vol réutilise les images du Domaine Ebersol (h001…h361 en paysage, m001…m361 en portrait).
    Une autre séquence se règle sur #vol : data-seq (préfixe), data-total, data-pas, data-debut-num,
-   data-chiffres, data-x-debut et data-x (cadrage horizontal sur téléphone, de 0 à 1, au début puis à la fin du vol). Une seule série paysage suffit alors. */
+   data-chiffres, data-x-debut et data-x (cadrage horizontal sur téléphone, de 0 à 1, au début puis à la fin du vol). Une seule série paysage suffit alors.
+   Facultatif : data-seq-portrait (préfixe d'une série déjà recadrée pour téléphone, cadrage inclus) et data-pas-portrait
+   (une image sur combien dans cette série). Le téléphone charge alors des images plus légères. */
 (function () {
   var entete = document.getElementById('entete');
   if (entete) {
@@ -19,13 +21,14 @@
     var barre = document.getElementById('vol-progres');
     var ds = vol.dataset, perso = !!ds.seq;
     var TOTAL = +(ds.total || 361), PAS = +(ds.pas || 2), PREMIER = +(ds.debutNum || 1), CHIFFRES = +(ds.chiffres || 3);
+    var PAS_H = PAS, PAS_M = +(ds.pasPortrait || PAS), SERIE_M = perso && !!ds.seqPortrait;
     var N = Math.ceil((TOTAL - PREMIER + 1) / PAS), PORTRAIT = false;
     var X0 = +(ds.xDebut || ds.x || 0.5), X1 = +(ds.x || 0.5);
     var sens = null, images = [], demandees = [], W = 0, H = 0, progres = 0, prevu = false, generation = 0;
 
     var src = function (i) {
       var num = Math.min(TOTAL, PREMIER + i * PAS);
-      if (perso) return ds.seq + String(num).padStart(CHIFFRES, '0') + '.webp';
+      if (perso) return (PORTRAIT && SERIE_M ? ds.seqPortrait : ds.seq) + String(num).padStart(CHIFFRES, '0') + '.webp';
       return 'exemples/domaine-ebersol/seq/' + sens + String(num).padStart(3, '0') + '.webp';
     };
 
@@ -66,20 +69,26 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       var s = W / H < 0.9 ? 'm' : 'h';
       PORTRAIT = perso && s === 'm';
-      if (perso && sens) s = sens;
-      if (s !== sens) { sens = s; generation++; images = []; demandees = []; plan(generation); }
+      if (perso && !SERIE_M && sens) s = sens;
+      if (s !== sens) {
+        sens = s;
+        if (SERIE_M) { PAS = PORTRAIT ? PAS_M : PAS_H; N = Math.ceil((TOTAL - PREMIER + 1) / PAS); }
+        generation++; images = []; demandees = []; plan(generation);
+      }
     }
 
     function dessiner() {
       prevu = false;
-      var r = vol.getBoundingClientRect();
-      var course = vol.offsetHeight - window.innerHeight;
-      progres = Math.min(1, Math.max(0, -r.top / (course || 1)));
+      // La scène reste collée sous l'en-tête : la course est la hauteur du vol moins celle de la scène
+      var r = vol.getBoundingClientRect(), scene = vol.firstElementChild;
+      var haut = parseFloat(getComputedStyle(scene).top) || 0;
+      var course = vol.offsetHeight - scene.offsetHeight;
+      progres = Math.min(1, Math.max(0, (haut - r.top) / (course || 1)));
       var im = proche(Math.round(progres * (N - 1)));
       if (im) {
         var e = Math.max(W / im.naturalWidth, H / im.naturalHeight);
         var dw = im.naturalWidth * e, dh = im.naturalHeight * e;
-        var cadrage = PORTRAIT ? X0 + (X1 - X0) * progres : 0.5;
+        var cadrage = PORTRAIT && !SERIE_M ? X0 + (X1 - X0) * progres : 0.5;
         ctx.drawImage(im, (W - dw) * cadrage, (H - dh) / 2, dw, dh);
       }
       chapitres.forEach(function (c) {
@@ -127,31 +136,4 @@
       choisir(onglets[(j + onglets.length) % onglets.length], true);
     });
   });
-  /* ---------- Le labo : la page de Charge en plein écran, chargée seulement au clic ---------- */
-  var fenetre = document.getElementById('labo-fenetre');
-  if (fenetre && typeof fenetre.showModal === 'function') {
-    var cadre = fenetre.querySelector('iframe');
-    var fermer = fenetre.querySelector('.labo-fermer');
-    var origine = null;
-    Array.prototype.forEach.call(document.querySelectorAll('[data-labo-ouvrir]'), function (a) {
-      a.addEventListener('click', function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // ouverture en onglet : on laisse faire
-        e.preventDefault();
-        origine = a.hasAttribute('aria-hidden') ? document.querySelector('.labo-actions [data-labo-ouvrir]') : a;
-        cadre.src = cadre.dataset.src; // recharge à chaque ouverture : l'animation d'ouverture rejoue
-        fenetre.showModal();
-        document.documentElement.classList.add('fenetre-ouverte');
-        fermer.focus();
-      });
-    });
-    fermer.addEventListener('click', function () { fenetre.close(); });
-    // Échap pressée dans la page de Charge : elle prévient la fenêtre
-    window.addEventListener('message', function (e) {
-      if (e.origin === location.origin && e.data === 'labo-fermer' && fenetre.open) fenetre.close();
-    });
-    fenetre.addEventListener('close', function () {
-      document.documentElement.classList.remove('fenetre-ouverte');
-      if (origine) origine.focus();
-    });
-  }
 })();
