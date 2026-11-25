@@ -371,15 +371,27 @@ fieldset.form-etape{border:0;margin:0;padding:0;min-width:0}
 
 /* Pied de page */
 .pied{border-top:1px solid var(--chaussee);padding-block:72px 40px}
-.pied-haut{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:end;padding-bottom:56px;border-bottom:1px solid var(--chaussee)}
-.pied-haut h2{font-size:clamp(40px,5.4vw,68px);max-width:14ch}
+/* Le haut et la grille partagent les mêmes 4 colonnes : le bloc contact démarre sur la 3e */
+.pied-haut{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;align-items:end;padding-bottom:56px;border-bottom:1px solid var(--chaussee)}
+.pied-haut h2{grid-column:1 / span 2;font-size:clamp(40px,5.4vw,68px);max-width:14ch}
+.pied-contact{grid-column:3 / span 2}
+.pied-rappel{margin-top:6px;font-size:14px;color:var(--brume)}
 .pied-haut h2 span{color:var(--gres);font-style:italic}
 .numero{font-family:var(--titre);font-size:34px;text-decoration:none}
-.pied-grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;padding-block:40px;color:var(--brume);font-size:15px}
-.pied-grille h3{font-family:var(--texte);font-weight:600;font-size:15px;color:var(--creme);margin-bottom:12px;letter-spacing:0}
-.pied-grille ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.pied-grille a{text-decoration:none}
+.pied-grille{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;padding-block:40px;color:var(--brume);font-size:15px}
+.pied-grille h3{font-family:var(--borne);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brume);margin-bottom:14px}
+.pied-grille ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pied-grille a{text-decoration:none;color:var(--creme)}
+.pied-grille a span{color:var(--brume)}
 .pied-grille a:hover{color:var(--gres)}
+.pied-marque{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-family:var(--titre);font-size:24px;line-height:1.1;color:var(--creme)}
+.pied-marque img{width:30px;height:30px;border-radius:7px}
+@media (max-width:900px){
+  .pied-haut{grid-template-columns:1fr}
+  .pied-haut h2,.pied-contact{grid-column:auto}
+  .pied-grille{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){.pied-grille{grid-template-columns:1fr}}
 .mentions{color:var(--brume);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
 /* Barre mobile */
