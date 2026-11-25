@@ -10,6 +10,9 @@
 /instagram/*
   X-Robots-Tag: noindex
 
+/labo/*
+  X-Robots-Tag: noindex
+
 /*.jpg
   Cache-Control: public, max-age=2592000
 

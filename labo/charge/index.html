@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charge, l'appli de muscu qui calcule ta prochaine série | Labo Alsaweb</title>
+<meta name="description" content="Charge, appli de musculation conçue et développée par Baptiste (Alsaweb). Page de démonstration interactive.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#111111">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F3EF;--paper:#FFFFFF;--ink:#111111;--muted:#5E5E5A;--ink-2:#2C2C2A;--line:#DCDAD3;--accent:#FF5A1F;--accent-ink:#B83A0C;--soft-dark:#C9C7C0;--muted-dark:#9A978F;--line-dark:#2C2B28;
+  --display:'Archivo','Arial Narrow',sans-serif;--body:'Inter',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--expo:cubic-bezier(.16,1,.3,1)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+p,h1,h2,h3,ol,ul{margin:0}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.d{font-family:var(--display);font-weight:900;font-stretch:72%;text-transform:uppercase;letter-spacing:-.01em;line-height:.9}
+.n62{font-stretch:62%}
+.m{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.eb{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.env{max-width:1320px;margin:0 auto;padding-inline:clamp(20px,3vw,40px)}
+.noir{background:var(--ink);color:var(--bg)}
+.tag{display:inline-block;padding:3px 7px;font-family:var(--mono);font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 18px;border:0;text-decoration:none;font-weight:700;font-size:15px;transition:transform 80ms ease,background-color 150ms ease,opacity 120ms ease}
+.btn:active{transform:scale(.97);opacity:.88}
+.btn-orange{background:var(--accent);color:var(--ink)}
+.btn-trait{background:none;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn-big{height:60px;font-family:var(--display);font-weight:900;font-stretch:80%;font-size:20px;letter-spacing:.04em;text-transform:uppercase;padding:0 26px}
+.section{padding-block:clamp(80px,9vw,120px)}
+.h2{font-size:clamp(44px,5.4vw,76px)}
+.chapeau{font-size:18px;line-height:1.55;max-width:32em}
+
+/* Bandeau quand la page est ouverte seule */
+.labo-note{position:relative;z-index:2;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;padding:10px 20px;background:#1B1B19;color:var(--soft-dark);font-size:14px;text-align:center}
+.labo-note a{color:var(--bg);font-weight:600}
+
+/* Ouverture */
+.hero{position:relative;padding-bottom:200px}
+.hero-lignes{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.06) 39px 40px);animation:fade 900ms ease 100ms both}
+.entete{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;padding-top:24px;animation:fade 500ms ease both}
+.marque{font-size:28px;text-decoration:none}
+.nav{display:flex;flex-wrap:wrap;gap:8px 28px;font-size:15px;font-weight:600}
+.nav a{text-decoration:none}
+.hero-corps{position:relative;display:flex;flex-direction:column;gap:32px;padding-top:56px}
+.mot{display:block;width:100%;height:auto;overflow:visible}
+.mot text{font-family:var(--display);font-weight:900;font-stretch:62%;font-size:300px}
+.mot .trace{stroke-dasharray:1600;animation:trace 1300ms var(--expo) 200ms both}
+.mot .jauge{animation:fillup 1100ms cubic-bezier(.65,0,.35,1) 900ms both}
+.hero-bas{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px 56px}
+.hero-texte{flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
+.hero-texte h1{font-size:clamp(40px,5vw,68px);max-width:15em;animation:rise 700ms var(--expo) 1300ms both}
+.hero-texte .chapeau{color:var(--soft-dark);max-width:34em;animation:rise 700ms var(--expo) 1450ms both}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;animation:rise 700ms var(--expo) 1550ms both}
+.compteur{display:flex;flex-direction:column;gap:8px;align-items:flex-start;animation:fade 400ms ease 900ms both}
+.compteur .val{font-size:96px;font-variant-numeric:tabular-nums;min-width:3.1ch}
+.compteur .pop{animation:pop 420ms cubic-bezier(.34,1.56,.64,1) both}
+
+/* Séance */
+.seance{padding:0 0 120px}
+.seance .env{display:flex;flex-wrap:wrap;gap:48px 88px;align-items:flex-start;margin-top:-150px;position:relative}
+.tel-col{flex:0 0 auto;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:16px;animation:up 900ms var(--expo) 1750ms both}
+.tel{width:340px;height:700px;padding:12px;border-radius:54px;background:var(--ink);box-shadow:0 40px 80px rgba(17,17,17,.28)}
+.ecran{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column;gap:14px;padding:30px 20px 20px}
+.sbar{height:4px;background:var(--line)}.sbar span{display:block;height:4px;background:var(--ink);transition:width 350ms ease}
+.coach{background:var(--ink);color:#fff;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.coach p{font-size:14px;line-height:1.45}
+.steppers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stepper{background:var(--paper);padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.stepper .val{font-size:46px;font-variant-numeric:tabular-nums}
+.stepper .val.tick{animation:tick 220ms ease-out}
+.stepper .ctrl{display:flex;gap:6px}
+.carre{width:44px;height:44px;border:0;background:none;box-shadow:inset 0 0 0 1.5px var(--ink);font-size:20px;line-height:1;transition:transform 80ms ease}
+.carre:active{transform:scale(.94)}
+.mini{height:44px;min-width:56px;padding:0 12px;border:0;background:none;box-shadow:inset 0 0 0 1px currentColor;font-size:14px;font-weight:600}
+.repos{background:var(--ink);color:#fff;padding:16px;display:flex;flex-direction:column;gap:12px;animation:swap 300ms var(--expo) both}
+.repos .temps{font-family:var(--mono);font-weight:700;font-size:52px;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.anneau{transform:rotate(-90deg);flex:none}
+.anneau .fg{transition:stroke-dashoffset 100ms linear}
+.reparti{background:var(--accent);color:var(--ink);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;animation:pop 380ms cubic-bezier(.34,1.56,.64,1) both}
+.fini{position:absolute;inset:0;padding:48px 24px 24px;display:flex;flex-direction:column;gap:12px;animation:rec 520ms var(--expo) both}
+.fini .gros{font-size:132px;line-height:.85;letter-spacing:-.02em}
+.bloc-set{display:flex;flex-direction:column;gap:14px;flex:1;animation:swap 320ms var(--expo) both}
+.serie-faite{margin-top:auto;height:64px;border:0;background:var(--ink);color:#fff;font-size:22px;font-stretch:80%;letter-spacing:.04em}
+.etapes{list-style:none;padding:0;display:flex;flex-direction:column;gap:28px}
+.etapes li{display:flex;gap:18px;align-items:flex-start;opacity:.45;transition:opacity 280ms ease}
+.etapes li.actif{opacity:1}
+.etapes .num{flex:none;width:48px;height:48px;display:grid;place-items:center;font-size:28px;box-shadow:inset 0 0 0 1.5px var(--ink);transition:background-color 200ms ease,box-shadow 200ms ease}
+.etapes li.actif .num{background:var(--accent);box-shadow:none}
+.etapes b{display:block;font-size:19px;margin-bottom:6px}
+.etapes span.t{display:block;font-size:16px;line-height:1.55;color:var(--ink-2);max-width:30em}
+
+/* Duel */
+.duel-tete{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px 56px}
+.choix{display:flex;flex-wrap:wrap;gap:6px}
+.choix button{height:44px;padding:0 16px;border:0;background:none;color:var(--bg);box-shadow:inset 0 0 0 1.5px var(--bg);font-weight:700;font-size:15px;transition:background-color 150ms ease,color 150ms ease}
+.choix button[aria-pressed="true"]{background:var(--bg);color:var(--ink)}
+.manches{display:flex;flex-direction:column;border-top:1px solid var(--line-dark)}
+.manche{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;padding:20px 0;border-bottom:1px solid var(--line-dark)}
+.manche .titre{flex:0 0 130px;font-size:30px}
+.pistes{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.piste{display:flex;align-items:center;gap:14px}
+.piste .qui{flex:0 0 74px;font-size:13px;font-weight:700}
+.piste .rail{flex:1;height:22px}
+.barre{height:22px;transform-origin:left;transform:scaleX(0);transition:transform 720ms var(--expo)}
+.barre.moi{background:var(--bg)}
+.barre.fantome{background:repeating-linear-gradient(135deg,rgba(244,243,239,.55) 0 2px,transparent 2px 6px);box-shadow:inset 0 0 0 1px rgba(244,243,239,.7)}
+.piste .v{flex:0 0 100px;font-size:14px;text-align:right}
+.verdict{flex:0 0 auto;min-width:88px;text-align:center;padding:5px 9px;font-size:12px;font-weight:700;opacity:0;transition:opacity 300ms ease}
+.resume{font-size:clamp(30px,3.4vw,46px);max-width:24em}
+.resume.swap{animation:swap 420ms var(--expo) both}
+
+/* Forme et prédiction */
+.forme .env{display:flex;flex-wrap:wrap;gap:64px 96px}
+.col{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:26px}
+.score{display:flex;align-items:baseline;gap:10px}
+.score .val{font-size:150px;font-variant-numeric:tabular-nums;line-height:.8}
+.blocs{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px}
+.blocs span{height:28px;box-shadow:inset 0 0 0 1px #C9C6BD;transition:background-color 220ms ease}
+.blocs span.on{background:var(--ink)}
+.facteurs{list-style:none;padding:0;border-top:1px solid var(--line)}
+.facteurs li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+.courbe .ligne{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1400ms var(--expo)}
+.courbe .proj,.courbe .point{opacity:0;transition:opacity 400ms ease 1300ms}
+.courbe.vue .ligne{stroke-dashoffset:0}.courbe.vue .proj,.courbe.vue .point{opacity:1}
+
+/* Fonctions */
+.liste{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));column-gap:72px;border-top:1.5px solid var(--ink)}
+.liste li{display:flex;flex-wrap:wrap;gap:6px 20px;padding:22px 0;border-bottom:1px solid var(--line)}
+.liste .d{flex:0 0 200px;font-size:26px}
+.liste span:last-child{flex:1 1 220px;font-size:16px;line-height:1.5;color:var(--ink-2)}
+
+/* Démo */
+.demo .env{display:flex;flex-wrap:wrap;gap:48px 96px;align-items:flex-start}
+.panneau{flex:1 1 420px;min-width:0;background:#1B1B19;padding:clamp(24px,3vw,40px);box-shadow:inset 0 0 0 1px var(--line-dark)}
+.champ{display:flex;flex-direction:column;gap:6px}
+.champ input{height:52px;padding:0 14px;border:0;background:var(--bg);color:var(--ink);font:inherit;font-size:16px;font-weight:500}
+.champ input[aria-invalid="true"]{box-shadow:inset 0 0 0 2px var(--accent)}
+.champ.shake{animation:shake 360ms cubic-bezier(.36,.07,.19,.97) both}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px}
+.merci{display:flex;flex-direction:column;gap:16px;align-items:flex-start;animation:rec 520ms var(--expo) both}
+
+@keyframes rise{from{transform:translateY(28px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes trace{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
+@keyframes fillup{from{transform:translateY(250px)}to{transform:none}}
+@keyframes up{from{transform:translateY(140px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:none}}
+@keyframes rec{0%{opacity:0;transform:scale(1.08)}100%{opacity:1;transform:none}}
+@keyframes tick{from{transform:translateY(-8px);opacity:.3}to{transform:none;opacity:1}}
+@keyframes swap{from{transform:translateY(-10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-10px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@media (max-width:760px){.nav{display:none}.seance .env{margin-top:-120px}.tel-col{width:100%}.etapes-col{padding-top:0!important}.compteur .val{font-size:72px}}
+@media (max-width:380px){.tel{width:320px;height:680px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<p class="labo-note" id="labo-note" hidden><span>Charge est un projet personnel de Baptiste, Alsaweb. Page de démonstration.</span><a href="/immersif#labo">Retour au site d'Alsaweb</a></p>
+
+<section class="hero noir">
+  <div class="hero-lignes" aria-hidden="true"></div>
+  <div class="env">
+    <header class="entete">
+      <a href="#haut" id="haut" class="marque d n62" style="color:var(--bg)">Charge</a>
+      <nav class="nav" aria-label="Navigation de la page">
+        <a href="#seance">Une séance</a>
+        <a href="#duel">Le duel</a>
+        <a href="#fonctions">Tout ce qu'elle fait</a>
+      </nav>
+      <a href="#demo" class="btn btn-trait">Demander une démo</a>
+    </header>
+    <div class="hero-corps">
+      <svg class="mot" viewBox="0 0 1000 250" aria-hidden="true">
+        <defs><clipPath id="remplir"><rect class="jauge" x="0" y="0" width="1000" height="250"></rect></clipPath></defs>
+        <text x="500" y="236" text-anchor="middle" textLength="990" lengthAdjust="spacingAndGlyphs" fill="#F4F3EF" clip-path="url(#remplir)">CHARGE</text>
+        <text class="trace" x="500" y="236" text-anchor="middle" textLength="990" lengthAdjust="spacingAndGlyphs" fill="none" stroke="#FF5A1F" stroke-width="2.5">CHARGE</text>
+      </svg>
+      <div class="hero-bas">
+        <div class="hero-texte">
+          <h1 class="d"><span class="sr">Charge : </span>L'appli de muscu qui calcule ta prochaine série.</h1>
+          <p class="chapeau">Charges, repos, records : Charge s'occupe des chiffres, toi tu soulèves. Sans compte, sans App Store, et tes données restent sur ton iPhone.</p>
+          <div class="hero-cta">
+            <a href="#demo" class="btn btn-orange btn-big">Demander une démo</a>
+            <a href="#seance" class="btn btn-trait" style="height:60px;padding:0 24px;font-size:16px">Essayer une séance ici</a>
+          </div>
+        </div>
+        <div class="compteur" aria-hidden="true">
+          <span class="eb" style="color:var(--muted-dark)">Squat, série 3 sur 4</span>
+          <div style="display:flex;align-items:baseline;gap:12px"><span class="val d n62" id="hero-kg">0</span><span class="m" style="font-size:18px;color:var(--muted-dark)">kg × 5</span></div>
+          <span class="tag" id="hero-tag" style="background:var(--accent);color:var(--ink);font-size:13px;padding:4px 8px;visibility:hidden">+2,5 kg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seance" id="seance">
+  <div class="env">
+    <div class="tel-col">
+      <div class="tel" role="group" aria-label="Démo interactive de l'appli Charge">
+        <div class="ecran" id="ecran"></div>
+      </div>
+      <p class="m" style="font-size:12px;color:var(--muted);max-width:300px;text-align:center">Le chrono de la démo tourne 6 fois plus vite.</p>
+    </div>
+    <div class="col etapes-col" style="flex:1 1 440px;padding-top:210px;gap:36px">
+      <h2 class="d h2">Une séance, zéro calcul.</h2>
+      <p class="chapeau" style="color:var(--ink-2)">Le téléphone, c'est l'appli. Touche « Série faite » et regarde ce qui se passe.</p>
+      <ol class="etapes" id="etapes">
+        <li class="actif"><span class="num d">1</span><span><b>La charge est déjà calculée</b><span class="t">Le coach relit ta dernière séance : +2,5 kg si tout est passé, une répétition de plus, ou −10 % si c'était dur deux fois de suite.</span></span></li>
+        <li><span class="num d">2</span><span><b>Le repos se lance tout seul</b><span class="t">Tu valides la série, le chrono démarre et te dit quoi mettre sur la barre ensuite, disque par disque.</span></span></li>
+        <li><span class="num d">3</span><span><b>Le record, en grand</b><span class="t">Quand tu bats ta meilleure perf, Charge te le montre plein écran. Impossible de le rater.</span></span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section noir" id="duel">
+  <div class="env" style="display:flex;flex-direction:column;gap:48px">
+    <div class="duel-tete">
+      <h2 class="d n62" style="font-size:clamp(56px,7vw,112px)">Bats-toi toi-même.</h2>
+      <p class="chapeau" style="color:var(--soft-dark)">Chaque série affronte ton fantôme. Sur les gros mouvements, le duel se gagne à la charge, jamais en arrachant une répétition de trop.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px">
+      <span style="font-weight:600;font-size:15px;color:var(--soft-dark)">Ton adversaire :</span>
+      <div class="choix" role="group" aria-label="Choisir le fantôme" id="choix"></div>
+    </div>
+    <div class="manches" id="manches"></div>
+    <p class="resume d" id="resume" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="section forme" id="forme" style="background:var(--paper)">
+  <div class="env">
+    <div class="col">
+      <span class="eb" style="color:var(--muted)">Ce matin</span>
+      <h2 class="d" style="font-size:clamp(44px,4.6vw,64px)">Ta forme du jour décide de la séance.</h2>
+      <div class="score"><span class="val d n62" id="forme-val">0</span><span class="m" style="font-size:20px;color:var(--muted)">/100</span></div>
+      <div class="blocs" id="blocs" aria-hidden="true"></div>
+      <ul class="facteurs">
+        <li><span>Bon sommeil</span><span class="m" style="font-weight:700">+5</span></li>
+        <li><span>Muscles récupérés</span><span class="m" style="font-weight:700">+3</span></li>
+        <li><span>Basket hier (normal)</span><span class="m" style="font-weight:700;color:var(--accent-ink)">−6</span></li>
+        <li><span>Objectif protéines atteint hier</span><span class="m" style="font-weight:700">+2</span></li>
+      </ul>
+      <p style="font-size:16px;line-height:1.55;color:var(--ink-2);max-width:32em">Trois questions au réveil, plus ce que l'appli sait déjà de ta semaine. Selon le score, la séance reste normale, s'allège, ou devient un jour à record.</p>
+    </div>
+    <div class="col">
+      <span class="eb" style="color:var(--muted)">Prochaine séance de squat</span>
+      <h2 class="d" style="font-size:clamp(44px,4.6vw,64px)">Elle te prévient quand un record est jouable.</h2>
+      <div class="coach" style="padding:18px 20px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span class="d" style="font-size:28px">Jour à record</span><span class="tag" style="background:var(--accent);color:var(--ink)">71 %</span></div>
+        <p style="font-size:15px">Tente 105 kg × 3. Chances estimées : 71 %.</p>
+      </div>
+      <svg class="courbe" id="courbe" viewBox="0 0 520 230" role="img" aria-label="Force maximale estimée au squat sur huit semaines, de 111 à 120 kg, avec une projection à 122 kg pour la prochaine séance" style="width:100%;height:auto">
+        <g stroke="#DCDAD3" stroke-width="1"><line x1="30" y1="30" x2="510" y2="30"></line><line x1="30" y1="115" x2="510" y2="115"></line><line x1="30" y1="200" x2="510" y2="200"></line></g>
+        <g font-family="JetBrains Mono, monospace" font-size="11" fill="#5E5E5A"><text x="0" y="34">124</text><text x="0" y="119">116</text><text x="0" y="204">108</text><text x="40" y="224">8 semaines</text><text x="430" y="224">prochaine</text></g>
+        <path class="ligne" id="courbe-ligne" pathLength="1" fill="none" stroke="#111111" stroke-width="3" stroke-linejoin="round"></path>
+        <path class="proj" id="courbe-proj" fill="none" stroke="#FF5A1F" stroke-width="3" stroke-dasharray="6 6"></path>
+        <g class="point"><circle id="courbe-pt" r="7" fill="#FF5A1F"></circle><text id="courbe-txt" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#B83A0C">122 kg estimés</text></g>
+      </svg>
+      <p style="font-size:16px;line-height:1.55;color:var(--ink-2);max-width:32em">Charge estime ta force max à chaque séance et prolonge la tendance. Quand les chances sont bonnes, le coach te propose la tentative, avec la charge exacte.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fonctions">
+  <div class="env" style="display:flex;flex-direction:column;gap:40px">
+    <h2 class="d h2">Et tout le reste, dans ta poche.</h2>
+    <ul class="liste">
+      <li><span class="d">Échauffement</span><span>5 à 6 mouvements choisis selon les muscles du jour.</span></li>
+      <li><span class="d">Carte du corps</span><span>15 muscles, le volume de ta semaine et ce qui récupère encore, sur un mannequin 3D.</span></li>
+      <li><span class="d">Bilan</span><span>Chaque semaine, tes chiffres, tes records et la consigne pour la suite.</span></li>
+      <li><span class="d">Version maison</span><span>Pas de salle aujourd'hui ? La séance se refait avec ce que tu as chez toi.</span></li>
+      <li><span class="d">Nutrition</span><span>Scanne le code-barres, Charge suit tes protéines.</span></li>
+      <li><span class="d">Basket</span><span>Tes matchs organisent la semaine, avec une routine chevilles et genoux.</span></li>
+      <li><span class="d">Hors-ligne</span><span>Tout marche sans réseau, même au fond de la salle.</span></li>
+      <li><span class="d">Tes données</span><span>Pas de compte. Tout reste sur ton téléphone, et s'exporte en un geste.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section demo noir" id="demo">
+  <div class="env">
+    <div class="col">
+      <h2 class="d n62" style="font-size:clamp(56px,6.4vw,96px)">Essaie-la avec 8 semaines de séances.</h2>
+      <p class="chapeau" style="color:var(--soft-dark)">On t'envoie le lien de la démo. L'appli s'ouvre avec deux mois de séances fictives : tu testes tout sans rien saisir, puis tu repars de zéro quand tu veux.</p>
+    </div>
+    <div class="panneau">
+      <form id="form-demo" novalidate style="display:flex;flex-direction:column;gap:22px">
+        <label class="champ"><span class="eb">Prénom</span><input type="text" id="prenom" autocomplete="given-name" maxlength="40"></label>
+        <label class="champ" id="champ-mail"><span class="eb">E-mail</span><input type="email" id="email" autocomplete="email" inputmode="email" maxlength="120" aria-describedby="err-mail"></label>
+        <p id="err-mail" hidden style="margin-top:-12px;font-size:15px;color:#FF8A5C">Il manque une adresse e-mail valide pour t'envoyer le lien.</p>
+        <fieldset><legend class="eb">Tu t'entraînes</legend>
+          <div class="choix" id="freqs">
+            <button type="button" aria-pressed="false">1 à 2 fois</button><button type="button" aria-pressed="true">3 à 4 fois</button><button type="button" aria-pressed="false">5 fois et plus</button>
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-orange btn-big" style="height:64px;font-size:22px">Demander une démo</button>
+        <p style="font-size:13px;color:var(--muted-dark)">Page de démonstration : rien n'est envoyé.</p>
+      </form>
+      <div class="merci" id="merci" hidden aria-live="polite">
+        <span class="tag" style="background:var(--accent);color:var(--ink);font-size:13px;padding:4px 8px">Envoyé</span>
+        <span class="d n62" style="font-size:64px" id="merci-titre">À toi de jouer.</span>
+        <p style="font-size:17px;line-height:1.55;color:var(--soft-dark)" id="merci-texte"></p>
+        <button type="button" class="btn btn-trait" id="changer" style="height:48px">Changer d'adresse</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="noir" style="padding:32px 0 44px;border-top:1px solid var(--line-dark);color:var(--muted-dark)">
+  <div class="env" style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 40px">
+    <span class="d n62" style="font-size:28px;color:var(--bg)">Charge</span>
+    <p style="font-size:14px">Appli web pour iPhone, conçue et développée par Baptiste, <a href="/" target="_top">Alsaweb</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return n.toLocaleString('fr-FR', { maximumFractionDigits: 2 }); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var e1rm = function (w, r) { return w * (1 + r / 30); };
+  var relancer = function (el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
+
+  // Bandeau de retour quand la page n'est pas ouverte dans la fenêtre d'Alsaweb
+  var dansCadre = true;
+  try { dansCadre = window.self !== window.top; } catch (e) { /* dans un cadre */ }
+  if (!dansCadre) $('labo-note').hidden = false;
+  // Ouverte dans la fenêtre d'Alsaweb : Échap la referme
+  if (dansCadre) document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') window.parent.postMessage('labo-fermer', location.origin);
+  });
+
+  function compter(duree, cible, pas, fin) {
+    var t0 = performance.now();
+    (function tour(t) {
+      var p = Math.min(1, (t - t0) / duree);
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      pas(cible * e);
+      if (p < 1) requestAnimationFrame(tour); else fin();
+    })(t0);
+  }
+
+  /* ---------- Ouverture ---------- */
+  var heroKg = $('hero-kg'), heroTag = $('hero-tag');
+  function heroFin() { heroKg.textContent = '102,5'; heroTag.style.visibility = 'visible'; heroTag.classList.add('pop'); }
+  if (calme) heroFin();
+  else setTimeout(function () { compter(1100, 102.5, function (v) { heroKg.textContent = fmt(Math.round(v / 2.5) * 2.5); }, heroFin); }, 900);
+
+  /* ---------- Le téléphone ---------- */
+  var C = 201.06, RECORD = e1rm(102.5, 4), ACCEL = 6;
+  var ecran = $('ecran'), etapes = $('etapes').children;
+  var t, chrono = null;
+  function initial() { return { ph: 'set', serie: 3, kg: 102.5, reps: 5, go: false, reste: 90000, total: 90000, faites: [] }; }
+  t = initial();
+
+  function disques(kg) {
+    var cote = (kg - 20) / 2, out = [];
+    if (cote <= 0) return 'Barre seule : 20 kg';
+    [25, 20, 15, 10, 5, 2.5, 1.25].forEach(function (p) { while (cote >= p - 0.001) { out.push(fmt(p)); cote -= p; } });
+    return 'Par côté : ' + out.join(' + ') + (cote > 0.01 ? ' (reste ' + fmt(cote) + ')' : '');
+  }
+  function coach() {
+    var c = { tag: '+2,5 kg', txt: 'Tout réussi la dernière fois : on monte de 2,5 kg.', style: 'background:#fff;color:#111' };
+    if (t.serie === 4) { c.tag = 'Dernière'; c.txt = 'Dernière série : même charge, vise les 5 répétitions.'; }
+    if (t.kg > 102.5) { c.tag = 'Record ?'; c.txt = 'Au-dessus de la charge prévue : tente-la seulement si l’échauffement est passé facilement.'; c.style = 'background:#FF5A1F;color:#111'; }
+    if (t.kg < 102.5) { c.tag = '−' + fmt(102.5 - t.kg) + ' kg'; c.txt = 'Plus léger que prévu : la série compte quand même, le coach ajustera la suite.'; c.style = 'background:none;color:#fff;box-shadow:inset 0 0 0 1px #fff'; }
+    return c;
+  }
+  function tempsTxt() { var s = Math.ceil(t.reste / 1000); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+  function anneau() { return (C * (1 - t.reste / t.total)).toFixed(2); }
+
+  function rendre() {
+    var actif = document.activeElement && ecran.contains(document.activeElement) ? document.activeElement.getAttribute('data-a') : null;
+    var faites = 2 + t.faites.length, h = '';
+    h += '<div style="display:flex;justify-content:space-between;align-items:baseline"><span class="eb" style="color:#5E5E5A">Séance en cours</span><span class="m" style="font-size:12px;color:#5E5E5A">' + faites + '/4 séries</span></div>';
+    h += '<div class="sbar"><span style="width:' + (faites / 4 * 100) + '%"></span></div>';
+    h += '<div style="display:flex;justify-content:space-between;align-items:flex-end"><span class="d" style="font-size:44px">Squat</span><span class="m" style="font-size:13px;padding-bottom:4px">Série ' + t.serie + ' sur 4</span></div>';
+    if (t.ph === 'rest') {
+      h += '<section class="repos" aria-label="Repos en cours"><div style="display:flex;align-items:center;gap:14px">' +
+        '<svg class="anneau" viewBox="0 0 76 76" width="76" height="76" aria-hidden="true"><circle cx="38" cy="38" r="32" fill="none" stroke="rgba(127,127,127,.35)" stroke-width="6"/><circle class="fg" id="anneau" cx="38" cy="38" r="32" fill="none" stroke="#FF5A1F" stroke-width="6" stroke-dasharray="201.06" stroke-dashoffset="' + anneau() + '"/></svg>' +
+        '<div style="flex:1"><span class="eb" style="opacity:.7">Repos</span><div class="temps" id="temps">' + tempsTxt() + '</div></div></div>' +
+        '<span style="font-size:13px;opacity:.75">Ensuite : <b style="opacity:1">' + fmt(t.kg) + ' kg × ' + t.reps + '</b></span>' +
+        '<div style="display:flex;gap:6px"><button type="button" class="mini" data-a="plus15" aria-label="Ajouter 15 secondes">+15</button><button type="button" class="mini" data-a="moins15" aria-label="Retirer 15 secondes">−15</button><button type="button" class="mini" data-a="passer" style="margin-left:auto">Passer</button></div></section>' +
+        '<p style="font-size:14px;line-height:1.45;color:#5E5E5A">Pendant le repos, l’écran reste allumé et la voix t’annonce la fin du chrono.</p>';
+    } else if (t.ph === 'set') {
+      var c = coach();
+      h += '<div class="bloc-set">';
+      if (t.go) h += '<div class="reparti"><span class="d" style="font-size:24px">C’est reparti</span><button type="button" class="mini" data-a="ok">OK</button></div>';
+      h += '<div class="coach"><div style="display:flex;justify-content:space-between;align-items:center"><span class="eb" style="opacity:.7">Coach</span><span class="tag" style="' + c.style + '">' + esc(c.tag) + '</span></div><p>' + esc(c.txt) + '</p></div>';
+      h += '<div class="steppers">' +
+        '<div class="stepper"><span class="m" style="font-size:12px;color:#5E5E5A">kg</span><span class="val d" id="val-kg">' + fmt(t.kg) + '</span><div class="ctrl"><button type="button" class="carre" data-a="kg-" aria-label="Retirer 2,5 kg">−</button><button type="button" class="carre" data-a="kg+" aria-label="Ajouter 2,5 kg">+</button></div></div>' +
+        '<div class="stepper"><span class="m" style="font-size:12px;color:#5E5E5A">répétitions</span><span class="val d" id="val-reps">' + t.reps + '</span><div class="ctrl"><button type="button" class="carre" data-a="r-" aria-label="Retirer une répétition">−</button><button type="button" class="carre" data-a="r+" aria-label="Ajouter une répétition">+</button></div></div></div>';
+      h += '<p class="m" style="font-size:12px;text-align:center;color:#2C2C2A">' + disques(t.kg) + '</p>';
+      h += '<button type="button" class="serie-faite d btn" data-a="faite">Série faite</button></div>';
+    } else {
+      var best = t.faites.reduce(function (b, d) { return e1rm(d[0], d[1]) > e1rm(b[0], b[1]) ? d : b; }, [0, 0]);
+      var rec = e1rm(best[0], best[1]) > RECORD + 0.01;
+      var tonnage = 2 * 102.5 * 5 + t.faites.reduce(function (a, d) { return a + d[0] * d[1]; }, 0);
+      h += '<div class="fini" aria-live="polite" style="background:' + (rec ? '#FF5A1F;color:#111' : '#111;color:#F4F3EF') + '">' +
+        '<span class="eb">' + (rec ? 'Nouveau record' : 'Séance terminée') + '</span>' +
+        '<span class="gros d n62">' + (rec ? fmt(best[0]) : '4/4') + '</span>' +
+        '<span class="m" style="font-size:16px;font-weight:700">' + (rec ? 'kg × ' + best[1] + ' au squat' : 'séries faites') + '</span>' +
+        '<p style="margin-top:8px;font-size:15px;line-height:1.5">' + (rec ? 'Séance terminée : 4 séries, ' : 'Pas de record aujourd’hui. 4 séries, ') + fmt(tonnage) + ' kg soulevés. Le coach prépare déjà la prochaine.</p>' +
+        '<button type="button" class="btn" data-a="recommencer" style="margin-top:auto;height:52px;background:' + (rec ? '#111;color:#fff' : '#F4F3EF;color:#111') + '">Recommencer la démo</button></div>';
+    }
+    ecran.innerHTML = h;
+    var etape = t.ph === 'end' ? 2 : (t.ph === 'rest' || t.serie === 4) ? 1 : 0;
+    for (var i = 0; i < etapes.length; i++) etapes[i].classList.toggle('actif', i === etape);
+    if (actif) {
+      var cible = ecran.querySelector('[data-a="' + actif + '"]') || ecran.querySelector('[data-a]');
+      if (cible) cible.focus();
+    }
+  }
+
+  function demarrerRepos() {
+    clearInterval(chrono);
+    chrono = setInterval(function () {
+      t.reste -= 100 * ACCEL;
+      if (t.reste <= 0) { clearInterval(chrono); t.ph = 'set'; t.serie = 4; t.go = true; t.reste = 0; rendre(); return; }
+      var tp = $('temps'), an = $('anneau');
+      if (tp) tp.textContent = tempsTxt();
+      if (an) an.setAttribute('stroke-dashoffset', anneau());
+    }, 100);
+  }
+
+  ecran.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-a]'); if (!b) return;
+    var a = b.getAttribute('data-a'), tic = null;
+    if (a === 'kg-' && t.kg > 20) { t.kg -= 2.5; tic = 'val-kg'; }
+    else if (a === 'kg+' && t.kg < 200) { t.kg += 2.5; tic = 'val-kg'; }
+    else if (a === 'r-' && t.reps > 1) { t.reps -= 1; tic = 'val-reps'; }
+    else if (a === 'r+' && t.reps < 20) { t.reps += 1; tic = 'val-reps'; }
+    else if (a === 'faite') {
+      t.faites.push([t.kg, t.reps]); t.go = false;
+      if (t.serie === 3) { t.ph = 'rest'; t.reste = t.total = 90000; demarrerRepos(); } else t.ph = 'end';
+    }
+    else if (a === 'plus15') { t.reste += 15000; t.total = Math.max(t.total, t.reste); }
+    else if (a === 'moins15') { t.reste = Math.max(600, t.reste - 15000); }
+    else if (a === 'passer') { t.reste = 600; }
+    else if (a === 'ok') { t.go = false; }
+    else if (a === 'recommencer') { clearInterval(chrono); t = initial(); }
+    else return;
+    if (a === 'plus15' || a === 'moins15' || a === 'passer') { $('temps').textContent = tempsTxt(); $('anneau').setAttribute('stroke-dashoffset', anneau()); return; }
+    rendre();
+    if (tic && !calme) relancer($(tic), 'tick');
+  });
+  rendre();
+
+  /* ---------- Le duel ---------- */
+  var AUJ = [[102.5, 5], [102.5, 5], [102.5, 5], [102.5, 4]];
+  var FANTOMES = [
+    { id: 'past', label: 'Il y a 3 sem.', s: [95, 5], resume: '4 manches sur 4. En trois semaines, tu as pris 7,5 kg.' },
+    { id: 'last', label: 'Dernière fois', s: [100, 5], resume: '3 manches sur 4. La dernière série t’a échappé d’une répétition.' },
+    { id: 'record', label: 'Record', s: [102.5, 4], resume: '3 manches gagnées, et un nouveau record : 102,5 kg × 5.' },
+    { id: 'future', label: 'Futur', s: [107.5, 5], resume: 'Le toi de dans 4 semaines gagne encore. Il garde 5 kg d’avance.' }
+  ];
+  var echelle = function (e) { return Math.max(0.12, Math.min(1, 0.12 + ((e - 100) / 30) * 0.88)); };
+  var choix = $('choix'), manches = $('manches'), resume = $('resume'), fantome = FANTOMES[0], duelVu = calme;
+  choix.innerHTML = FANTOMES.map(function (f, i) { return '<button type="button" data-f="' + i + '" aria-pressed="' + (i === 0) + '">' + f.label + '</button>'; }).join('');
+  manches.innerHTML = AUJ.map(function (s, i) {
+    return '<div class="manche"><span class="titre d">Manche ' + (i + 1) + '</span><div class="pistes">' +
+      '<div class="piste"><span class="qui">Toi</span><div class="rail"><div class="barre moi" style="transition-delay:' + i * 90 + 'ms"></div></div><span class="v m">' + fmt(s[0]) + ' × ' + s[1] + '</span></div>' +
+      '<div class="piste"><span class="qui" style="color:var(--muted-dark)">Fantôme</span><div class="rail"><div class="barre fantome" style="transition-delay:' + (i * 90 + 60) + 'ms"></div></div><span class="v m fv" style="color:var(--muted-dark)"></span></div>' +
+      '</div><span class="verdict m" style="transition-delay:' + (i * 90 + 600) + 'ms"></span></div>';
+  }).join('');
+  function duel(anime) {
+    var lignes = manches.children;
+    AUJ.forEach(function (s, i) {
+      var l = lignes[i], moi = e1rm(s[0], s[1]), gh = e1rm(fantome.s[0], fantome.s[1]);
+      l.querySelector('.moi').style.transform = 'scaleX(' + (duelVu ? echelle(moi) : 0) + ')';
+      l.querySelector('.fantome').style.transform = 'scaleX(' + (duelVu ? echelle(gh) : 0) + ')';
+      l.querySelector('.fv').textContent = fmt(fantome.s[0]) + ' × ' + fantome.s[1];
+      var v = l.querySelector('.verdict'), txt = 'Égalité', st = 'background:none;color:#F4F3EF;box-shadow:inset 0 0 0 1px #F4F3EF';
+      if (moi > gh + 0.01) { txt = fantome.id === 'record' ? 'Record' : 'Gagnée'; st = 'background:' + (fantome.id === 'record' ? '#FF5A1F' : '#F4F3EF') + ';color:#111;box-shadow:none'; }
+      else if (moi < gh - 0.01) { txt = 'Perdue'; st = 'background:none;color:#9A978F;box-shadow:inset 0 0 0 1px #5E5E5A'; }
+      v.textContent = txt; v.style.cssText = 'transition-delay:' + (i * 90 + 600) + 'ms;' + st + ';opacity:' + (duelVu ? 1 : 0);
+    });
+    resume.textContent = fantome.resume;
+    if (anime && !calme) relancer(resume, 'swap');
+  }
+  choix.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-f]'); if (!b) return;
+    var f = FANTOMES[+b.getAttribute('data-f')]; if (f === fantome) return;
+    fantome = f; duelVu = true;
+    Array.prototype.forEach.call(choix.children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    duel(true);
+  });
+  duel(false);
+
+  /* ---------- Forme du jour et courbe ---------- */
+  var formeVal = $('forme-val'), blocs = $('blocs'), courbe = $('courbe');
+  blocs.innerHTML = new Array(11).join('<span></span>');
+  function forme(v) {
+    formeVal.textContent = Math.round(v);
+    Array.prototype.forEach.call(blocs.children, function (b, i) { b.classList.toggle('on', v >= (i + 1) * 10 - 2); });
+  }
+  var TENDANCE = [111, 113, 114, 116, 112, 117, 119, 120];
+  var px = function (i) { return 40 + i * 58; }, py = function (v) { return 200 - ((v - 108) / 16) * 170; };
+  $('courbe-ligne').setAttribute('d', TENDANCE.map(function (v, i) { return (i ? 'L' : 'M') + px(i) + ' ' + py(v).toFixed(1); }).join(' '));
+  var PX = px(7) + 64, PY = py(122);
+  $('courbe-proj').setAttribute('d', 'M' + px(7) + ' ' + py(120).toFixed(1) + ' L' + PX + ' ' + PY.toFixed(1));
+  var pt = $('courbe-pt'); pt.setAttribute('cx', PX); pt.setAttribute('cy', PY.toFixed(1));
+  var tx = $('courbe-txt'); tx.setAttribute('x', PX - 12); tx.setAttribute('y', (PY - 14).toFixed(1));
+
+  function voirForme() {
+    courbe.classList.add('vue');
+    if (calme) forme(82); else compter(1200, 82, forme, function () { forme(82); });
+  }
+  if (calme || !('IntersectionObserver' in window)) { duelVu = true; duel(false); voirForme(); }
+  else {
+    forme(0);
+    var io = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        if (en.target.id === 'duel') { duelVu = true; duel(false); }
+        if (en.target.id === 'forme') voirForme();
+      });
+    }, { threshold: 0.25 });
+    io.observe($('duel')); io.observe($('forme'));
+  }
+
+  /* ---------- Demande de démo (simulée) ---------- */
+  var form = $('form-demo'), email = $('email'), champMail = $('champ-mail'), err = $('err-mail'), freqs = $('freqs');
+  freqs.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    Array.prototype.forEach.call(freqs.children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+  });
+  email.addEventListener('input', function () { err.hidden = true; email.removeAttribute('aria-invalid'); });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!/\S+@\S+\.\S+/.test(email.value)) {
+      err.hidden = false; email.setAttribute('aria-invalid', 'true');
+      if (!calme) relancer(champMail, 'shake');
+      email.focus(); return;
+    }
+    var p = $('prenom').value.trim();
+    $('merci-titre').textContent = 'À toi de jouer' + (p ? ', ' + p : '') + '.';
+    $('merci-texte').textContent = 'Le lien part à ' + email.value.trim() + '. Ouvre-le sur ton iPhone dans Safari, puis Partager et « Sur l’écran d’accueil » pour l’installer.';
+    form.hidden = true; $('merci').hidden = false; $('changer').focus();
+  });
+  $('changer').addEventListener('click', function () { $('merci').hidden = true; form.hidden = false; email.focus(); });
+})();
+</script>
+</body>
+</html>
