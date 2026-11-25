@@ -1,6 +1,7 @@
-/* Offre immersive : vol au-dessus du domaine piloté par le défilement, puis le grand jour en onglets.
-   Le vol réutilise les images du Domaine Ebersol (exemples/domaine-ebersol/seq) :
-   h001…h361 en paysage, m001…m361 en portrait. Une image sur deux suffit. */
+/* Offre immersive : vol au-dessus du lieu piloté par le défilement, puis la visite de la démo en onglets.
+   Par défaut, le vol réutilise les images du Domaine Ebersol (h001…h361 en paysage, m001…m361 en portrait).
+   Une autre séquence se règle sur #vol : data-seq (préfixe), data-total, data-pas, data-debut-num,
+   data-chiffres, data-x-debut et data-x (cadrage horizontal sur téléphone, de 0 à 1, au début puis à la fin du vol). Une seule série paysage suffit alors. */
 (function () {
   var entete = document.getElementById('entete');
   if (entete) {
@@ -16,11 +17,15 @@
     var ctx = canvas.getContext('2d');
     var chapitres = Array.prototype.slice.call(vol.querySelectorAll('.chapitre'));
     var barre = document.getElementById('vol-progres');
-    var TOTAL = 361, PAS = 2, N = Math.ceil(TOTAL / PAS);
+    var ds = vol.dataset, perso = !!ds.seq;
+    var TOTAL = +(ds.total || 361), PAS = +(ds.pas || 2), PREMIER = +(ds.debutNum || 1), CHIFFRES = +(ds.chiffres || 3);
+    var N = Math.ceil((TOTAL - PREMIER + 1) / PAS), PORTRAIT = false;
+    var X0 = +(ds.xDebut || ds.x || 0.5), X1 = +(ds.x || 0.5);
     var sens = null, images = [], demandees = [], W = 0, H = 0, progres = 0, prevu = false, generation = 0;
 
     var src = function (i) {
-      var num = Math.min(TOTAL, 1 + i * PAS);
+      var num = Math.min(TOTAL, PREMIER + i * PAS);
+      if (perso) return ds.seq + String(num).padStart(CHIFFRES, '0') + '.webp';
       return 'exemples/domaine-ebersol/seq/' + sens + String(num).padStart(3, '0') + '.webp';
     };
 
@@ -60,6 +65,8 @@
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       var s = W / H < 0.9 ? 'm' : 'h';
+      PORTRAIT = perso && s === 'm';
+      if (perso && sens) s = sens;
       if (s !== sens) { sens = s; generation++; images = []; demandees = []; plan(generation); }
     }
 
@@ -72,7 +79,8 @@
       if (im) {
         var e = Math.max(W / im.naturalWidth, H / im.naturalHeight);
         var dw = im.naturalWidth * e, dh = im.naturalHeight * e;
-        ctx.drawImage(im, (W - dw) / 2, (H - dh) / 2, dw, dh);
+        var cadrage = PORTRAIT ? X0 + (X1 - X0) * progres : 0.5;
+        ctx.drawImage(im, (W - dw) * cadrage, (H - dh) / 2, dw, dh);
       }
       chapitres.forEach(function (c) {
         var on = progres >= +c.dataset.debut && progres < +c.dataset.fin;
@@ -90,7 +98,7 @@
     demander();
   }
 
-  /* ---------- Le grand jour ---------- */
+  /* ---------- La visite de la démo (onglets) ---------- */
   var onglets = Array.prototype.slice.call(document.querySelectorAll('.heures [role="tab"]'));
   var panneau = document.getElementById('p-moment');
   var img = document.getElementById('moment-img');

@@ -19,7 +19,7 @@
 
 const UN_AN = 365 * 24 * 3600;
 const MAX_PAR_JOUR_ET_IP = 5;
-const ACTIVITES = ['Restaurant', 'Commerce', 'Artisan', 'Hébergement', 'Autre', 'Hôtel', 'Domaine de réception'];
+const ACTIVITES = ['Restaurant', 'Commerce', 'Artisan', 'Hébergement', 'Autre', 'Hôtel', 'Domaine', 'Domaine de réception'];
 
 export default {
   async fetch(request, env, ctx) {
