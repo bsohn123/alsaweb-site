@@ -418,7 +418,7 @@ fieldset.form-etape{border:0;margin:0;padding:0;min-width:0}
   .vol.anime .chapitre{display:block;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
   .vol.anime .chapitre.visible{opacity:1;transform:none}
 }
-.vol-progres{position:absolute;z-index:1;left:0;bottom:0;height:3px;background:var(--gres);width:0}
+.vol-progres{position:absolute;z-index:1;left:0;bottom:0;height:3px;width:100%;background:var(--gres);transform:scaleX(0);transform-origin:left;will-change:transform}
 
 .arguments{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px 56px;margin-top:56px}
 .arguments h3{font-size:30px;margin-bottom:12px}
