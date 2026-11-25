@@ -17,7 +17,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 52'%3E%3Crect width='40' height='52' rx='8' fill='%23141019'/%3E%3Cpath d='M6 48V33h4v-6h4v-6h4v-6h4v6h4v6h4v6h4v15Z' fill='none' stroke='%23f6e2a6' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/libre-caslon-display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="seq/f000.webp">
+<link rel="preload" as="fetch" crossorigin href="seq/f000.webp">
 <style>
 @font-face{font-family:"Libre Caslon Display";src:url(fonts/libre-caslon-display.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:Jost;src:url(fonts/jost-300.woff2) format("woff2");font-weight:300;font-display:swap}
@@ -490,6 +490,7 @@ dialog li .ico{width:18px;height:18px;color:var(--ok)}
 <div id="lb" hidden role="dialog" aria-label="Photos de la suite"><div class="top"><span id="lbc"></span><button class="round x" id="lbx" aria-label="Fermer">×</button></div><div class="strip" id="lbs"></div><button class="round nv l" id="lbp" aria-label="Photo précédente">←</button><button class="round nv r" id="lbn" aria-label="Photo suivante">→</button></div>
 <dialog id="dlg"><div class="in" id="dlgb"></div></dialog>
 
+<script src="/assets/vol.js?v=20261125b"></script>
 <script>
 {
 const $=id=>document.getElementById(id);
@@ -691,40 +692,41 @@ function route(){
  $('mGo').textContent=v==='suite'?'Réserver':'Rechercher';$('mGo').setAttribute('href',v==='suite'?'#bc':'#disponibilites');
  if(v==='suite'){renderSuite(h.slice(6));scrollTo(0,0)}
  else if(v==='dispo'){renderDispo();scrollTo(0,0)}
- else{const el=h&&h!=='accueil'&&document.getElementById(h);if(el)requestAnimationFrame(()=>el.scrollIntoView());else if(was!=='home'||h==='accueil')scrollTo(0,0);size();need=true}
- paint();navState();
+ else{const el=h&&h!=='accueil'&&document.getElementById(h);if(el)requestAnimationFrame(()=>el.scrollIntoView());else if(was!=='home'||h==='accueil')scrollTo(0,0);size()}
+ paint();navState();if(film3)film3.redimensionner();
 }
 $('mGo').addEventListener('click',e=>{if(view==='suite'){e.preventDefault();$('bc').scrollIntoView({behavior:'smooth',block:'start'})}});
 addEventListener('hashchange',route);
 
-/* ---------- scroll film ---------- */
-const N=121,film=$('film'),stage=$('stage'),cv=$('seq'),ctx=cv.getContext('2d'),still=$('still');
-const IW=1280,IH=716,frames=new Array(N);let loaded=0;
-const order=[];for(let s=16;s>=1;s=s>>1)for(let i=0;i<N;i+=s)if(!order.includes(i))order.push(i);
-let q=0,cur=0,need=true,W=0,H=0,dpr=1;
-const pump=()=>{while(q<order.length&&q-loaded<6){const i=order[q++];const im=new Image();im.decoding='async';im.onload=()=>{frames[i]=im;loaded++;$('bar').style.width=(loaded/N*100)+'%';if(loaded===N)$('bar').style.opacity=0;if(i===0||Math.abs(i-cur)<3)need=true;pump()};im.onerror=()=>{loaded++;pump()};im.src=`seq/f${String(i).padStart(3,'0')}.webp`}};pump();
+/* ---------- scroll film (moteur commun /assets/vol.js : lissage, fondu, décodage hors du fil principal) ---------- */
+const N=121,film=$('film'),stage=$('stage'),cv=$('seq'),still=$('still');
 const posX=()=>innerWidth/innerHeight<1?.78:.5;
-function rect(iw,ih){const s=Math.max(W/iw,H/ih),dw=iw*s,dh=ih*s;return{x:(W-dw)*posX(),y:(H-dh)*.5,w:dw,h:dh}}
-function size(){W=stage.clientWidth;H=stage.clientHeight;if(!W)return;dpr=Math.min(devicePixelRatio||1,1.5);cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
- const r=rect(2400,1340);Object.assign(box.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});still.style.objectPosition=`${posX()*100}% 50%`;need=true}
+function rect(iw,ih){const W=stage.clientWidth,H=stage.clientHeight,s=Math.max(W/iw,H/ih),dw=iw*s,dh=ih*s;return{x:(W-dw)*posX(),y:(H-dh)*.5,w:dw,h:dh}}
+// La façade cliquable et l'image fixe suivent le même cadrage que le film
+function size(){if(!stage.clientWidth)return;const r=rect(2400,1340);Object.assign(box.style,{left:r.x+'px',top:r.y+'px',width:r.w+'px',height:r.h+'px'});still.style.objectPosition=`${posX()*100}% 50%`;if(film3)film3.redimensionner()}
 addEventListener('resize',size);
-function draw(i){let f=frames[i];if(!f){for(let d=1;d<N;d++){if(frames[i-d]){f=frames[i-d];break}if(frames[i+d]){f=frames[i+d];break}}}if(!f)return;const r=rect(IW,IH);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.drawImage(f,r.x,r.y,r.w,r.h)}
 const caps=[$('cap1'),$('cap2'),$('cap3')];
 function navState(){const solid=view!=='home'||scrollY>film.offsetHeight-90;$('nav').classList.toggle('solid',solid)}
 /* Barre de réservation : visible pendant le film ; ensuite, elle s'efface quand on descend (pour ne pas couvrir les titres) et revient quand on remonte */
 let dernierY=scrollY;
 function barreResa(){const y=scrollY,apresFilm=view==='home'&&y>film.offsetHeight-innerHeight;
  if(Math.abs(y-dernierY)<6)return;$('bk').classList.toggle('cache',apresFilm&&y>dernierY);dernierY=y}
-function tick(){
- if(view==='home'){
-  const top=film.getBoundingClientRect().top,max=film.offsetHeight-innerHeight,p=Math.min(1,Math.max(0,-top/max));
-  const i=Math.round(Math.min(1,p/.7)*(N-1));
-  if(i!==cur||need){cur=i;need=false;draw(i)}
-  const hold=p>.72;still.style.opacity=hold?1:0;box.classList.toggle('on',hold);
-  caps[0].classList.toggle('on',p<.12);caps[1].classList.toggle('on',p>.24&&p<.52);caps[2].classList.toggle('on',hold);
- }
- navState();barreResa();requestAnimationFrame(tick)}
-size();route();requestAnimationFrame(tick);
+addEventListener('scroll',()=>{navState();barreResa()},{passive:true});
+let film3=null;
+if(window.VolDefile){
+ film3=VolDefile({
+  canvas:cv,
+  serie:()=>({cle:'h',n:N,url:i=>`seq/f${String(i).padStart(3,'0')}.webp`}),
+  progression:()=>{if(view!=='home')return 0;const top=film.getBoundingClientRect().top,max=film.offsetHeight-innerHeight;return Math.min(1,Math.max(0,-top/max))},
+  versImage:p=>Math.min(1,p/.7),
+  cadrage:posX,
+  charge:(nb,total)=>{$('bar').style.width=(nb/total*100)+'%';if(nb===total)$('bar').style.opacity=0},
+  rendu:p=>{if(view!=='home')return;
+   const hold=p>.72;still.style.opacity=hold?1:0;box.classList.toggle('on',hold);
+   caps[0].classList.toggle('on',p<.12);caps[1].classList.toggle('on',p>.24&&p<.52);caps[2].classList.toggle('on',hold)}
+ });
+}
+size();route();navState();
 }
 </script>
 </body>

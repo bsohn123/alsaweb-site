@@ -1,9 +1,8 @@
 /* Offre immersive : vol au-dessus du lieu piloté par le défilement, puis la visite de la démo en onglets.
-   Par défaut, le vol réutilise les images du Domaine Ebersol (h001…h361 en paysage, m001…m361 en portrait).
-   Une autre séquence se règle sur #vol : data-seq (préfixe), data-total, data-pas, data-debut-num,
-   data-chiffres, data-x-debut et data-x (cadrage horizontal sur téléphone, de 0 à 1, au début puis à la fin du vol). Une seule série paysage suffit alors.
-   Facultatif : data-seq-portrait (préfixe d'une série déjà recadrée pour téléphone, cadrage inclus) et data-pas-portrait
-   (une image sur combien dans cette série). Le téléphone charge alors des images plus légères. */
+   Le vol utilise le moteur commun assets/vol.js (lissage, fondu, décodage hors du fil principal).
+   La séquence se règle sur #vol : data-seq (préfixe), data-total, data-pas, data-debut-num, data-chiffres,
+   data-x-debut et data-x (cadrage horizontal sur téléphone si aucune série portrait, de 0 à 1, au début puis à la fin).
+   Facultatif : data-seq-portrait (série déjà recadrée pour téléphone) et data-pas-portrait (une image sur combien). */
 (function () {
   var entete = document.getElementById('entete');
   if (entete) {
@@ -11,100 +10,48 @@
     window.addEventListener('scroll', f, { passive: true }); f();
   }
 
-  /* ---------- Le vol ---------- */
+  /* ---------- Le vol (moteur commun : assets/vol.js) ---------- */
   var vol = document.getElementById('vol');
   var canvas = document.getElementById('vol-canvas');
   var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (vol && canvas && canvas.getContext && !calme) {
-    var ctx = canvas.getContext('2d');
+  if (vol && canvas && canvas.getContext && !calme && window.VolDefile) {
+    var ds = vol.dataset, scene = vol.firstElementChild;
     var chapitres = Array.prototype.slice.call(vol.querySelectorAll('.chapitre'));
     var barre = document.getElementById('vol-progres');
-    var ds = vol.dataset, perso = !!ds.seq;
-    var TOTAL = +(ds.total || 361), PAS = +(ds.pas || 2), PREMIER = +(ds.debutNum || 1), CHIFFRES = +(ds.chiffres || 3);
-    var PAS_H = PAS, PAS_M = +(ds.pasPortrait || PAS), SERIE_M = perso && !!ds.seqPortrait;
-    var N = Math.ceil((TOTAL - PREMIER + 1) / PAS), PORTRAIT = false;
+    var TOTAL = +(ds.total || 120), PREMIER = +(ds.debutNum || 0), CHIFFRES = +(ds.chiffres || 3);
     var X0 = +(ds.xDebut || ds.x || 0.5), X1 = +(ds.x || 0.5);
-    var sens = null, images = [], demandees = [], W = 0, H = 0, progres = 0, prevu = false, generation = 0;
-
-    var src = function (i) {
-      var num = Math.min(TOTAL, PREMIER + i * PAS);
-      if (perso) return (PORTRAIT && SERIE_M ? ds.seqPortrait : ds.seq) + String(num).padStart(CHIFFRES, '0') + '.webp';
-      return 'exemples/domaine-ebersol/seq/' + sens + String(num).padStart(3, '0') + '.webp';
-    };
-
-    function charger(i, g) {
-      if (demandees[i]) return;
-      demandees[i] = true;
-      var im = new Image();
-      im.decoding = 'async';
-      im.onload = function () { if (g === generation) { images[i] = im; demander(); } };
-      im.src = src(i);
-    }
-    // D'abord une image sur huit pour avoir tout le vol vite, puis le reste autour de la position courante.
-    function plan(g) {
-      for (var i = 0; i < N; i += 8) charger(i, g);
-      var c = 0;
-      (function suite() {
-        if (g !== generation) return;
-        var centre = Math.round(progres * (N - 1)), lot = 0;
-        for (var d = 0; d < N && lot < 6; d++) {
-          [centre + d, centre - d].forEach(function (j) { if (j >= 0 && j < N && !demandees[j]) { charger(j, g); lot++; } });
-        }
-        if (lot && ++c < 400) setTimeout(suite, 120);
-      })();
-    }
-
-    function proche(i) {
-      for (var d = 0; d < N; d++) {
-        if (images[i - d]) return images[i - d];
-        if (images[i + d]) return images[i + d];
-      }
-      return null;
-    }
-
-    function dimensionner() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = canvas.clientWidth; H = canvas.clientHeight;
-      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var s = W / H < 0.9 ? 'm' : 'h';
-      PORTRAIT = perso && s === 'm';
-      if (perso && !SERIE_M && sens) s = sens;
-      if (s !== sens) {
-        sens = s;
-        if (SERIE_M) { PAS = PORTRAIT ? PAS_M : PAS_H; N = Math.ceil((TOTAL - PREMIER + 1) / PAS); }
-        generation++; images = []; demandees = []; plan(generation);
-      }
-    }
-
-    function dessiner() {
-      prevu = false;
-      // La scène reste collée sous l'en-tête : la course est la hauteur du vol moins celle de la scène
-      var r = vol.getBoundingClientRect(), scene = vol.firstElementChild;
-      var haut = parseFloat(getComputedStyle(scene).top) || 0;
-      var course = vol.offsetHeight - scene.offsetHeight;
-      progres = Math.min(1, Math.max(0, (haut - r.top) / (course || 1)));
-      var im = proche(Math.round(progres * (N - 1)));
-      if (im) {
-        var e = Math.max(W / im.naturalWidth, H / im.naturalHeight);
-        var dw = im.naturalWidth * e, dh = im.naturalHeight * e;
-        var cadrage = PORTRAIT && !SERIE_M ? X0 + (X1 - X0) * progres : 0.5;
-        ctx.drawImage(im, (W - dw) * cadrage, (H - dh) / 2, dw, dh);
-      }
-      chapitres.forEach(function (c) {
-        var on = progres >= +c.dataset.debut && progres < +c.dataset.fin;
-        c.classList.toggle('visible', on);
-        c.setAttribute('aria-hidden', on ? 'false' : 'true');
-      });
-      if (barre) barre.style.width = (progres * 100).toFixed(2) + '%';
-    }
-    function demander() { if (!prevu) { prevu = true; requestAnimationFrame(dessiner); } }
+    var portrait = function () { return canvas.clientWidth / (canvas.clientHeight || 1) < 0.9; };
+    var serieM = function () { return portrait() && !!ds.seqPortrait; };
 
     vol.classList.add('anime');
-    dimensionner();
-    window.addEventListener('scroll', demander, { passive: true });
-    window.addEventListener('resize', function () { dimensionner(); demander(); });
-    demander();
+    var haut = 0, course = 1;
+    var mesurer = function () { haut = parseFloat(getComputedStyle(scene).top) || 0; course = Math.max(1, vol.offsetHeight - scene.offsetHeight); };
+    mesurer();
+    window.addEventListener('resize', mesurer);
+
+    window.VolDefile({
+      canvas: canvas,
+      serie: function () {
+        var m = serieM(), pas = m ? +(ds.pasPortrait || 1) : +(ds.pas || 1), prefixe = m ? ds.seqPortrait : ds.seq;
+        return {
+          cle: m ? 'm' : 'h',
+          n: Math.ceil((TOTAL - PREMIER + 1) / pas),
+          url: function (i) { return prefixe + String(Math.min(TOTAL, PREMIER + i * pas)).padStart(CHIFFRES, '0') + '.webp'; }
+        };
+      },
+      // La scène reste collée sous l'en-tête : la course est la hauteur du vol moins celle de la scène
+      progression: function () { return Math.min(1, Math.max(0, (haut - vol.getBoundingClientRect().top) / course)); },
+      // Série paysage sur un écran en portrait : le cadrage glisse pendant le vol (la série portrait est déjà cadrée)
+      cadrage: function (t) { return portrait() && !serieM() ? X0 + (X1 - X0) * t : 0.5; },
+      rendu: function (t) {
+        chapitres.forEach(function (c) {
+          var on = t >= +c.dataset.debut && t < +c.dataset.fin;
+          c.classList.toggle('visible', on);
+          c.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        if (barre) barre.style.transform = 'scaleX(' + t.toFixed(4) + ')';
+      }
+    });
   }
 
   /* ---------- La visite de la démo (onglets) ---------- */
