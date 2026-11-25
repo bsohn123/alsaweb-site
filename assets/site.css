@@ -409,6 +409,10 @@ fieldset.form-etape{border:0;margin:0;padding:0;min-width:0}
 .moment figcaption{margin-top:18px;font-size:18px;line-height:1.55;color:var(--encre-2);max-width:52ch}
 .moment figcaption strong{display:block;font-family:var(--titre);font-weight:400;font-size:34px;line-height:1.1;color:var(--encre);margin-bottom:8px}
 .note-demo{margin-top:20px;font-size:14px;color:var(--encre-2)}
+.heures.mots button{grid-template-columns:132px 1fr}
+@media (max-width:520px){.heures.mots button{grid-template-columns:1fr;gap:2px}}
+.lien-demo{margin-top:24px}
+.moment img{box-shadow:0 18px 50px rgba(19,34,26,.18)}
 
 .contenu-offre{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 56px}
 .contenu-offre li{padding:22px 0;border-bottom:1px solid var(--chaussee)}
