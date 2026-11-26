@@ -1,4 +1,4 @@
-/* Formulaires : maquette automatique (accueil), demande de démonstration (immersif), mini-audit.
+/* Formulaires : maquette automatique (accueil), demande de démonstration (immersif), ancien mini-audit (remplacé par le diagnostic de assets/trouve.js).
    La demande part vers /api/maquette (le Worker). Si le Worker ne répond pas,
    elle part vers Formspree : aucune demande n'est perdue. */
 (function () {
@@ -194,7 +194,7 @@
 
   // La barre d'appel mobile se retire quand un formulaire est à l'écran
   var barre = document.getElementById('barre-mobile');
-  var zones = document.querySelectorAll('.formulaire');
+  var zones = document.querySelectorAll('.formulaire, .trouve-form');
   if (barre && zones.length && 'IntersectionObserver' in window) {
     var visibles = new Set();
     var io = new IntersectionObserver(function (es) {

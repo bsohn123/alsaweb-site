@@ -7,7 +7,7 @@ HTML, CSS et JavaScript sans étape de compilation, plus un petit Worker Cloudfl
 
 ## Contenu
 
-- `index.html` : l'accueil. La route qui se trace au défilement (grand écran), le formulaire de maquette automatique, la carte en direct, les tarifs, le mini-audit, la FAQ.
+- `index.html` : l'accueil. La route qui se trace au défilement (grand écran), le formulaire de maquette automatique, la carte en direct, la section « Deux façons de vous trouver » (Google et IA, avec le diagnostic gratuit qui remplace le mini-audit), les tarifs, la FAQ.
 - `immersif.html` (servi sur `/immersif`) : l'offre premium pour les hôtels, gîtes et domaines. Le vol réutilise les images de la démo `exemples/le-gres-rose/seq/` sur ordinateur, et `seq-m/` sur téléphone (recadrées en portrait, une image sur deux : environ 2 Mo au lieu de 7). Réglage par les attributs `data-*` de `#vol`, voir `assets/immersif.js`.
 - `labo/charge/` : la page de présentation de Charge (projet personnel, pas un client), en HTML autonome. Ouverte en plein écran depuis le bloc « Le labo » de l'accueil (fenêtre `#labo-fenetre`, `assets/labo.js`, chargée seulement au clic), non indexée (en-tête `/labo/*`). `apercu.webp` est l'image du bloc.
 - `exemples/le-gres-rose/` : la démo d'hôtel immersif (hôtel fictif, visuels IA). Polices hébergées sur place, non indexée (en-tête `/exemples/*`).
