@@ -1,40 +1,41 @@
-/* Section « Deux façons de vous trouver » (accueil, #trouve).
-   Montre au commerçant la différence entre Google (SEO) et une IA (GEO), sur deux téléphones.
+/* Section « Deux façons de vous trouver » (accueil, #trouve), sur fond sombre, juste avant les Tarifs.
+   Montre au commerçant la différence entre Google (SEO) et une IA (GEO), sur deux téléphones,
+   puis propose le diagnostic gratuit (Google, IA, et site s'il en a un), qui remplace l'ancien mini-audit.
    Couleurs du site : celles de site.css. Les seules couleurs écrites ici sont celles
    des deux écrans simulés (blanc, gris, bleu de lien, étoile), regroupées dans .tr-tel. */
 
 .trouve-tete{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px clamp(32px,6vw,96px);align-items:end}
 .trouve-tete .titre-bloc{text-wrap:balance;max-width:15ch}
-.trouve-tete .titre-bloc em{color:var(--gres-fonce)}
+.trouve-tete .titre-bloc em{color:var(--gres)}
 .trouve-tete .chapeau{margin-top:0}
 .trouve-choix{margin-top:22px;display:grid;gap:10px}
-.trouve-choix>span{font-size:14px;font-weight:600;color:var(--encre-2)}
+.trouve-choix>span{font-size:14px;font-weight:600;color:var(--brume)}
 .trouve-choix div{display:flex;flex-wrap:wrap;gap:8px}
-.pastille{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--contour);background:transparent;color:var(--encre);font:500 15px var(--texte);cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
-.pastille:hover{border-color:var(--encre)}
-.pastille[aria-pressed="true"]{background:var(--encre);border-color:var(--encre);color:var(--papier)}
+.pastille{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid color-mix(in srgb,var(--brume) 55%,var(--nuit));background:transparent;color:var(--papier);font:500 15px var(--texte);cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.pastille:hover{border-color:var(--papier)}
+.pastille[aria-pressed="true"]{background:var(--papier);border-color:var(--papier);color:var(--nuit)}
 .trouve-choix:not(.actif){display:none}
 @media (max-width:900px){.trouve-tete{grid-template-columns:1fr}}
 
 /* Onglets (téléphone seulement, et seulement avec JavaScript) */
-.trouve-onglets{display:none;margin-top:36px;padding:4px;gap:4px;border-radius:999px;background:var(--filet)}
-.trouve-onglets button{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--encre-2);font:500 15px var(--texte);cursor:pointer}
-.trouve-onglets button[aria-pressed="true"]{background:var(--blanc);color:var(--encre);font-weight:600;box-shadow:0 1px 3px rgba(28,38,32,.14)}
+.trouve-onglets{display:none;margin-top:36px;padding:4px;gap:4px;border-radius:999px;background:var(--nuit-2);border:1px solid var(--chaussee)}
+.trouve-onglets button{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--brume);font:500 15px var(--texte);cursor:pointer}
+.trouve-onglets button[aria-pressed="true"]{background:var(--papier);color:var(--nuit);font-weight:600}
 
 /* La scène : deux colonnes et le « ou » au milieu */
 .trouve-scene{margin-top:56px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:40px;align-items:start}
 .trouve-col{display:flex;flex-direction:column;align-items:center;gap:28px}
 .trouve-col-tete,.trouve-legende{width:100%;max-width:340px}
-.trouve-col-tete{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-top:1px solid var(--encre);padding-top:14px}
+.trouve-col-tete{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-top:1px solid var(--papier);padding-top:14px}
 .trouve-col-tete h3{font-size:32px}
-.trouve-col-tete span{font-size:13px;font-weight:600;color:var(--encre-2)}
+.trouve-col-tete span{font-size:13px;font-weight:600;color:var(--brume)}
 .trouve-legende{display:grid;gap:8px}
 .trouve-legende strong{font:400 25px/1.2 var(--titre)}
-.trouve-legende p{font-size:16px;line-height:1.55;color:var(--encre-2)}
+.trouve-legende p{font-size:16px;line-height:1.55;color:var(--brume)}
 .trouve-ou{align-self:stretch;display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:120px}
-.trouve-ou::before,.trouve-ou::after{content:"";flex:1;width:1px;background:var(--filet)}
-.trouve-ou span{font:italic 28px var(--titre);color:var(--gres-fonce)}
-.trouve-note{margin-top:28px;text-align:center;font-size:14px;color:var(--encre-2)}
+.trouve-ou::before,.trouve-ou::after{content:"";flex:1;width:1px;background:var(--chaussee)}
+.trouve-ou span{font:italic 28px var(--titre);color:var(--gres)}
+.trouve-note{margin-top:28px;text-align:center;font-size:14px;color:var(--brume)}
 @media (max-width:880px){
   .trouve-scene{grid-template-columns:minmax(0,1fr);margin-top:32px}
   .trouve-ou{display:none}
@@ -44,7 +45,7 @@
 
 /* Les téléphones */
 .tr-tel{--ecran:#FFFFFF;--gris-1:#202124;--gris-2:#4D5156;--gris-3:#70757A;--gris-4:#DADCE0;--gris-5:#EBEBEB;--lien:#1A0DAB;--ouvert:#188038;--etoile:#E8A33D;--carte:#EEF0EA;--parc:#DDE6D5;--epingle:#8A8F87;--ia:#F7F6F3;--ia-texte:#2B2B2B;--ia-bord:#DAD6CE;
-  width:300px;max-width:100%;height:620px;padding:10px;border-radius:48px;background:#141414;box-shadow:0 30px 60px -20px rgba(19,34,26,.5),0 8px 16px rgba(19,34,26,.14)}
+  width:300px;max-width:100%;height:620px;padding:10px;border-radius:48px;background:#141414;box-shadow:0 30px 60px -20px rgba(0,0,0,.6),0 0 0 1px var(--chaussee)}
 .tr-ecran{position:relative;height:100%;border-radius:38px;background:var(--ecran);overflow:hidden;display:flex;flex-direction:column;gap:12px;padding:54px 14px 14px;color:var(--gris-1);font-size:13px;line-height:1.4}
 .tr-ecran::before{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);width:88px;height:26px;border-radius:20px;background:#141414}
 .tr-ia .tr-ecran{background:var(--ia);color:var(--ia-texte);gap:14px}
@@ -93,21 +94,21 @@
 @keyframes tr-monte{from{opacity:0;transform:translateY(12px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
 @media (prefers-reduced-motion:reduce){.trouve-col.joue .tape,.trouve-col.joue .ap{animation:none}}
 
-/* La phrase qui fait comprendre l'enjeu */
-.trouve-choc{margin-top:clamp(80px,10vw,140px);padding-top:40px;border-top:1px solid var(--filet);font:400 clamp(32px,4vw,56px)/1.08 var(--titre);letter-spacing:-.02em;max-width:22ch;text-wrap:balance}
-.trouve-choc em{color:var(--gres-fonce)}
+/* L'enjeu : la phrase-choc à gauche, ce qu'Alsaweb fait à droite */
+.trouve-enjeu{margin-top:clamp(80px,10vw,140px);padding-top:40px;border-top:1px solid var(--chaussee);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(40px,6vw,88px);align-items:start}
+@media (max-width:900px){.trouve-enjeu{grid-template-columns:1fr}}
+.trouve-choc{font:400 clamp(32px,3.6vw,48px)/1.08 var(--titre);letter-spacing:-.02em;text-wrap:balance}
+.trouve-choc em{color:var(--gres)}
 
 /* Ce qu'Alsaweb fait pour l'un et pour l'autre */
-.trouve-deux{margin-top:clamp(64px,8vw,104px)}
-.trouve-deux>h3{font-size:clamp(28px,3vw,40px);line-height:1.15;max-width:24ch}
-.trouve-deux-grille{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
-.trouve-deux h4{margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--encre);font-size:15px;font-weight:600}
-.trouve-deux ul{margin:0;padding-left:20px;display:grid;gap:12px;line-height:1.5}
-.trouve-deux li::marker{color:var(--gres-fonce)}
-@media (max-width:760px){.trouve-deux-grille{grid-template-columns:1fr;gap:36px}}
+.trouve-deux>h3{font-size:clamp(26px,2.6vw,32px);line-height:1.15}
+.trouve-deux-grille{margin-top:24px;display:grid;gap:22px}
+.trouve-deux h4{margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--chaussee);font:600 14px var(--texte);color:var(--brume)}
+.trouve-deux ul{margin:0;padding-left:20px;display:grid;gap:8px;line-height:1.5}
+.trouve-deux li::marker{color:var(--gres)}
 
 /* L'appel : « Et vous, on vous trouve ? » */
-.trouve-appel{margin-top:clamp(72px,9vw,120px);border-radius:32px;background:var(--nuit);color:var(--papier);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px clamp(32px,5vw,64px);align-items:end}
+.trouve-appel{margin-top:clamp(64px,8vw,104px);border-radius:32px;background:var(--nuit-2);border:1px solid var(--chaussee);color:var(--papier);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px clamp(32px,5vw,64px);align-items:start}
 .trouve-appel h3{font-size:clamp(36px,4.4vw,60px);line-height:1.02;letter-spacing:-.02em}
 .trouve-appel h3 em{color:var(--gres)}
 .trouve-appel>div>p{margin-top:16px;line-height:1.55;color:var(--brume);max-width:40ch}
@@ -115,10 +116,18 @@
 .trouve-form .duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 14px}
 .trouve-form .champ{margin-bottom:14px}
 .trouve-form .champ label{color:var(--papier)}
+.trouve-form .facultatif{font-weight:400;color:var(--brume)}
+.trouve-exemple{margin-top:28px;padding:18px 20px;border-radius:18px;background:var(--nuit);border:1px solid var(--chaussee)}
+.trouve-exemple .borne{font-size:12px;color:var(--brume);margin-bottom:6px}
+.trouve-exemple ul{list-style:none;margin:0;padding:0}
+.trouve-exemple li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--chaussee);font-size:15px}
+.trouve-exemple li:first-child{border-top:0}
+.trouve-exemple strong{flex:none;color:var(--gres);font-weight:600}
+.trouve-exemple strong.ok{color:var(--brume)}
 .trouve-form .btn{width:100%;min-height:56px;font-size:17px}
 .trouve-form .consent{color:var(--brume)}
 .trouve-form .form-erreur{color:var(--gres)}
-.trouve-merci{padding:24px;border-radius:20px;background:var(--nuit-2);border:1px solid var(--chaussee)}
+.trouve-merci{padding:24px;border-radius:20px;background:var(--nuit);border:1px solid var(--chaussee)}
 .trouve-merci h4{margin:0;font:400 30px var(--titre)}
 .trouve-merci p{color:var(--brume)}
 @media (max-width:900px){.trouve-appel{grid-template-columns:1fr}}

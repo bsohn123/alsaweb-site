@@ -2,7 +2,7 @@
    - Les deux téléphones s'animent quand la section arrive à l'écran.
    - Les pastilles changent d'exemple (pizzeria, menuisier, winstub) et relancent l'animation.
    - Sur téléphone, deux onglets montrent un écran à la fois.
-   - Le formulaire « Et vous, on vous trouve ? » part vers Formspree, comme le mini-audit.
+   - Le diagnostic gratuit « Et vous, on vous trouve ? » (Google, IA, et site facultatif) part vers Formspree.
    Sans JavaScript, l'exemple de la pizzeria reste affiché, sans animation. */
 (function () {
   var section = document.getElementById('trouve');
@@ -71,7 +71,7 @@
     io.observe(scene);
   }
 
-  // Formulaire : Formspree, comme le mini-audit
+  // Diagnostic gratuit : Formspree (le champ « site » est facultatif)
   var form = document.getElementById('trouve-form');
   if (!form) return;
   function emailOk(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
