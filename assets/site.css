@@ -48,7 +48,7 @@ p{margin:0}
 .btn-gres{background:var(--gres);color:var(--nuit)}
 .btn-gres:hover{background:color-mix(in srgb,var(--gres) 82%,var(--papier))}
 .btn-trait{border-color:currentColor;background:transparent;color:inherit}
-.btn-trait:hover{background:rgba(239,228,212,.08)}
+.btn-trait:hover{background:rgba(246,239,233,.08)}
 .clair .btn-gres{background:var(--gres-fonce);color:var(--papier)}
 .clair .btn-gres:hover{background:color-mix(in srgb,var(--gres-fonce) 82%,var(--nuit))}
 .btn[disabled]{opacity:.6;cursor:wait}
@@ -374,18 +374,48 @@ fieldset.form-etape{border:0;margin:0;padding:0;min-width:0}
 .statut.correct{background:color-mix(in srgb,var(--sapin) 13%,var(--blanc));color:var(--sapin)}
 
 /* FAQ */
-.faq-liste{margin-top:40px;max-width:860px;border-top:1px solid var(--chaussee)}
-.faq-liste details{border-bottom:1px solid var(--chaussee)}
-.faq-liste summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:22px 0;font-size:20px;font-weight:600}
-.faq-liste summary::-webkit-details-marker{display:none}
-.faq-liste summary::after{content:"+";font-family:var(--titre);font-size:30px;line-height:.8;color:var(--gres);transition:transform .25s}
-.faq-liste details[open] summary::after{transform:rotate(45deg)}
-.faq-liste details p{padding:0 0 24px;color:var(--brume);max-width:64ch}
-/* FAQ sur fond clair (accueil) */
-.faq.clair{border-top:1px solid var(--filet)}
-.clair .faq-liste,.clair .faq-liste details{border-color:var(--filet)}
-.clair .faq-liste summary::after{color:var(--gres-fonce)}
-.clair .faq-liste details p{color:var(--encre-2)}
+/* FAQ « carnet de route » : questions par tronçon, la route se colore à mesure qu'on lit (assets/faq.js) */
+.faq-tete{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
+@media (max-width:860px){.faq-tete{grid-template-columns:1fr;gap:16px}}
+.faq-borne{color:var(--gres);margin-bottom:14px}
+.faq-troncons{display:flex;flex-direction:column;gap:28px;max-width:860px}
+.faq-troncon-titre{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brume);margin-bottom:10px}
+.faq-q{position:relative;padding-left:28px;border-left:2px solid var(--chaussee);transition:border-color .3s}
+.faq-q::before{content:"";position:absolute;left:-6px;top:20px;width:10px;height:10px;border-radius:50%;background:var(--nuit);border:2px solid var(--chaussee);transition:all .3s}
+.faq-q.lu{border-left-color:var(--gres)}
+.faq-q.lu::before{background:var(--gres);border-color:var(--gres)}
+.faq-q.actuelle::before{left:-9px;top:17px;width:16px;height:16px;box-shadow:0 0 0 6px rgba(227,154,130,.22)}
+.faq-q summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:baseline;min-height:48px;padding:12px 0;font-size:18px;font-weight:600;line-height:1.35}
+.faq-q summary::-webkit-details-marker{display:none}
+.faq-q summary::after{content:"+";margin-left:auto;padding-left:12px;font-family:var(--titre);font-size:28px;line-height:.8;color:var(--gres);transition:transform .25s}
+.faq-q[open] summary::after{transform:rotate(45deg)}
+.faq-km{flex:none;min-width:62px;font:500 12px var(--borne);color:var(--brume)}
+.faq-r{padding:0 0 22px 76px}
+.faq-r p{color:var(--brume);max-width:64ch}
+.faq-objection{font-family:var(--titre);font-style:italic;font-size:22px;line-height:1.15;color:var(--papier);margin-bottom:10px}
+.faq-r .faq-objection{color:var(--papier)}
+@media (max-width:600px){.faq-q{padding-left:22px}.faq-km{display:none}.faq-r{padding-left:0}.faq-q summary{font-size:17px}}
+/* Grand écran : la réponse s'affiche dans la fiche à droite */
+.faq-route.fiche{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:56px;align-items:start}
+.faq-route.fiche .faq-r,.faq-route.fiche summary::after{display:none}
+.faq-route.fiche summary{font-size:17px;font-weight:500;color:var(--brume)}
+.faq-route.fiche .actuelle summary{color:var(--papier);font-weight:600}
+.faq-route.fiche summary:hover{color:var(--papier)}
+.faq-fiche{position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;min-height:460px;padding:40px;background:var(--nuit-2);border:1px solid var(--chaussee);border-radius:20px}
+.faq-fiche-km{color:var(--gres)}
+.faq-fiche .faq-objection{margin:0;font-size:36px}
+.faq-fiche-question{font:600 17px/1.4 var(--texte);letter-spacing:0;color:var(--brume)}
+.faq-fiche-reponse p{font-size:19px;line-height:1.6;color:var(--papier)}
+.faq-fiche-reponse p+p{margin-top:12px}
+.faq-fiche-pied{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid var(--chaussee)}
+.faq-fiche-nav{display:flex;gap:10px}
+.faq-fiche-nav .btn{min-height:44px;padding:8px 18px;font-size:15px}
+.faq-compte{font-size:12px;color:var(--brume)}
+.faq-fiche.change>*{animation:faq-fondu .35s ease both}
+@keyframes faq-fondu{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.faq-fiche.change>*{animation:none}}
+.faq-pas-trouve{margin-top:40px;color:var(--brume)}
+.faq-pas-trouve a{color:var(--gres)}
 
 /* Pied de page */
 .pied{border-top:1px solid var(--chaussee);padding-block:72px 40px}

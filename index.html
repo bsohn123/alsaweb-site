@@ -495,22 +495,88 @@
   </div>
 </section>
 
-<section class="faq clair bloc" id="questions" aria-labelledby="titre-faq">
+<section class="faq bloc" id="questions" aria-labelledby="titre-faq">
   <div class="enveloppe">
-    <h2 class="titre-bloc" id="titre-faq">Vos questions, mes réponses.</h2>
-    <div class="faq-liste">
-      <details><summary>Combien coûte un site ?</summary><p>L'offre Essentiel est à 790 €, la Vitrine Pro à 1 490 €, et les projets particuliers sont sur devis. Les prix sont fixes : le montant du devis est celui que vous payez.</p></details>
-      <details><summary>La maquette gratuite m'engage-t-elle à quelque chose ?</summary><p>Non. Si elle ne vous plaît pas, vous me le dites et on s'arrête là. Aucune carte bancaire, aucun acompte avant la signature du devis.</p></details>
-      <details><summary>Qui prépare la maquette ?</summary><p>Une première version est préparée automatiquement à partir de vos réponses, avec l'aide d'une intelligence artificielle. Je la relis et la corrige avant de vous l'envoyer : rien ne part sans être passé entre mes mains.</p></details>
-      <details><summary>L'adresse de ma maquette est-elle publique ?</summary><p>Non. Elle n'est pas référencée sur Google : seules les personnes à qui vous donnez le lien peuvent l'ouvrir.</p></details>
-      <details><summary>À qui appartiennent le site et le nom de domaine ?</summary><p>À vous. Je m'occupe de la partie technique, hébergement et mises à jour comprises, et je vous transfère tout sur simple demande.</p></details>
-      <details><summary>Y a-t-il des frais chaque année ?</summary><p>Avec le forfait tranquillité, à partir de 35 € par mois, l'hébergement et le nom de domaine sont inclus. Sans forfait, comptez environ 30 € par an pour le nom de domaine et l'hébergement ; le montant exact figure sur le devis.</p></details>
-      <details><summary>Puis-je modifier mes horaires ou ma carte moi-même ?</summary><p>Comme vous préférez : je vous montre comment faire, ou je m'en occupe pour vous. Avec le forfait tranquillité, les modifications courantes sont comprises.</p></details>
-      <details><summary>Je n'ai pas de belles photos. Est-ce un problème ?</summary><p>Non. La maquette utilise des photos d'ambiance libres de droits, que l'on remplace par les vôtres dès que vous en avez.</p></details>
-      <details><summary>Combien de temps faut-il ?</summary><p>La maquette arrive en général dès le lendemain de votre demande, au plus tard sous 5 jours. Comptez ensuite 2 à 3 semaines entre la signature du devis et la mise en ligne, selon la formule.</p></details>
-      <details><summary>Et si mon site a un problème ?</summary><p>Avec le forfait tranquillité, j'interviens sous 48 h. Vous m'écrivez ou vous m'appelez, et vous avez toujours affaire à la même personne.</p></details>
-      <details><summary>J'ai déjà un site. Pouvez-vous le refaire ?</summary><p>Oui, c'est une refonte, sur devis. Commencez par le <a href="#audit">mini-audit gratuit</a> : il dit ce qui mérite d'être corrigé et ce qui peut rester.</p></details>
+    <div class="faq-tete">
+      <div>
+        <p class="borne faq-borne">Km 14 · Dernière étape avant chez vous</p>
+        <h2 class="titre-bloc" id="titre-faq">Vos questions, sur la route.</h2>
+      </div>
+      <p class="chapeau">Classées selon le moment où vous vous les posez : avant de signer, pendant la création, une fois le site en ligne.</p>
     </div>
+    <!-- Carnet de route : sans JavaScript ou sur téléphone, chaque question se déplie (details).
+         Sur grand écran, assets/faq.js affiche la réponse dans la fiche à droite. -->
+    <div class="faq-route" id="faq-route">
+      <div class="faq-troncons">
+        <div class="faq-troncon">
+          <p class="borne faq-troncon-titre">Tronçon 1 · Avant de signer</p>
+          <details class="faq-q" data-troncon="Avant de signer">
+            <summary><span class="faq-km">Km 14,1</span><span class="faq-question">Combien coûte un site ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Un site, c'est sûrement trop cher pour moi. »</p><p>L'offre Essentiel est à 790 €, la Vitrine Pro à 1 490 €, et les projets particuliers sont sur devis. Les prix sont fixes : le montant du devis est celui que vous payez.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Avant de signer">
+            <summary><span class="faq-km">Km 14,3</span><span class="faq-question">La maquette gratuite m'engage-t-elle à quelque chose ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Si je demande une maquette, je suis coincé. »</p><p>Non. Si elle ne vous plaît pas, vous me le dites et on s'arrête là. Aucune carte bancaire, aucun acompte avant la signature du devis.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Avant de signer">
+            <summary><span class="faq-km">Km 14,5</span><span class="faq-question">Qui prépare la maquette ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Une maquette faite par une IA, non merci. »</p><p>Une première version est préparée automatiquement à partir de vos réponses, avec l'aide d'une intelligence artificielle. Je la relis et la corrige avant de vous l'envoyer : rien ne part sans être passé entre mes mains.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Avant de signer">
+            <summary><span class="faq-km">Km 14,7</span><span class="faq-question">L'adresse de ma maquette est-elle publique ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Je ne veux pas qu'on voie mon site avant qu'il soit prêt. »</p><p>Non. Elle n'est pas référencée sur Google : seules les personnes à qui vous donnez le lien peuvent l'ouvrir.</p></div>
+          </details>
+        </div>
+        <div class="faq-troncon">
+          <p class="borne faq-troncon-titre">Tronçon 2 · Pendant la création</p>
+          <details class="faq-q" data-troncon="Pendant la création">
+            <summary><span class="faq-km">Km 15,0</span><span class="faq-question">Combien de temps faut-il ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Je n'ai pas le temps pour un projet qui dure des mois. »</p><p>La maquette arrive en général dès le lendemain de votre demande, au plus tard sous 5 jours. Comptez ensuite 2 à 3 semaines entre la signature du devis et la mise en ligne, selon la formule.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Pendant la création">
+            <summary><span class="faq-km">Km 15,2</span><span class="faq-question">Je n'ai pas de belles photos. Est-ce un problème ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Je n'ai pas de belles photos. »</p><p>Non. La maquette utilise des photos d'ambiance libres de droits, que l'on remplace par les vôtres dès que vous en avez.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Pendant la création">
+            <summary><span class="faq-km">Km 15,4</span><span class="faq-question">J'ai déjà un site. Pouvez-vous le refaire ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« J'ai déjà un site, je ne vais pas tout recommencer. »</p><p>Oui, c'est une refonte, sur devis. Commencez par le <a href="#audit">mini-audit gratuit</a> : il dit ce qui mérite d'être corrigé et ce qui peut rester.</p></div>
+          </details>
+        </div>
+        <div class="faq-troncon">
+          <p class="borne faq-troncon-titre">Tronçon 3 · Une fois en ligne</p>
+          <details class="faq-q" data-troncon="Une fois en ligne">
+            <summary><span class="faq-km">Km 15,8</span><span class="faq-question">À qui appartiennent le site et le nom de domaine ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Le jour où j'arrête, je perds tout. »</p><p>À vous. Je m'occupe de la partie technique, hébergement et mises à jour comprises, et je vous transfère tout sur simple demande.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Une fois en ligne">
+            <summary><span class="faq-km">Km 16,0</span><span class="faq-question">Y a-t-il des frais chaque année ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Il y aura des frais cachés chaque année. »</p><p>Avec le forfait tranquillité, à partir de 35 € par mois, l'hébergement et le nom de domaine sont inclus. Sans forfait, comptez environ 30 € par an pour le nom de domaine et l'hébergement ; le montant exact figure sur le devis.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Une fois en ligne">
+            <summary><span class="faq-km">Km 16,2</span><span class="faq-question">Puis-je modifier mes horaires ou ma carte moi-même ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Je paierai à chaque changement d'horaires. »</p><p>Comme vous préférez : je vous montre comment faire, ou je m'en occupe pour vous. Avec le forfait tranquillité, les modifications courantes sont comprises.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Une fois en ligne">
+            <summary><span class="faq-km">Km 16,4</span><span class="faq-question">Et si mon site a un problème ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Si ça plante, personne ne répondra. »</p><p>Avec le forfait tranquillité, j'interviens sous 48 h. Vous m'écrivez ou vous m'appelez, et vous avez toujours affaire à la même personne.</p></div>
+          </details>
+        </div>
+      </div>
+      <aside class="faq-fiche" id="faq-fiche" aria-live="polite" hidden>
+        <p class="borne faq-fiche-km" id="faq-fiche-km"></p>
+        <p class="faq-objection" id="faq-fiche-objection"></p>
+        <h3 class="faq-fiche-question" id="faq-fiche-question"></h3>
+        <div class="faq-fiche-reponse" id="faq-fiche-reponse"></div>
+        <div class="faq-fiche-pied">
+          <div class="faq-fiche-nav">
+            <button type="button" class="btn btn-trait" id="faq-precedente">← Précédente</button>
+            <button type="button" class="btn btn-gres" id="faq-suivante">Suivante →</button>
+          </div>
+          <p class="borne faq-compte" id="faq-compte"></p>
+        </div>
+      </aside>
+    </div>
+    <p class="faq-pas-trouve">Pas trouvé votre question ? <a href="https://wa.me/33750482176?text=Bonjour%2C%20j%27ai%20une%20question%20sur%20les%20sites%20Alsaweb." rel="noopener">Écrivez-moi sur WhatsApp</a>, je réponds moi-même.</p>
   </div>
 </section>
 
@@ -592,5 +658,6 @@
 <script src="/assets/menu.js?v=20261125" defer></script>
 <script src="/assets/formulaires.js?v=20261125" defer></script>
 <script src="/assets/labo.js?v=20261125" defer></script>
+<script src="/assets/faq.js?v=20261126" defer></script>
 </body>
 </html>
