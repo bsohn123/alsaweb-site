@@ -36,7 +36,7 @@
     bulle.appendChild(l);
     if (site.mise_en_ligne) {
       var d = document.createElement('span');
-      d.style.display = 'block'; d.style.color = '#4C5A51';
+      d.style.display = 'block'; d.style.color = 'var(--encre-2)';
       d.textContent = 'En ligne depuis le ' + dateFr(site.mise_en_ligne);
       bulle.appendChild(d);
     }
