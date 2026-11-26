@@ -65,6 +65,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css?v=20261126">
+<link rel="stylesheet" href="/assets/trouve.css?v=20261126">
 </head>
 <body>
 
@@ -176,6 +177,135 @@
       </li>
     </ol>
     <p class="compteur borne" id="indice" aria-hidden="true">Faites défiler pour avancer</p>
+  </div>
+</section>
+
+<section class="trouve clair bloc" id="trouve" aria-labelledby="titre-trouve">
+  <div class="enveloppe">
+    <div class="trouve-tete">
+      <h2 class="titre-bloc" id="titre-trouve">Aujourd'hui, vos clients vous cherchent de <em>deux façons</em>.</h2>
+      <div>
+        <p class="chapeau">Sur Google, ils comparent une liste. Sur ChatGPT, une IA choisit pour eux. Votre commerce doit gagner les deux.</p>
+        <div class="trouve-choix" id="trouve-choix">
+          <span id="trouve-choix-titre">Essayez avec :</span>
+          <div role="group" aria-labelledby="trouve-choix-titre">
+            <button type="button" class="pastille" data-exemple="0" aria-pressed="true">Pizzeria à Rosheim</button>
+            <button type="button" class="pastille" data-exemple="1" aria-pressed="false">Menuisier à Molsheim</button>
+            <button type="button" class="pastille" data-exemple="2" aria-pressed="false">Winstub à Obernai</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouve-onglets" role="group" aria-label="Choisir la recherche">
+      <button type="button" data-onglet="google" aria-pressed="true">Sur Google</button>
+      <button type="button" data-onglet="ia" aria-pressed="false">Sur une IA</button>
+    </div>
+
+    <div class="trouve-scene">
+      <div class="trouve-col" data-col="google">
+        <div class="trouve-col-tete"><h3>Sur Google</h3><span>On appelle ça le SEO</span></div>
+        <div class="tr-tel" role="img" aria-label="Exemple d'une recherche Google sur téléphone : votre commerce apparaît en premier, sur la carte et dans la liste">
+          <div class="tr-ecran" aria-hidden="true">
+            <div class="g-barre"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="tape" data-t="q">pizzeria rosheim</span></div>
+            <div class="g-onglets ap r1"><span>Tous</span><span>Maps</span><span>Images</span><span>Avis</span></div>
+            <div class="g-carte ap r1"><svg viewBox="0 0 272 118" preserveAspectRatio="xMidYMid slice"><rect width="272" height="118" fill="var(--carte)"/><path d="M0 84 C70 70 120 96 272 60" stroke="var(--ecran)" stroke-width="10" fill="none"/><path d="M150 0 C140 40 170 80 160 118" stroke="var(--ecran)" stroke-width="7" fill="none"/><path d="M0 30 L272 40" stroke="var(--ecran)" stroke-width="4" fill="none"/><rect x="20" y="44" width="46" height="26" rx="4" fill="var(--parc)"/><rect x="196" y="76" width="54" height="30" rx="4" fill="var(--parc)"/><circle cx="214" cy="30" r="5" fill="var(--epingle)"/><circle cx="60" cy="96" r="5" fill="var(--epingle)"/><path d="M128 28c-9 0-15 7-15 15 0 11 15 25 15 25s15-14 15-25c0-8-6-15-15-15z" fill="var(--gres-fonce)"/><circle cx="128" cy="43" r="5" fill="var(--ecran)"/></svg></div>
+            <div class="g-fiche ap r2">
+              <span class="g-badge">Votre commerce</span>
+              <strong data-t="nom">La Bella Rosa</strong>
+              <span class="g-note"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--etoile)"><path d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.5 5.7 21l1.6-7L2 9.3l7-.7z"/></svg><span data-t="note">4,8 (212) · Four à bois</span></span>
+              <span class="g-heures" data-t="heures">Ouvert · Ferme à 22:00</span>
+              <div class="g-actions"><span>Appeler</span><span>Itinéraire</span><span>Site web</span></div>
+            </div>
+            <div class="g-autre ap r3"><strong data-t="o1">Pizza du Marché</strong><span data-t="o1m">4,1 (58) · Pizzeria</span></div>
+            <div class="g-autre ap r4"><strong data-t="o2">Chez Nonna</strong><span data-t="o2m">3,9 (31) · Restaurant italien</span></div>
+          </div>
+        </div>
+        <div class="trouve-legende">
+          <strong>Être en haut de la liste.</strong>
+          <p>Le client compare plusieurs adresses et clique sur celle qu'il voit en premier.</p>
+        </div>
+      </div>
+
+      <div class="trouve-ou" aria-hidden="true"><span>ou</span></div>
+
+      <div class="trouve-col tr-ia" data-col="ia">
+        <div class="trouve-col-tete"><h3>Sur une IA</h3><span>On appelle ça le GEO</span></div>
+        <div class="tr-tel" role="img" aria-label="Exemple d'une question posée à une IA sur téléphone : elle recommande un seul commerce, le vôtre, et cite ses sources">
+          <div class="tr-ecran" aria-hidden="true">
+            <div class="ia-tete"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>Assistant IA</div>
+            <div class="ia-question ap r0"><span class="tape" data-t="question">Quelle pizzeria tu me conseilles à Rosheim ?</span></div>
+            <span class="ia-reflexion ap r1">Je compare les avis et les sites du coin…</span>
+            <p class="ia-reponse ap r2"><span data-t="a1">Pour une bonne pizza à Rosheim, je vous conseille </span><strong data-t="nom">La Bella Rosa</strong><span data-t="a2"> : pâte maison, four à bois, 4,8/5 sur 212 avis. Ouvert ce soir jusqu'à 22 h, réservation en ligne possible.</span></p>
+            <div class="ia-sources ap r3"><span>Sources consultées</span><div><span data-t="site">labellarosa.fr</span><span>Fiche Google</span><span data-t="src">TripAdvisor</span></div></div>
+            <div class="ia-saisie">Posez une question…</div>
+          </div>
+        </div>
+        <div class="trouve-legende">
+          <strong>Être celui qu'on recommande.</strong>
+          <p>Pas de liste : l'IA choisit pour le client un ou deux noms. Les autres n'existent pas.</p>
+        </div>
+      </div>
+    </div>
+    <p class="trouve-note">Commerces fictifs, pour l'exemple.</p>
+
+    <p class="trouve-choc">Sur Google, si vous êtes 5ᵉ, on peut encore vous voir. <em>Sur ChatGPT, si on ne vous cite pas, vous n'existez pas.</em></p>
+
+    <div class="trouve-deux">
+      <h3>Tous mes sites sont construits pour les deux. Sans supplément.</h3>
+      <div class="trouve-deux-grille">
+        <div>
+          <h4>Pour Google, je m'occupe de</h4>
+          <ul>
+            <li>votre fiche Google complète, reliée au site</li>
+            <li>une page par service et par ville</li>
+            <li>un site rapide sur téléphone</li>
+            <li>vos avis mis en avant</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Pour les IA, je m'occupe de</h4>
+          <ul>
+            <li>des infos claires et identiques partout</li>
+            <li>une FAQ qui répond aux vraies questions de vos clients</li>
+            <li>des données que les IA savent lire</li>
+            <li>votre présence sur les sites qu'elles consultent</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="trouve-appel">
+      <div>
+        <h3>Et vous, on vous <em>trouve</em> ?</h3>
+        <p>Je vérifie si votre commerce sort sur Google et sur ChatGPT, et je vous envoie le résultat sous 24 h. Gratuit, sans engagement.</p>
+      </div>
+      <div>
+        <form class="trouve-form" id="trouve-form" action="https://formspree.io/f/xkjwjlqd" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Test de visibilité Google et IA demandé sur alsaweb.fr">
+          <div class="duo">
+            <div class="champ">
+              <label for="trouve-commerce">Nom de votre commerce</label>
+              <input type="text" id="trouve-commerce" name="commerce" required autocomplete="organization" placeholder="Ex. La Bella Rosa">
+            </div>
+            <div class="champ">
+              <label for="trouve-ville">Ville</label>
+              <input type="text" id="trouve-ville" name="ville" required autocomplete="address-level2" placeholder="Ex. Rosheim">
+            </div>
+          </div>
+          <div class="champ">
+            <label for="trouve-email">Votre e-mail, pour recevoir le résultat</label>
+            <input type="email" id="trouve-email" name="email" required autocomplete="email" inputmode="email" placeholder="vous@votre-commerce.fr">
+          </div>
+          <button class="btn btn-gres" type="submit">Vérifier gratuitement</button>
+          <p class="consent">Votre adresse sert uniquement à vous envoyer le résultat.</p>
+        </form>
+        <div class="trouve-merci merci" id="trouve-merci" hidden tabindex="-1">
+          <h4>C'est noté.</h4>
+          <p>Je regarde où sort votre commerce sur Google et sur les IA, et je vous envoie le résultat par e-mail sous 24 h.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -659,5 +789,6 @@
 <script src="/assets/formulaires.js?v=20261125" defer></script>
 <script src="/assets/labo.js?v=20261125" defer></script>
 <script src="/assets/faq.js?v=20261126" defer></script>
+<script src="/assets/trouve.js?v=20261126" defer></script>
 </body>
 </html>
