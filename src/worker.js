@@ -27,6 +27,12 @@ export default {
     const domaine = env.DOMAINE || 'alsaweb.fr';
     const hote = url.hostname.toLowerCase();
 
+    // Une seule adresse officielle pour Google : https://alsaweb.fr (sans www, en https).
+    // Les accès en http:// ou par www. sont redirigés définitivement (301).
+    if ((hote === domaine || hote === 'www.' + domaine) && (url.protocol === 'http:' || hote !== domaine)) {
+      return Response.redirect(`https://${domaine}${url.pathname}${url.search}`, 301);
+    }
+
     try {
       // 1. Maquette sur sous-domaine : winstub-le-cerf-k7q2.alsaweb.fr
       if (env.SOUS_DOMAINES === '1' && hote.endsWith('.' + domaine) && hote !== 'www.' + domaine) {

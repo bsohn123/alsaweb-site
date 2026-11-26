@@ -13,7 +13,7 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Alsaweb">
 <meta property="og:url" content="https://alsaweb.fr/">
-<meta property="og:title" content="Alsaweb : la Route des sites des commerces d'Alsace">
+<meta property="og:title" content="Alsaweb : création de sites internet pour les commerces d'Alsace">
 <meta property="og:description" content="Des sites simples, rapides et beaux pour les restaurants, commerces et artisans. Votre maquette gratuite arrive dès le lendemain.">
 <meta property="og:image" content="https://alsaweb.fr/img/partage.jpg">
 <meta property="og:image:width" content="1200">
@@ -23,22 +23,48 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Alsaweb",
-  "url": "https://alsaweb.fr/",
-  "logo": "https://alsaweb.fr/apple-touch-icon.png",
-  "image": "https://alsaweb.fr/img/partage.jpg",
-  "description": "Création de sites internet pour les restaurants, commerces et artisans d'Alsace.",
-  "email": "contact@alsaweb.fr",
-  "telephone": "+33750482176",
-  "founder": { "@type": "Person", "name": "Baptiste Sohn", "sameAs": ["https://www.linkedin.com/in/baptiste-sohn/"] },
-  "sameAs": ["https://www.linkedin.com/in/baptiste-sohn/", "https://www.instagram.com/alsaweb.fr/"],
-  "address": { "@type": "PostalAddress", "streetAddress": "9 rue de la Bruche", "postalCode": "67810", "addressLocality": "Holtzheim", "addressRegion": "Grand Est", "addressCountry": "FR" },
-  "areaServed": [{ "@type": "City", "name": "Strasbourg" }, { "@type": "AdministrativeArea", "name": "Bas-Rhin" }, { "@type": "AdministrativeArea", "name": "Alsace" }],
-  "priceRange": "790 € – 1 490 €",
-  "makesOffer": [
-    { "@type": "Offer", "name": "Site Essentiel", "price": "790", "priceCurrency": "EUR" },
-    { "@type": "Offer", "name": "Site Vitrine Pro", "price": "1490", "priceCurrency": "EUR" }
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://alsaweb.fr/#entreprise",
+      "name": "Alsaweb",
+      "url": "https://alsaweb.fr/",
+      "logo": "https://alsaweb.fr/logo.png",
+      "image": "https://alsaweb.fr/img/partage.jpg",
+      "description": "Alsaweb est une micro-entreprise de création de sites internet pour les restaurants, commerces et artisans d'Alsace, basée à Holtzheim, près de Strasbourg. Sites à prix fixes dès 790 €, maquette gratuite avant tout engagement.",
+      "slogan": "La Route des sites",
+      "foundingDate": "2026-06",
+      "email": "contact@alsaweb.fr",
+      "telephone": "+33750482176",
+      "identifier": { "@type": "PropertyValue", "propertyID": "SIRET", "value": "10647087500019" },
+      "founder": { "@id": "https://alsaweb.fr/a-propos#baptiste-sohn" },
+      "sameAs": ["https://www.instagram.com/alsaweb.fr/", "https://www.linkedin.com/in/baptiste-sohn/"],
+      "address": { "@type": "PostalAddress", "streetAddress": "9 rue de la Bruche", "postalCode": "67810", "addressLocality": "Holtzheim", "addressRegion": "Grand Est", "addressCountry": "FR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 48.557, "longitude": 7.644 },
+      "areaServed": [
+        { "@type": "City", "name": "Strasbourg" }, { "@type": "City", "name": "Molsheim" }, { "@type": "City", "name": "Obernai" }, { "@type": "City", "name": "Rosheim" },
+        { "@type": "AdministrativeArea", "name": "Bas-Rhin" }, { "@type": "AdministrativeArea", "name": "Alsace" }
+      ],
+      "knowsLanguage": "fr",
+      "priceRange": "790 € – 1 490 €",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Création de sites internet",
+        "itemListElement": [
+          { "@type": "Offer", "name": "Site Essentiel", "description": "Site d'une page pour artisans et indépendants : horaires, contact, itinéraire, relié à la fiche Google.", "price": "790", "priceCurrency": "EUR", "url": "https://alsaweb.fr/#tarifs", "itemOffered": { "@type": "Service", "name": "Création de site internet d'une page" } },
+          { "@type": "Offer", "name": "Site Vitrine Pro", "description": "Site de 3 à 5 pages pour restaurants et boutiques : carte ou catalogue, galerie, réservation ou demande de devis, référencement local.", "price": "1490", "priceCurrency": "EUR", "url": "https://alsaweb.fr/#tarifs", "itemOffered": { "@type": "Service", "name": "Création de site vitrine" } },
+          { "@type": "Offer", "name": "Site immersif pour hôtels, gîtes et domaines", "description": "Sur devis.", "url": "https://alsaweb.fr/immersif", "itemOffered": { "@id": "https://alsaweb.fr/immersif#service" } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://alsaweb.fr/#site",
+      "url": "https://alsaweb.fr/",
+      "name": "Alsaweb",
+      "inLanguage": "fr-FR",
+      "publisher": { "@id": "https://alsaweb.fr/#entreprise" }
+    }
   ]
 }
 </script>
@@ -50,6 +76,7 @@
   { "@type": "Question", "name": "Combien coûte un site ?", "acceptedAnswer": { "@type": "Answer", "text": "L'offre Essentiel est à 790 €, la Vitrine Pro à 1 490 €, et les projets particuliers sont sur devis. Les prix sont fixes : le montant du devis est celui que vous payez." } },
   { "@type": "Question", "name": "La maquette gratuite m'engage-t-elle à quelque chose ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Si elle ne vous plaît pas, vous me le dites et on s'arrête là. Aucune carte bancaire, aucun acompte avant la signature du devis." } },
   { "@type": "Question", "name": "Qui prépare la maquette ?", "acceptedAnswer": { "@type": "Answer", "text": "Une première version est préparée automatiquement à partir de vos réponses, avec l'aide d'une intelligence artificielle. Je la relis et la corrige avant de vous l'envoyer : rien ne part sans être passé entre mes mains." } },
+  { "@type": "Question", "name": "Où intervenez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "Alsaweb est basé à Holtzheim, près de Strasbourg. J'interviens dans tout le Bas-Rhin : Strasbourg et son agglomération, Molsheim, Obernai, Rosheim, Sélestat, Haguenau, Saverne… Les rendez-vous se font sur place ou en visio." } },
   { "@type": "Question", "name": "L'adresse de ma maquette est-elle publique ?", "acceptedAnswer": { "@type": "Answer", "text": "Non. Elle n'est pas référencée sur Google : seules les personnes à qui vous donnez le lien peuvent l'ouvrir." } },
   { "@type": "Question", "name": "À qui appartiennent le site et le nom de domaine ?", "acceptedAnswer": { "@type": "Answer", "text": "À vous. Je m'occupe de la partie technique, hébergement et mises à jour comprises, et je vous transfère tout sur simple demande." } },
   { "@type": "Question", "name": "Y a-t-il des frais chaque année ?", "acceptedAnswer": { "@type": "Answer", "text": "Avec le forfait tranquillité, à partir de 35 € par mois, l'hébergement et le nom de domaine sont inclus. Sans forfait, comptez environ 30 € par an pour le nom de domaine et l'hébergement ; le montant exact figure sur le devis." } },
@@ -65,7 +92,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20261126">
+<link rel="stylesheet" href="/assets/site.css?v=20261126c">
 <link rel="stylesheet" href="/assets/trouve.css?v=20261126b">
 </head>
 <body>
@@ -88,10 +115,10 @@
 <main id="top">
 
 <section class="heros enveloppe" aria-labelledby="titre-heros">
-  <h1 id="titre-heros">La Route <span>des sites.</span></h1>
+  <h1 id="titre-heros"><span class="heros-sur">Création de sites internet en Alsace</span>La Route <span>des sites.</span></h1>
   <div class="heros-bas">
     <div>
-      <p>Comme la Route des Vins, mais pour les commerces d'Alsace : chaque site que je construis est une étape. On part de Holtzheim, faites défiler pour avancer.</p>
+      <p>Je crée les sites internet des restaurants, commerces et artisans de Strasbourg, Molsheim, Obernai et de tout le Bas-Rhin, à prix fixes dès 790 €. Comme sur la Route des Vins, chaque site est une étape : on part de Holtzheim, faites défiler pour avancer.</p>
     </div>
     <div>
       <div class="actions">
@@ -184,7 +211,7 @@
 <section class="maquette clair bloc" id="maquette" aria-labelledby="titre-maquette">
   <div class="enveloppe">
     <div class="maquette-gauche">
-      <h2 class="titre-bloc" id="titre-maquette">Votre maquette, dès le lendemain.</h2>
+      <h2 class="titre-bloc" id="titre-maquette"><span class="sur-titre">Maquette de site internet gratuite</span>Votre maquette, dès le lendemain.</h2>
       <p class="chapeau">Décrivez votre commerce en une minute : l'aperçu ci-dessous se construit pendant que vous tapez. La vraie maquette, relue par moi, arrive par e-mail en général dès le lendemain, au plus tard sous 5 jours.</p>
 
       <figure class="apercu" aria-label="Aperçu de votre futur site, mis à jour pendant la saisie">
@@ -334,7 +361,7 @@
 <section class="trouve bloc" id="trouve" aria-labelledby="titre-trouve">
   <div class="enveloppe">
     <div class="trouve-tete">
-      <h2 class="titre-bloc" id="titre-trouve">Aujourd'hui, vos clients vous cherchent de <em>deux façons</em>.</h2>
+      <h2 class="titre-bloc" id="titre-trouve"><span class="sur-titre">Référencement Google (SEO) et IA (GEO)</span>Aujourd'hui, vos clients vous cherchent de <em>deux façons</em>.</h2>
       <div>
         <p class="chapeau">Sur Google, ils comparent une liste. Sur ChatGPT, une IA choisit pour eux. Votre commerce doit gagner les deux.</p>
         <div class="trouve-choix" id="trouve-choix">
@@ -478,7 +505,7 @@
 <section class="tarifs clair bloc" id="tarifs" aria-labelledby="titre-tarifs">
   <div class="enveloppe">
     <div class="tarifs-tete">
-      <h2 class="titre-bloc" id="titre-tarifs">Trois routes, un seul chauffeur.</h2>
+      <h2 class="titre-bloc" id="titre-tarifs"><span class="sur-titre">Tarifs de création de site internet</span>Trois routes, un seul chauffeur.</h2>
       <p class="chapeau">Chaque projet commence par une maquette gratuite. Le prix du devis est le prix payé : TVA non applicable, aucun supplément caché.</p>
     </div>
 
@@ -561,10 +588,11 @@
 <section class="qui bloc" aria-labelledby="titre-qui">
   <div class="enveloppe">
     <div>
-      <h2 class="titre-bloc" id="titre-qui">Vous parlez à celui qui construit votre site.</h2>
+      <h2 class="titre-bloc" id="titre-qui"><span class="sur-titre">Qui crée votre site</span>Vous parlez à celui qui construit votre site.</h2>
       <div class="corps" style="margin-top:28px">
         <p>Je m'appelle Baptiste Sohn. Je suis développeur à Holtzheim, à côté de Strasbourg, et j'ai créé Alsaweb pour les restaurateurs, commerçants et artisans de la région.</p>
         <p>Pas d'agence ni d'intermédiaire : du premier appel à la mise en ligne, puis pour chaque modification, vous avez affaire à moi. Et je m'engage sur des délais.</p>
+        <p><a href="/a-propos">En savoir plus sur Alsaweb et sur moi</a></p>
       </div>
       <!-- La photo s'affiche dès que le fichier img/baptiste.jpg existe (carré, 600 × 600 px conseillé). Sans fichier, le bloc se retire tout seul. -->
       <figure class="qui-photo">
@@ -603,7 +631,7 @@
   <div class="enveloppe">
     <div class="faq-tete">
       <div>
-        <p class="borne faq-borne">Km 14 · Dernière étape avant chez vous</p>
+        <p class="borne faq-borne">Questions fréquentes · Km 14, dernière étape avant chez vous</p>
         <h2 class="titre-bloc" id="titre-faq">Vos questions, sur la route.</h2>
       </div>
       <p class="chapeau">Classées selon le moment où vous vous les posez : avant de signer, pendant la création, une fois le site en ligne.</p>
@@ -627,6 +655,10 @@
             <div class="faq-r"><p class="faq-objection">« Une maquette faite par une IA, non merci. »</p><p>Une première version est préparée automatiquement à partir de vos réponses, avec l'aide d'une intelligence artificielle. Je la relis et la corrige avant de vous l'envoyer : rien ne part sans être passé entre mes mains.</p></div>
           </details>
           <details class="faq-q" data-troncon="Avant de signer">
+            <summary><span class="faq-km">Km 14,6</span><span class="faq-question">Où intervenez-vous ?</span></summary>
+            <div class="faq-r"><p class="faq-objection">« Vous êtes sûrement trop loin de chez moi. »</p><p>Alsaweb est basé à Holtzheim, près de Strasbourg. J'interviens dans tout le Bas-Rhin : Strasbourg et son agglomération, Molsheim, Obernai, Rosheim, Sélestat, Haguenau, Saverne… Les rendez-vous se font sur place ou en visio.</p></div>
+          </details>
+          <details class="faq-q" data-troncon="Avant de signer">
             <summary><span class="faq-km">Km 14,7</span><span class="faq-question">L'adresse de ma maquette est-elle publique ?</span></summary>
             <div class="faq-r"><p class="faq-objection">« Je ne veux pas qu'on voie mon site avant qu'il soit prêt. »</p><p>Non. Elle n'est pas référencée sur Google : seules les personnes à qui vous donnez le lien peuvent l'ouvrir.</p></div>
           </details>
@@ -643,7 +675,7 @@
           </details>
           <details class="faq-q" data-troncon="Pendant la création">
             <summary><span class="faq-km">Km 15,4</span><span class="faq-question">J'ai déjà un site. Pouvez-vous le refaire ?</span></summary>
-            <div class="faq-r"><p class="faq-objection">« J'ai déjà un site, je ne vais pas tout recommencer. »</p><p>Oui, c'est une refonte, sur devis. Commencez par le <a href="#audit">mini-audit gratuit</a> : il dit ce qui mérite d'être corrigé et ce qui peut rester.</p></div>
+            <div class="faq-r"><p class="faq-objection">« J'ai déjà un site, je ne vais pas tout recommencer. »</p><p>Oui, c'est une refonte, sur devis. Commencez par le <a href="#trouve">diagnostic gratuit</a> : il dit ce qui mérite d'être corrigé et ce qui peut rester.</p></div>
           </details>
         </div>
         <div class="faq-troncon">
@@ -707,7 +739,7 @@
     <div class="pied-grille">
       <div>
         <p class="pied-marque"><img src="logo.png" width="30" height="30" alt="">Alsaweb</p>
-        <p>Sites internet pour les restaurants, commerces et artisans d'Alsace.</p>
+        <p>Création de sites internet pour les restaurants, commerces et artisans d'Alsace. Atelier à Holtzheim, près de Strasbourg.</p>
         <ul style="margin-top:12px">
           <li><a href="mailto:contact@alsaweb.fr">contact@alsaweb.fr</a></li>
           <li><a href="https://www.instagram.com/alsaweb.fr/" rel="noopener">Instagram <span>@alsaweb.fr</span></a></li>
@@ -724,11 +756,12 @@
           <li><a href="#trouve">Diagnostic Google et IA</a></li>
           <li><a href="#labo">Le labo</a></li>
           <li><a href="#questions">Questions</a></li>
+          <li><a href="/a-propos">À propos</a></li>
         </ul>
       </div>
       <div>
         <h3>Zone d'intervention</h3>
-        <p>Tout le Bas-Rhin, autour de Strasbourg. Rendez-vous sur place ou en visio.</p>
+        <p>Strasbourg, Molsheim, Obernai, Rosheim et tout le Bas-Rhin. Rendez-vous sur place ou en visio.</p>
       </div>
       <div>
         <h3>Informations</h3>

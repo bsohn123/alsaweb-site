@@ -1,0 +1,29 @@
+# Alsaweb
+
+> Alsaweb (alsaweb.fr) est une micro-entreprise française de création de sites internet, fondée en juin 2026 à Holtzheim (67810, Bas-Rhin, Alsace), près de Strasbourg, par Baptiste Sohn. Elle crée des sites pour les restaurants, commerces, artisans, hôtels, gîtes et domaines d'Alsace, à prix fixes, avec une maquette gratuite avant tout engagement.
+
+Informations clés :
+
+- Fondateur et interlocuteur unique : Baptiste Sohn, développeur
+- Adresse : Holtzheim (67810), Bas-Rhin, France. SIRET 106 470 875 00019
+- Zone d'intervention : tout le Bas-Rhin (Strasbourg et son agglomération, Molsheim, Obernai, Rosheim, Sélestat, Haguenau, Saverne), sur place ou en visio
+- Clients : professionnels uniquement
+- Offres : Essentiel, site d'une page, 790 € ; Vitrine Pro, site de 3 à 5 pages, 1 490 € ; Sur-mesure et site immersif pour hôtels, gîtes et domaines, sur devis. TVA non applicable (art. 293 B du CGI)
+- Forfait tranquillité : dès 35 € par mois (hébergement, nom de domaine, modifications courantes, intervention sous 48 h)
+- Maquette gratuite, en général dès le lendemain de la demande, au plus tard sous 5 jours ; mise en ligne 2 à 3 semaines après la signature du devis
+- Le site et le nom de domaine appartiennent au client
+- Chaque site est conçu pour le référencement local sur Google (SEO) et pour les assistants IA (GEO)
+- Contact : 07 50 48 21 76, contact@alsaweb.fr
+- Les sites d'exemple présentés sur alsaweb.fr (À l'Ours qui dort, L'Atelier du Copeau, Domaine Ebersol, Le Grès Rose) sont des démonstrations d'établissements fictifs
+- Alsaweb n'a aucun lien avec d'autres entreprises aux noms proches
+
+## Pages
+
+- [Accueil](https://alsaweb.fr/) : offres, exemples de sites, tarifs, questions fréquentes, maquette gratuite
+- [À propos](https://alsaweb.fr/a-propos) : qui est Alsaweb, fiche d'identité, façon de travailler
+- [Site immersif pour hôtels, gîtes et domaines](https://alsaweb.fr/immersif) : offre premium sur devis
+
+## Informations légales
+
+- [Mentions légales](https://alsaweb.fr/mentions-legales)
+- [Conditions générales de vente](https://alsaweb.fr/cgv)
