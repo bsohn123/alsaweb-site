@@ -215,6 +215,124 @@ button,input,select,textarea{font:inherit;color:inherit}
 .envoi .btn-ligne{color:var(--texte)}
 .retour{font-size:14px;margin:6px 0 0;min-height:1.4em;font-weight:600;color:var(--palmier)}
 
+/* ---------- Réservation v2 : la phrase à compléter ---------- */
+.resa{background:var(--crepi-2)}
+.resa-tete{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:18px 64px;align-items:end}
+.resa-tete .chapo{margin-bottom:22px}
+@media (max-width:900px){.resa-tete{grid-template-columns:1fr}.resa-tete .chapo{margin-bottom:0}}
+.resa-grille{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);gap:clamp(28px,5vw,84px);margin-top:clamp(36px,5vw,60px);align-items:start}
+@media (max-width:960px){.resa-grille{grid-template-columns:minmax(0,1fr)}}
+.resa-gauche{min-width:0}
+.phrase{font-family:var(--serif);font-weight:400;font-size:clamp(27px,3.2vw,44px);line-height:1.42;letter-spacing:-.015em;margin:0;color:var(--texte);font-variation-settings:"opsz" 72;text-wrap:pretty}
+.jeton{font:inherit;font-style:italic;color:var(--framboise-fonce);background:none;border:0;border-bottom:2px dashed rgba(165,50,60,.6);padding:0 .1em;margin:0;cursor:pointer;border-radius:8px 8px 0 0;transition:background .2s,color .2s,border-color .2s;-webkit-box-decoration-break:clone;box-decoration-break:clone;text-align:left}
+.jeton::after{content:"";display:inline-block;width:.28em;height:.28em;margin:0 .05em 0 .22em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-.2em) rotate(45deg);opacity:.55;transition:transform .2s}
+.jeton:hover{background:rgba(198,66,76,.08);border-bottom-style:solid}
+.jeton[aria-expanded="true"]{background:rgba(198,66,76,.14);border-bottom:2px solid var(--framboise-fonce);color:var(--store)}
+.jeton[aria-expanded="true"]::after{transform:translateY(.05em) rotate(-135deg)}
+.panneau{margin-top:28px;background:var(--volet);border:1px solid rgba(37,28,27,.09);border-radius:22px;padding:18px 22px 22px;box-shadow:0 22px 44px -34px rgba(37,28,27,.5)}
+.panneau[hidden]{display:none}
+.anim .panneau.entre{animation:panIn .34s cubic-bezier(.2,.7,.2,1)}
+@keyframes panIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pan-tete{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.pan-pas{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--doux);font-variant-numeric:tabular-nums}
+.pan-tete h3{font-family:var(--serif);font-size:22px;font-weight:600;margin:0;letter-spacing:-.01em}
+.pan-nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.pan-suivant{min-height:42px;padding:6px 16px;border-radius:999px;border:1.5px solid var(--ardoise);background:none;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap}
+.pan-suivant:hover{background:var(--ardoise);color:var(--clair)}
+.pan-fermer{width:42px;height:42px;border-radius:50%;border:0;background:rgba(37,28,27,.06);font-size:22px;line-height:1;cursor:pointer}
+.pan-fermer:hover{background:rgba(37,28,27,.12)}
+/* jours */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.tuile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:9px 2px 8px;border-radius:12px;border:1.5px solid rgba(37,28,27,.13);background:var(--crepi);cursor:pointer;min-height:68px;transition:border-color .15s,background .15s,transform .15s}
+.tuile .tj{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--doux)}
+.tuile .tn{font-family:var(--serif);font-size:25px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.tuile .tm{font-size:10.5px;color:var(--doux)}
+.tuile:hover:not(:disabled){border-color:var(--texte);transform:translateY(-1px)}
+.tuile[aria-pressed="true"]{background:var(--ardoise);border-color:var(--ardoise);color:var(--clair)}
+.tuile[aria-pressed="true"] .tj,.tuile[aria-pressed="true"] .tm{color:var(--clair-doux)}
+.tuile:disabled{cursor:not-allowed;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(37,28,27,.06) 6px 8px);opacity:.5}
+.tuile.auj .tj{color:var(--framboise-fonce)}
+.tuile[aria-pressed="true"].auj .tj{color:var(--ambre)}
+@media (max-width:560px){.pan-tete{row-gap:8px}.pan-tete h3{order:3;flex-basis:100%;font-size:21px}}
+@media (max-width:480px){.cal{gap:4px}.tuile{min-height:58px;padding:7px 0;border-radius:10px}.tuile .tn{font-size:20px}.tuile .tm{display:none}.tuile .tj{font-size:10px;letter-spacing:.02em}}
+/* heures */
+.service{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px 14px;align-items:start;padding:14px 0}
+.service + .service{border-top:1px solid rgba(37,28,27,.08)}
+.service-nom{margin:4px 0 0;font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.1}
+.service-nom small{display:block;font-family:var(--sans);font-size:12.5px;font-weight:500;color:var(--doux);margin-top:3px}
+.creneaux{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:6px}
+.creneau{min-height:44px;border-radius:10px;border:1.5px solid rgba(37,28,27,.16);background:var(--crepi);font-weight:600;font-size:14.5px;cursor:pointer;font-variant-numeric:tabular-nums;transition:border-color .15s,background .15s}
+.creneau:hover{border-color:var(--texte)}
+.creneau[aria-pressed="true"]{background:var(--ardoise);border-color:var(--ardoise);color:var(--clair)}
+.service .vide-service{margin:8px 0 0;font-size:14px;color:var(--doux)}
+@media (max-width:560px){.service{grid-template-columns:1fr}}
+/* couverts */
+.cpts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cpt{background:var(--crepi);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.cpt b{font-family:var(--serif);font-size:19px;font-weight:600;display:block;line-height:1.1}
+.cpt small{font-size:12.5px;color:var(--doux)}
+.cpt .stepper{background:var(--volet)}
+.cpt[hidden]{display:none}
+@media (max-width:640px){.cpts{grid-template-columns:1fr}.cpt{flex-direction:row;justify-content:space-between;align-items:center}}
+.sous-pan{margin:18px 0 10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--doux)}
+.sous-pan small{text-transform:none;letter-spacing:0;font-weight:500}
+/* plats */
+.plat-ligne{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:12px 0}
+.plat-ligne + .plat-ligne{border-top:1px solid rgba(37,28,27,.08)}
+.plat-ligne b{font-family:var(--serif);font-size:19px;font-weight:600;display:block;line-height:1.15}
+.plat-ligne small{font-size:13px;color:var(--doux)}
+.plat-ligne .stepper{background:var(--crepi)}
+.pan-note{font-size:13.5px;color:var(--doux);margin:12px 0 0}
+/* temps */
+.temps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.carte-temps{text-align:left;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(37,28,27,.14);background:var(--crepi);cursor:pointer;transition:border-color .15s,background .15s}
+.carte-temps b{display:block;font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.1;margin-bottom:4px}
+.carte-temps span{font-size:13.5px;color:var(--doux)}
+.carte-temps:hover{border-color:var(--texte)}
+.carte-temps[aria-pressed="true"]{background:var(--ardoise);border-color:var(--ardoise);color:var(--clair)}
+.carte-temps[aria-pressed="true"] span{color:var(--clair-doux)}
+@media (max-width:640px){.temps3{grid-template-columns:1fr}}
+/* vous */
+.phrase-vous{margin-top:clamp(28px,4vw,44px);font-size:clamp(25px,2.7vw,38px)}
+.champ-ligne{display:inline-block;max-width:100%}
+.champ-ligne input{font:inherit;font-style:italic;color:var(--framboise-fonce);background:transparent;border:0;border-bottom:2px solid rgba(37,28,27,.32);border-radius:0;padding:0 .12em;width:6.5em;max-width:100%;outline:none;transition:border-color .2s,background .2s}
+#tel{width:7.2em}
+.champ-ligne input::placeholder{color:rgba(106,90,85,.5)}
+.champ-ligne input:focus{border-bottom-color:var(--framboise-fonce);background:rgba(198,66,76,.06)}
+.champ-ligne[data-erreur] input{border-bottom-color:var(--store)}
+.champ-ligne[data-ok] input{border-bottom-color:var(--palmier)}
+.erreurs{color:var(--store-fonce);font-weight:600;font-size:14.5px;margin:12px 0 0;min-height:1.3em}
+.options{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 28px;margin-top:6px}
+.precision summary{cursor:pointer;min-height:44px;display:inline-flex;align-items:center;font-weight:600;font-size:15px;list-style:none}
+.precision summary::-webkit-details-marker{display:none}
+.precision summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;margin-right:9px;font-size:15px;line-height:1}
+.precision[open]{flex-basis:100%}
+.precision[open] summary::before{content:"−"}
+.precision .choix{margin-top:6px}
+/* chevalet + nappe */
+.resa-droite{position:sticky;top:96px}
+@media (max-width:960px){.resa-droite{position:static;max-width:520px}}
+.chevalet{position:relative;background:var(--volet);border-radius:22px;overflow:hidden;box-shadow:0 34px 60px -38px rgba(37,28,27,.6);border:1px solid rgba(37,28,27,.08)}
+.nappe{position:relative;padding:28px 18px 16px;background-color:#FCF8F4;background-image:linear-gradient(90deg,rgba(198,66,76,.13) 50%,transparent 50%),linear-gradient(rgba(198,66,76,.13) 50%,transparent 50%);background-size:30px 30px}
+.nappe::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,rgba(255,253,249,.55),transparent 70%);pointer-events:none}
+.carton{position:relative;z-index:1;margin:0 auto 10px;max-width:280px;background:var(--volet);border-radius:8px;padding:16px 18px 14px;text-align:center;box-shadow:0 18px 22px -16px rgba(37,28,27,.6),0 1px 0 rgba(37,28,27,.08);transform:perspective(700px) rotateX(10deg);transform-origin:50% 100%}
+.carton::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;border-radius:8px 8px 0 0;background:linear-gradient(rgba(37,28,27,.1),transparent)}
+.carton .res{font-family:var(--craie-f);font-size:32px;font-weight:700;color:var(--framboise);line-height:1;margin:0}
+.carton .nom{font-family:var(--serif);font-size:28px;font-weight:600;margin:4px 0 4px;line-height:1.05;overflow-wrap:anywhere;letter-spacing:-.01em}
+.carton .nom.vide{color:#B9ABA3;font-style:italic;font-weight:400}
+.carton .quand{font-size:14px;font-weight:600;margin:0;font-variant-numeric:tabular-nums}
+.carton .numero{font-size:11.5px;color:var(--doux);margin:6px 0 0;letter-spacing:.05em;font-variant-numeric:tabular-nums}
+.plan2{position:relative;z-index:1;display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
+.plan2 .chaise{transform-box:fill-box;transform-origin:center}
+.anim .plan2 .nouvelle{animation:pose .42s cubic-bezier(.3,1.6,.5,1)}
+.legende-plan{position:relative;z-index:1;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:4px 0 0;font-size:12px;font-weight:600;color:var(--doux)}
+.legende-plan i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.chev-infos{padding:16px 22px 20px;display:grid;grid-template-columns:auto 1fr;gap:7px 16px;margin:0;font-size:14.5px}
+.chev-infos dt{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--doux);font-weight:700;padding-top:3px}
+.chev-infos dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.chev-infos .gris{color:#A69890;font-weight:500;font-style:italic}
+.chevalet .tampon{top:auto;bottom:18px;right:16px;z-index:2}
+
 /* ---------- L'ardoise ---------- */
 #ardoise{background:var(--ardoise)}
 .ardoise-grille{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(30px,5vw,80px);align-items:center}
@@ -373,73 +491,46 @@ button,input,select,textarea{font:inherit;color:inherit}
   </div>
 
   <!-- 2. L'outil : réservation + « prévenir la cuisine » -->
-  <section id="reserver" class="sec" aria-labelledby="t-reserver">
+  <section id="reserver" class="sec resa" aria-labelledby="t-reserver">
     <div class="wrap">
-      <p class="label" style="color:var(--store)">Réserver</p>
-      <h2 class="titre reveal" id="t-reserver">Votre table,<br><em>et la cuisine prévenue.</em></h2>
-      <p class="chapo reveal">Choisissez le jour, l'heure et le nombre de couverts. Dites à la cuisine ce que vous venez manger et le temps dont vous disposez : votre plat vous attend. Essayez, c'est une démo : rien n'est réservé.</p>
+      <div class="resa-tete">
+        <div>
+          <p class="label" style="color:var(--store)">Réserver</p>
+          <h2 class="titre reveal" id="t-reserver">Votre table,<br><em>et la cuisine prévenue.</em></h2>
+        </div>
+        <p class="chapo reveal">Complétez la phrase : touchez un mot souligné pour le changer. La cuisine reçoit votre demande avec le plat que vous venez manger. Démo : rien n'est réservé.</p>
+      </div>
 
-      <div class="bon-grille">
-        <form id="resa" novalidate>
-          <fieldset class="etape" id="e1">
-            <legend><span class="n">1</span>Quand ?<span class="resume" id="r1"></span></legend>
-            <div class="defile" id="jours" role="group" aria-label="Jour"></div>
-            <div class="services" id="services" role="group" aria-label="Service"></div>
-            <div class="grille-heures" id="creneaux" role="group" aria-label="Heure d'arrivée"></div>
-          </fieldset>
+      <div class="resa-grille">
+        <div class="resa-gauche" id="resa">
+          <p class="phrase" id="phrase"></p>
+          <div class="panneau" id="panneau" role="region" aria-labelledby="panneauTitre"></div>
 
-          <fieldset class="etape" id="e2">
-            <legend><span class="n">2</span>Combien ?<span class="resume" id="r2"></span></legend>
-            <div class="compteurs">
-              <div class="compteur"><div><b>Adultes</b></div><div class="stepper" data-compteur="adultes"></div></div>
-              <div class="compteur"><div><b>Enfants</b><span class="desc">moins de 12 ans</span></div><div class="stepper" data-compteur="enfants"></div></div>
-              <div class="compteur" id="ligneChaise" hidden><div><b>Chaises hautes</b><span class="desc">pour les tout-petits</span></div><div class="stepper" data-compteur="chaises"></div></div>
+          <div class="vous">
+            <p class="phrase phrase-vous">Au nom de <label class="champ-ligne" id="champNom"><span class="sr-only">Votre nom</span><input id="nom" autocomplete="name" autocapitalize="words" enterkeyhint="next" placeholder="votre nom"></label>, joignable au <label class="champ-ligne" id="champTel"><span class="sr-only">Votre téléphone</span><input id="tel" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done" placeholder="06 12 34 56 78" maxlength="17"></label>.</p>
+            <p class="erreurs" id="erreurs" role="alert"></p>
+            <div class="options">
+              <label class="memo"><input type="checkbox" id="memo"> <span>Se souvenir de moi sur cet appareil</span></label>
+              <details class="precision" id="precision">
+                <summary>Ajouter une précision</summary>
+                <div class="choix" id="precisions" role="group" aria-label="Précisions rapides"></div>
+                <label class="champ"><span class="sr-only">Un mot pour le restaurant</span><textarea id="remarque" placeholder="Allergie, régime, demande pour un enfant…"></textarea></label>
+              </details>
             </div>
-            <div id="alerteGroupe"></div>
-            <p class="label sous-titre">L'occasion <small>(facultatif)</small></p>
-            <div class="choix" id="occasions" role="group" aria-label="Occasion"></div>
-          </fieldset>
+          </div>
+        </div>
 
-          <fieldset class="etape" id="e3">
-            <legend><span class="n">3</span>En cuisine<span class="resume" id="r3"></span><span class="legende-libre">facultatif</span></legend>
-            <p class="astuce">Vous venez pour un plat précis ? Dites-le : la cuisine le met de côté pour vous.</p>
-            <div class="compteurs" id="plats"></div>
-            <p class="note">Selon l'ardoise du jour : si un plat n'est pas prévu ce jour-là, le restaurant vous rappelle.</p>
-            <p class="label sous-titre">Vous disposez de</p>
-            <div class="choix" id="temps" role="group" aria-label="Temps disponible"></div>
-          </fieldset>
-
-          <fieldset class="etape" id="e4">
-            <legend><span class="n">4</span>Vous<span class="resume" id="r4"></span></legend>
-            <div class="duo">
-              <label class="champ" id="champNom"><span>Votre nom</span>
-                <input id="nom" name="nom" autocomplete="name" autocapitalize="words" enterkeyhint="next" placeholder="Au nom de…" required>
-              </label>
-              <label class="champ" id="champTel"><span>Votre téléphone</span>
-                <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done" placeholder="06 12 34 56 78" maxlength="17" required>
-              </label>
-            </div>
-            <p class="note" style="margin-top:8px">Le restaurant vous rappelle sur ce numéro pour confirmer.</p>
-            <label class="memo"><input type="checkbox" id="memo"> <span>Se souvenir de moi sur cet appareil</span></label>
-            <p class="label sous-titre">Une précision ? <small>(facultatif)</small></p>
-            <div class="choix" id="precisions" role="group" aria-label="Précisions rapides"></div>
-            <label class="champ" style="margin-top:10px"><span class="sr-only">Un mot pour le restaurant</span>
-              <textarea id="remarque" placeholder="Allergie, régime, demande pour un enfant…"></textarea>
-            </label>
-          </fieldset>
-        </form>
-
-        <div class="ticket-col">
-          <div class="ticket" id="ticket" aria-live="polite"></div>
+        <aside class="resa-droite" aria-label="Votre demande">
+          <div class="chevalet" id="ticket" aria-live="polite"></div>
           <div class="envoi">
-            <button class="btn btn-action" id="envoyerMail" type="button">Envoyer la demande par e-mail</button>
+            <button class="btn btn-action" id="envoyerMail" type="button">Envoyer ma demande</button>
             <div class="ligne2">
-              <button class="btn btn-ligne" id="copier" type="button">Copier le bon</button>
+              <button class="btn btn-ligne" id="copier" type="button">Copier la demande</button>
               <a class="btn btn-ligne" data-tel href="#">Appeler</a>
             </div>
             <p class="retour" id="retour" role="status"></p>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -931,13 +1022,25 @@ const CONFIG = {
   if (reduit) $("#passer").classList.add("cache");
 
   /* ===================================================================
-     RÉSERVATION
+     RÉSERVATION — une phrase à compléter, un panneau par mot,
+     et le chevalet « Réservé » posé sur la nappe qui se remplit en direct.
      =================================================================== */
   const etat = {
     jour: null, service: null, heure: null,
     adultes: 2, enfants: 0, chaises: 0, occasion: null,
-    plats: {}, temps: null, nom: "", tel: "", precisions: [], remarque: "",
-    touche: {}, tente: false, numero: null, envoye: false
+    plats: {}, temps: "On prend notre temps", nom: "", tel: "", precisions: [], remarque: "",
+    touche: {}, tente: false, numero: null, envoye: false, panneau: "jour"
+  };
+  const ORDRE = ["jour", "heure", "couverts", "plats", "temps"];
+  const MOIS_C = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+  const TITRES = { jour: "Quel jour ?", heure: "À quelle heure ?", couverts: "Combien serez-vous ?", plats: "Qu'est-ce qui vous fait envie ?", temps: "Combien de temps avez-vous ?" };
+  const SUIVANT = { jour: "L'heure", heure: "Les couverts", couverts: "En cuisine", plats: "Le temps", temps: "Vos coordonnées" };
+  const TEMPS = { "45 min": ["45 minutes", "La pause déjeuner : on envoie vite."], "1 h": ["une heure", "Le temps d'un vrai repas."], "On prend notre temps": ["tout notre temps", "Entrée, plat, dessert et café."] };
+  const PLATS_INFO = {
+    pdj: ["plat du jour", "plats du jour", "le midi, selon l'ardoise"],
+    bouchees: ["bouchée à la reine", "bouchées à la reine", "riz ou spätzle"],
+    baeckeoffe: ["baeckeoffe", "baeckeoffes", "sur commande, la veille"],
+    tarte: ["tarte à l'oignon", "tartes à l'oignon", "en entrée, ou le soir avec une salade"]
   };
 
   function creneaux(j, sid) {
@@ -954,7 +1057,7 @@ const CONFIG = {
       return { ...j, parService, ouvert: sv.some(s => parService[s].length) };
     });
   }
-  function jourCourant() { return jours().find(j => j.cle === etat.jour); }
+  const jourCourant = () => jours().find(j => j.cle === etat.jour);
   function assurerChoix() {
     const js = jours();
     let j = js.find(x => x.cle === etat.jour && x.ouvert);
@@ -964,141 +1067,196 @@ const CONFIG = {
     const liste = etat.service ? j.parService[etat.service] : [];
     if (etat.heure == null || !liste.includes(etat.heure)) etat.heure = liste[0] != null ? liste[0] : null;
   }
-  function rendreQuand() {
-    assurerChoix();
-    const js = jours();
-    $("#jours").innerHTML = js.map(j => {
-      const nomJ = j.n === 0 ? "Aujourd'hui" : j.n === 1 ? "Demain" : Maj(JOURS[j.wd].slice(0, 3)) + ".";
-      const sous = j.ouvert ? `${j.d} ${MOIS[j.m - 1].slice(0, 4)}.` : "fermé";
-      return `<button type="button" class="puce" data-jour="${j.cle}" aria-pressed="${etat.jour === j.cle}" ${j.ouvert ? "" : "disabled"} aria-label="${esc(JOURS[j.wd] + " " + j.d + " " + MOIS[j.m - 1] + (j.ouvert ? "" : ", fermé"))}">${esc(nomJ)}<small>${esc(sous)}</small></button>`;
-    }).join("");
-    const j = jourCourant();
-    $("#services").innerHTML = j ? Object.keys(CONFIG.services).map(sid => {
-      const s = CONFIG.services[sid]; const l = j.parService[sid] || []; const ok = l.length > 0;
-      const sous = !(sid in j.parService) ? "fermé ce jour" : ok ? `${hFr(l[0])} – ${hFr(l[l.length - 1])}` : "plus de place aujourd'hui";
-      return `<button type="button" class="puce" data-service="${sid}" aria-pressed="${etat.service === sid}" ${ok ? "" : "disabled"}>${esc(s.label)}<small>${esc(sous)}</small></button>`;
-    }).join("") : "";
-    const liste = j && etat.service ? j.parService[etat.service] : [];
-    $("#creneaux").innerHTML = liste.map((m, i) => `<button type="button" class="puce" data-h="${m}" aria-pressed="${etat.heure === m}">${hFr(m)}${i === 0 ? "<small>au plus tôt</small>" : ""}</button>`).join("") || `<p class="note">Aucune table en ligne cette semaine : appelez-nous.</p>`;
-    rendrePlats();
-  }
-  $("#jours").addEventListener("click", e => { const b = e.target.closest("[data-jour]"); if (!b || b.disabled) return; etat.jour = b.dataset.jour; etat.heure = null; rendreQuand(); rendreTicket(); });
-  $("#services").addEventListener("click", e => { const b = e.target.closest("[data-service]"); if (!b || b.disabled) return; etat.service = b.dataset.service; etat.heure = null; rendreQuand(); rendreTicket(); });
-  $("#creneaux").addEventListener("click", e => { const b = e.target.closest("[data-h]"); if (!b) return; etat.heure = +b.dataset.h; rendreQuand(); rendreTicket(); });
 
-  /* --- Combien --- */
+  /* --- les mots de la phrase --- */
+  function libJour() {
+    const j = jourCourant(); if (!j) return "un jour à choisir";
+    const sv = etat.service === "midi" ? "midi" : etat.service === "soir" ? "soir" : "";
+    if (j.n === 0) return sv ? `ce ${sv}` : "aujourd'hui";
+    if (j.n === 1) return sv ? `demain ${sv}` : "demain";
+    return `${JOURS[j.wd]} ${j.d === 1 ? "1er" : j.d} ${MOIS[j.m - 1]}`;
+  }
+  function libCouverts() { const a = etat.adultes, e = etat.enfants; return `${a} adulte${a > 1 ? "s" : ""}${e ? ` et ${e} enfant${e > 1 ? "s" : ""}` : ""}`; }
+  function libPlats() {
+    const l = CONFIG.plats.filter(p => etat.plats[p.id]).map(p => { const q = etat.plats[p.id]; const inf = PLATS_INFO[p.id] || [p.nom, p.nom]; return `${q} ${q > 1 ? inf[1] : inf[0]}`; });
+    if (!l.length) return "ce que dit l'ardoise";
+    return l.length === 1 ? l[0] : l.slice(0, -1).join(", ") + " et " + l[l.length - 1];
+  }
+  const libTemps = () => (TEMPS[etat.temps] || [etat.temps])[0];
+  const jeton = (k, t) => `<button type="button" class="jeton" data-panneau="${k}" aria-expanded="${etat.panneau === k}" aria-controls="panneau">${esc(t)}</button>`;
+  function rendrePhrase() {
+    $("#phrase").innerHTML = `Une table pour ${jeton("couverts", libCouverts())}, ${jeton("jour", libJour())} à ${jeton("heure", etat.heure != null ? hFr(etat.heure) : "l'heure")}. On vient pour ${jeton("plats", libPlats())}, et on a ${jeton("temps", libTemps())}.`;
+  }
+
+  /* --- le panneau du mot ouvert --- */
+  function corpsJour() {
+    return `<div class="cal">` + jours().map(j => {
+      const nomJ = j.n === 0 ? "Auj." : JOURS[j.wd].slice(0, 3) + ".";
+      return `<button type="button" class="tuile${j.n === 0 ? " auj" : ""}" data-jour="${j.cle}" aria-pressed="${etat.jour === j.cle}" ${j.ouvert ? "" : "disabled"} aria-label="${esc(Maj(JOURS[j.wd]) + " " + j.d + " " + MOIS[j.m - 1] + (j.ouvert ? "" : ", fermé"))}"><span class="tj">${esc(nomJ)}</span><span class="tn">${j.d}</span><span class="tm">${j.ouvert ? esc(MOIS_C[j.m - 1]) : "fermé"}</span></button>`;
+    }).join("") + `</div>`;
+  }
+  function corpsHeure() {
+    const j = jourCourant(); if (!j) return `<p class="pan-note">Aucune table en ligne cette semaine : appelez-nous.</p>`;
+    return Object.keys(CONFIG.services).map(sid => {
+      const s = CONFIG.services[sid]; const l = j.parService[sid];
+      const info = !l ? "fermé ce jour" : l.length ? `${hFr(l[0])} – ${hFr(l[l.length - 1])}` : "plus de table aujourd'hui";
+      const btns = l && l.length ? `<div class="creneaux">${l.map(m => `<button type="button" class="creneau" data-service="${sid}" data-h="${m}" aria-pressed="${etat.service === sid && etat.heure === m}">${hFr(m)}</button>`).join("")}</div>` : `<p class="vide-service">${esc(info)}</p>`;
+      return `<div class="service"><p class="service-nom">${esc(s.label)}<small>${esc(l && l.length ? "arrivée " + info : "")}</small></p>${btns}</div>`;
+    }).join("");
+  }
   const LIMITES = { adultes: [1, 30], enfants: [0, 20], chaises: [0, 6] };
-  function rendreCompteurs() {
+  function stepper(k, val, mn, mx, lib) {
+    return `<div class="stepper"><button type="button" data-moins="${k}" aria-label="${esc(lib)} : un de moins" ${val <= mn ? "disabled" : ""}>−</button><output aria-label="${esc(lib)}">${val}</output><button type="button" data-plus="${k}" aria-label="${esc(lib)} : un de plus" ${val >= mx ? "disabled" : ""}>+</button></div>`;
+  }
+  function corpsCouverts() {
     etat.chaises = Math.min(etat.chaises, etat.enfants);
-    $$("[data-compteur]").forEach(st => {
-      const k = st.dataset.compteur; const [mn, mx0] = LIMITES[k]; const mx = k === "chaises" ? Math.min(mx0, etat.enfants) : mx0;
-      const lib = { adultes: "adulte", enfants: "enfant", chaises: "chaise haute" }[k];
-      st.innerHTML = `<button type="button" data-moins="${k}" aria-label="Un ${lib} de moins" ${etat[k] <= mn ? "disabled" : ""}>−</button><output aria-live="polite" aria-label="${lib}s">${etat[k]}</output><button type="button" data-plus="${k}" aria-label="Un ${lib} de plus" ${etat[k] >= mx ? "disabled" : ""}>+</button>`;
-    });
-    $("#ligneChaise").hidden = etat.enfants === 0;
     const n = etat.adultes + etat.enfants;
-    $("#alerteGroupe").innerHTML = n > CONFIG.seuilGroupe ? `<p class="alerte">${n} couverts : appelez le ${esc(CONFIG.telephone)}, on organise la salle et la cuisine avec vous.</p>` : "";
+    return `<div class="cpts">
+      <div class="cpt"><div><b>Adultes</b></div>${stepper("adultes", etat.adultes, 1, 30, "Adultes")}</div>
+      <div class="cpt"><div><b>Enfants</b><small>moins de 12 ans</small></div>${stepper("enfants", etat.enfants, 0, 20, "Enfants")}</div>
+      <div class="cpt" ${etat.enfants ? "" : "hidden"}><div><b>Chaises hautes</b><small>pour les tout-petits</small></div>${stepper("chaises", etat.chaises, 0, Math.min(6, etat.enfants), "Chaises hautes")}</div>
+    </div>` + (n > CONFIG.seuilGroupe ? `<p class="alerte">${n} couverts : appelez-nous, on prépare la salle et la cuisine avec vous.</p>` : "") +
+      `<p class="sous-pan">L'occasion <small>(facultatif)</small></p><div class="choix">${CONFIG.occasions.map(o => `<button type="button" class="puce petite" data-occ="${esc(o)}" aria-pressed="${etat.occasion === o}">${esc(o)}</button>`).join("")}</div>`;
   }
-  $$("[data-compteur]").forEach(st => st.addEventListener("click", e => {
-    const p = e.target.closest("[data-plus]"), m = e.target.closest("[data-moins]"); if (!p && !m) return;
-    const k = (p || m).dataset.plus || (p || m).dataset.moins;
-    etat[k] += p ? 1 : -1; rendreCompteurs(); rendreTicket(!!p);
-    const nb = $(`[data-${p ? "plus" : "moins"}="${k}"]`); if (nb && !nb.disabled) nb.focus(); else { const a = $(`[data-${p ? "moins" : "plus"}="${k}"]`); if (a) a.focus(); }
-  }));
-  function rendreOccasions() {
-    $("#occasions").innerHTML = CONFIG.occasions.map(o => `<button type="button" class="puce petite" data-occ="${esc(o)}" aria-pressed="${etat.occasion === o}">${esc(o)}</button>`).join("");
+  function corpsPlats() {
+    const midi = etat.service === "midi"; const n = etat.adultes + etat.enfants;
+    return CONFIG.plats.filter(p => !p.midiSeulement || midi).map(p => {
+      const q = etat.plats[p.id] || 0; const inf = PLATS_INFO[p.id];
+      return `<div class="plat-ligne"><div><b>${esc(p.nom.replace(" (sur commande)", ""))}</b><small>${esc(inf ? inf[2] : "")}</small></div><div class="stepper"><button type="button" data-pmoins="${p.id}" aria-label="${esc(p.nom)} : une part de moins" ${q <= 0 ? "disabled" : ""}>−</button><output aria-label="Parts de ${esc(p.nom)}">${q}</output><button type="button" data-pplus="${p.id}" aria-label="${esc(p.nom)} : une part de plus" ${q >= n ? "disabled" : ""}>+</button></div></div>`;
+    }).join("") + `<p class="pan-note">La cuisine met vos parts de côté. Si un plat n'est pas prévu ce jour-là, le restaurant vous rappelle.</p>`;
   }
-  $("#occasions").addEventListener("click", e => { const b = e.target.closest("[data-occ]"); if (!b) return; etat.occasion = etat.occasion === b.dataset.occ ? null : b.dataset.occ; rendreOccasions(); rendreTicket(); });
+  function corpsTemps() {
+    return `<div class="temps3">${CONFIG.temps.map(t => { const inf = TEMPS[t] || [t, ""]; return `<button type="button" class="carte-temps" data-temps="${esc(t)}" aria-pressed="${etat.temps === t}"><b>${esc(Maj(inf[0]))}</b><span>${esc(inf[1])}</span></button>`; }).join("")}</div>`;
+  }
+  function rendrePanneau(anime) {
+    const pan = $("#panneau"); const k = etat.panneau;
+    if (!k) { pan.hidden = true; pan.innerHTML = ""; return; }
+    pan.hidden = false;
+    const i = ORDRE.indexOf(k);
+    const corps = { jour: corpsJour, heure: corpsHeure, couverts: corpsCouverts, plats: corpsPlats, temps: corpsTemps }[k]();
+    pan.innerHTML = `<div class="pan-tete"><span class="pan-pas">${i + 1}/${ORDRE.length}</span><h3 id="panneauTitre">${esc(TITRES[k])}</h3><div class="pan-nav"><button type="button" class="pan-suivant" data-suivant>${esc(SUIVANT[k])} →</button><button type="button" class="pan-fermer" data-fermer aria-label="Fermer">×</button></div></div>${corps}`;
+    if (anime) { pan.classList.remove("entre"); void pan.offsetWidth; pan.classList.add("entre"); }
+  }
+  function ouvrir(k, focusPanneau) {
+    etat.panneau = k; rendrePhrase(); rendrePanneau(true); rafraichirST();
+    if (!k) return;
+    const pan = $("#panneau"); const r = pan.getBoundingClientRect();
+    if (r.bottom > innerHeight - 70 || r.top < 80) {
+      const y = scrollY + r.top - Math.max(90, innerHeight * 0.18);
+      window.__lenis ? window.__lenis.scrollTo(y) : window.scrollTo({ top: y, behavior: reduit ? "auto" : "smooth" });
+    }
+    if (focusPanneau) { const t = pan.querySelector('[aria-pressed="true"], button:not([disabled])'); if (t) t.focus({ preventScroll: true }); }
+  }
+  function suivant() {
+    const i = ORDRE.indexOf(etat.panneau);
+    if (i < ORDRE.length - 1) ouvrir(ORDRE[i + 1], true);
+    else { ouvrir(null); const n = $("#nom"); n.focus({ preventScroll: true }); n.scrollIntoView({ block: "center", behavior: reduit ? "auto" : "smooth" }); }
+  }
+  function toutRendre(animePlan) { rendrePhrase(); rendrePanneau(false); rendreTicket(animePlan); }
+  function refocus(sel) { const el = $(sel, $("#panneau")); if (el && !el.disabled) el.focus({ preventScroll: true }); }
 
-  /* --- En cuisine --- */
-  function rendrePlats() {
-    const midi = etat.service === "midi";
-    CONFIG.plats.forEach(p => { if (p.midiSeulement && !midi) delete etat.plats[p.id]; });
-    const n = etat.adultes + etat.enfants;
-    $("#plats").innerHTML = CONFIG.plats.filter(p => !p.midiSeulement || midi).map(p => {
-      const q = etat.plats[p.id] || 0;
-      return `<div class="compteur"><div><b>${esc(p.nom)}</b>${p.midiSeulement ? `<span class="desc">le midi</span>` : ""}</div><div class="stepper"><button type="button" data-pmoins="${p.id}" aria-label="Une part de moins : ${esc(p.nom)}" ${q <= 0 ? "disabled" : ""}>−</button><output aria-label="Parts de ${esc(p.nom)}">${q}</output><button type="button" data-pplus="${p.id}" aria-label="Une part de plus : ${esc(p.nom)}" ${q >= n ? "disabled" : ""}>+</button></div></div>`;
-    }).join("");
-    $("#temps").innerHTML = CONFIG.temps.map(x => `<button type="button" class="puce petite" data-temps="${esc(x)}" aria-pressed="${etat.temps === x}">${esc(x)}</button>`).join("");
-  }
-  $("#plats").addEventListener("click", e => {
-    const p = e.target.closest("[data-pplus]"), m = e.target.closest("[data-pmoins]"); if (!p && !m) return;
-    const id = (p || m).dataset.pplus || (p || m).dataset.pmoins;
-    etat.plats[id] = Math.max(0, (etat.plats[id] || 0) + (p ? 1 : -1)); if (!etat.plats[id]) delete etat.plats[id];
-    rendrePlats(); rendreTicket();
-    const nb = $(`[data-${p ? "pplus" : "pmoins"}="${id}"]`); if (nb && !nb.disabled) nb.focus();
+  $("#phrase").addEventListener("click", e => {
+    const b = e.target.closest("[data-panneau]"); if (!b) return;
+    const k = b.dataset.panneau; ouvrir(etat.panneau === k ? null : k, false);
+    const nb = $(`#phrase [data-panneau="${k}"]`); if (nb) nb.focus({ preventScroll: true });
   });
-  $("#temps").addEventListener("click", e => { const b = e.target.closest("[data-temps]"); if (!b) return; etat.temps = etat.temps === b.dataset.temps ? null : b.dataset.temps; rendrePlats(); rendreTicket(); });
+  $("#panneau").addEventListener("click", e => {
+    const t = e.target;
+    if (t.closest("[data-fermer]")) { const k = etat.panneau; ouvrir(null); const j = $(`#phrase [data-panneau="${k}"]`); if (j) j.focus(); return; }
+    if (t.closest("[data-suivant]")) { suivant(); return; }
+    const jb = t.closest("[data-jour]");
+    if (jb && !jb.disabled) { etat.jour = jb.dataset.jour; etat.heure = null; assurerChoix(); rendreTicket(); ouvrir("heure", true); return; }
+    const hb = t.closest("[data-h]");
+    if (hb) { etat.service = hb.dataset.service; etat.heure = +hb.dataset.h; rendreTicket(); ouvrir("couverts", true); return; }
+    const p = t.closest("[data-plus]"), m = t.closest("[data-moins]");
+    if (p || m) {
+      const k = (p || m).dataset.plus || (p || m).dataset.moins; const [mn, mx] = LIMITES[k];
+      etat[k] = Math.max(mn, Math.min(mx, etat[k] + (p ? 1 : -1)));
+      if (k === "enfants") etat.chaises = Math.min(etat.chaises, etat.enfants);
+      const tot = etat.adultes + etat.enfants; Object.keys(etat.plats).forEach(id => { etat.plats[id] = Math.min(etat.plats[id], tot); });
+      toutRendre(!!p); refocus(`[data-${p ? "plus" : "moins"}="${k}"]`) ; return;
+    }
+    const pp = t.closest("[data-pplus]"), pm = t.closest("[data-pmoins]");
+    if (pp || pm) {
+      const id = (pp || pm).dataset.pplus || (pp || pm).dataset.pmoins;
+      etat.plats[id] = Math.max(0, (etat.plats[id] || 0) + (pp ? 1 : -1)); if (!etat.plats[id]) delete etat.plats[id];
+      toutRendre(); refocus(`[data-${pp ? "pplus" : "pmoins"}="${id}"]`); return;
+    }
+    const o = t.closest("[data-occ]");
+    if (o) { etat.occasion = etat.occasion === o.dataset.occ ? null : o.dataset.occ; toutRendre(); refocus(`[data-occ="${o.dataset.occ}"]`); return; }
+    const tp = t.closest("[data-temps]");
+    if (tp) { etat.temps = tp.dataset.temps; rendreTicket(); suivant(); return; }
+  });
+  $("#panneau").addEventListener("keydown", e => { if (e.key === "Escape") { const k = etat.panneau; ouvrir(null); const j = $(`#phrase [data-panneau="${k}"]`); if (j) j.focus(); } });
 
   /* --- Vous --- */
   function rendrePrecisions() { $("#precisions").innerHTML = CONFIG.precisions.map(p => `<button type="button" class="puce petite" data-prec="${esc(p)}" aria-pressed="${etat.precisions.includes(p)}">${esc(p)}</button>`).join(""); }
-  $("#precisions").addEventListener("click", e => { const b = e.target.closest("[data-prec]"); if (!b) return; const t = b.dataset.prec; etat.precisions = etat.precisions.includes(t) ? etat.precisions.filter(x => x !== t) : [...etat.precisions, t]; rendrePrecisions(); rendreTicket(); });
+  $("#precisions").addEventListener("click", e => { const b = e.target.closest("[data-prec]"); if (!b) return; const t = b.dataset.prec; etat.precisions = etat.precisions.includes(t) ? etat.precisions.filter(x => x !== t) : [...etat.precisions, t]; rendrePrecisions(); rendreTicket(); const nb = $(`#precisions [data-prec="${t}"]`); if (nb) nb.focus(); });
   const telPropre = (v) => { let d = String(v).replace(/[^\d+]/g, ""); if (d.startsWith("+33")) d = "0" + d.slice(3); if (d.startsWith("0033")) d = "0" + d.slice(4); return d.replace(/\D/g, ""); };
   const telFmt = (d) => d.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
-  $("#nom").addEventListener("input", e => { etat.nom = e.target.value; valider(); rendreTicket(); });
+  function ajuster(el, min) { el.style.width = Math.max(min, (el.value || "").length * 0.56 + 0.8) + "em"; }
+  $("#nom").addEventListener("input", e => { etat.nom = e.target.value; ajuster(e.target, 6.5); valider(); rendreTicket(); });
   $("#nom").addEventListener("blur", () => { etat.touche.nom = !!etat.nom; valider(); });
   $("#nom").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); $("#tel").focus(); } });
   $("#tel").addEventListener("input", e => {
     const el = e.target; if (!el.value.startsWith("+") && !el.value.startsWith("00")) { const f = telFmt(el.value.replace(/\D/g, "").slice(0, 10)); if (f !== el.value) el.value = f; }
-    etat.tel = el.value; valider(); rendreTicket();
+    etat.tel = el.value; ajuster(el, 7.2); valider(); rendreTicket();
   });
   $("#tel").addEventListener("blur", () => { etat.touche.tel = !!etat.tel; valider(); });
   $("#tel").addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); e.target.blur(); } });
   $("#remarque").addEventListener("input", e => { etat.remarque = e.target.value; rendreTicket(); });
   $("#memo").addEventListener("change", e => { if (!e.target.checked) { try { localStorage.removeItem("demo-client"); } catch (x) {} } });
-  (function rappel() { try { const c = JSON.parse(localStorage.getItem("demo-client") || "null"); if (c && c.nom) { etat.nom = c.nom; etat.tel = c.tel || ""; $("#nom").value = etat.nom; $("#tel").value = etat.tel; $("#memo").checked = true; } } catch (x) {} })();
+  (function rappel() { try { const c = JSON.parse(localStorage.getItem("demo-client") || "null"); if (c && c.nom) { etat.nom = c.nom; etat.tel = c.tel || ""; $("#nom").value = etat.nom; $("#tel").value = etat.tel; ajuster($("#nom"), 6.5); ajuster($("#tel"), 7.2); $("#memo").checked = true; } } catch (x) {} })();
 
-  function erreurChamp(sel, msg, ok) {
-    const c = $(sel); let p = c.querySelector(".erreur"); const inp = c.querySelector("input");
-    c.toggleAttribute("data-ok", !!ok && !msg);
-    if (msg) { c.setAttribute("data-erreur", ""); if (!p) { p = document.createElement("p"); p.className = "erreur"; c.appendChild(p); } p.textContent = msg; inp.setAttribute("aria-invalid", "true"); }
-    else { c.removeAttribute("data-erreur"); if (p) p.remove(); inp.removeAttribute("aria-invalid"); }
-  }
+  function marquer(sel, erreur, ok) { const c = $(sel); c.toggleAttribute("data-erreur", !!erreur); c.toggleAttribute("data-ok", !!ok && !erreur); c.querySelector("input").setAttribute("aria-invalid", erreur ? "true" : "false"); }
   function valider() {
-    const manque = [];
-    const okNom = etat.nom.trim().length >= 2;
-    erreurChamp("#champNom", (etat.tente || etat.touche.nom) && !okNom ? "Indiquez le nom de la réservation." : "", okNom);
-    const d = telPropre(etat.tel); const okTel = /^0\d{9}$/.test(d);
-    erreurChamp("#champTel", (etat.tente || etat.touche.tel) && !okTel ? (d.length < 10 ? `Encore ${10 - d.length} chiffre${10 - d.length > 1 ? "s" : ""} : il en faut 10, par exemple 06 12 34 56 78.` : "Ce numéro ne ressemble pas à un numéro français.") : "", okTel);
+    const manque = [], msgs = [];
+    const okNom = etat.nom.trim().length >= 2; const d = telPropre(etat.tel); const okTel = /^0\d{9}$/.test(d);
+    const voirNom = (etat.tente || etat.touche.nom) && !okNom, voirTel = (etat.tente || etat.touche.tel) && !okTel;
+    marquer("#champNom", voirNom, okNom); marquer("#champTel", voirTel, okTel);
+    if (voirNom) msgs.push("Indiquez le nom de la réservation.");
+    if (voirTel) msgs.push(d.length < 10 ? `Il manque ${10 - d.length} chiffre${10 - d.length > 1 ? "s" : ""} au téléphone.` : "Ce numéro ne ressemble pas à un numéro français.");
+    $("#erreurs").textContent = msgs.join(" ");
     if (!etat.jour || etat.heure == null) manque.push("un jour et une heure");
     if (!okNom) manque.push("votre nom"); if (!okTel) manque.push("un téléphone à 10 chiffres");
     if (etat.adultes + etat.enfants > CONFIG.seuilGroupe) manque.push(`un appel (plus de ${CONFIG.seuilGroupe} couverts)`);
     return manque;
   }
 
-  /* --- Le bon : la table se dresse --- */
+  /* --- le chevalet et la table dressée --- */
   let chaisesAvant = 0;
+  function assiette(x, y, rot) {
+    return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})"><circle r="12" fill="#FFFFFF" stroke="#D9C9B9" stroke-width="1.4"/><circle r="7.5" fill="none" stroke="#E8DCCF" stroke-width="1.2"/><line x1="-17" y1="-7" x2="-17" y2="7" stroke="#A9978A" stroke-width="1.6" stroke-linecap="round"/><line x1="17" y1="-7" x2="17" y2="7" stroke="#A9978A" stroke-width="1.6" stroke-linecap="round"/><circle cx="14" cy="-14" r="3.6" fill="#EAF1F3" stroke="#B7C6CB" stroke-width="1"/></g>`;
+  }
+  function chaise(x, y, rot, k, nouvelle) {
+    const c = { a: ["#2E3537", 30, 20], e: ["#4C6A3E", 24, 17], h: ["#E09B3D", 24, 17] }[k];
+    return `<g class="chaise${nouvelle ? " nouvelle" : ""}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})"><rect x="${-c[1] / 2}" y="${-c[2] / 2}" width="${c[1]}" height="${c[2]}" rx="6" fill="${c[0]}"/><rect x="${-c[1] / 2}" y="${c[2] / 2 - 5}" width="${c[1]}" height="5" rx="2.5" fill="rgba(0,0,0,.25)"/>${k === "h" ? `<rect x="-8" y="${-c[2] / 2 - 5}" width="16" height="5" rx="2" fill="#B06E1A"/>` : ""}</g>`;
+  }
   function planTable(anime) {
-    const a = etat.adultes, e = etat.enfants, c = etat.chaises;
-    const places = []; for (let i = 0; i < a; i++) places.push("a"); for (let i = 0; i < e - c; i++) places.push("e"); for (let i = 0; i < c; i++) places.push("h");
-    const n = Math.min(places.length, 16);
-    const parCote = Math.max(2, Math.ceil(n / 2));
-    const pas = 46, tw = parCote * pas + 16, th = 54, W = Math.max(280, tw + 60), H = 150;
-    const tx = (W - tw) / 2, ty = (H - th) / 2;
-    let s = `<svg class="plan-table" viewBox="0 0 ${W} ${H}" role="img" aria-label="Table pour ${a} adulte${a > 1 ? "s" : ""}${e ? ` et ${e} enfant${e > 1 ? "s" : ""}` : ""}">`;
-    s += `<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="6" fill="#E9D7C0" stroke="#9C7651" stroke-width="2"/>`;
-    s += `<rect x="${tx + 6}" y="${ty + 6}" width="${tw - 12}" height="${th - 12}" rx="3" fill="none" stroke="#C9B095" stroke-dasharray="2 4"/>`;
-    for (let i = 0; i < n; i++) {
-      const haut = i % 2 === 0; const col = Math.floor(i / 2);
-      const cx = tx + 8 + pas / 2 + col * pas; const k = places[i];
-      const w = k === "a" ? 30 : 24, h = k === "a" ? 22 : 18;
-      const y = haut ? ty - h - 6 : ty + th + 6;
-      const fill = k === "a" ? "#FFFDF9" : k === "e" ? "#DCE6D3" : "#F7D9A8";
-      const nouvelle = anime && i >= chaisesAvant ? " nouvelle" : "";
-      s += `<g class="chaise${nouvelle}"><rect x="${cx - w / 2}" y="${y}" width="${w}" height="${h}" rx="6" fill="${fill}" stroke="#251C1B" stroke-width="1.6"/>`;
-      if (k === "h") s += `<rect x="${cx - 7}" y="${haut ? y + h - 7 : y + 2}" width="14" height="5" rx="2" fill="#A11F2B"/>`;
-      s += `</g>`;
-      // couverts
-      s += `<circle cx="${cx}" cy="${haut ? ty + 14 : ty + th - 14}" r="7" fill="#FFFDF9" stroke="#9C7651"/>`;
+    const places = []; for (let i = 0; i < etat.adultes; i++) places.push("a"); for (let i = 0; i < etat.enfants - etat.chaises; i++) places.push("e"); for (let i = 0; i < etat.chaises; i++) places.push("h");
+    const n = Math.min(places.length, 12); const W = 340, H = 200, cx = W / 2, cy = H / 2;
+    let s = `<svg class="plan2" viewBox="0 0 ${W} ${H}" role="img" aria-label="Plan de table : ${esc(libCouverts())}">`;
+    let tab = "", chaises = "", assiettes = "";
+    if (n <= 4) {
+      const R = 52; tab = `<circle cx="${cx}" cy="${cy}" r="${R + 6}" fill="rgba(37,28,27,.08)"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="#FFFDF9" stroke="#D8C8B6" stroke-width="1.5"/>`;
+      const ang = n === 1 ? [-90] : n === 2 ? [-90, 90] : n === 3 ? [-90, 30, 150] : [-90, 0, 90, 180];
+      ang.forEach((a, i) => { const r = a * Math.PI / 180; chaises += chaise(cx + Math.cos(r) * (R + 20), cy + Math.sin(r) * (R + 20), a + 90, places[i], anime && i >= chaisesAvant); assiettes += assiette(cx + Math.cos(r) * (R - 22), cy + Math.sin(r) * (R - 22), a + 90); });
+    } else {
+      const parCote = Math.ceil(n / 2), pas = Math.min(48, 270 / parCote), tw = parCote * pas + 18, th = 72, tx = cx - tw / 2, ty = cy - th / 2;
+      tab = `<rect x="${tx + 4}" y="${ty + 5}" width="${tw}" height="${th}" rx="10" fill="rgba(37,28,27,.08)"/><rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="10" fill="#FFFDF9" stroke="#D8C8B6" stroke-width="1.5"/>`;
+      for (let i = 0; i < n; i++) {
+        const haut = i % 2 === 0, col = Math.floor(i / 2), x = tx + 9 + pas / 2 + col * pas;
+        chaises += chaise(x, haut ? ty - 16 : ty + th + 16, haut ? 0 : 180, places[i], anime && i >= chaisesAvant);
+        assiettes += assiette(x, haut ? ty + 19 : ty + th - 19, haut ? 0 : 180);
+      }
     }
-    if (places.length > 16) s += `<text x="${W / 2}" y="${H - 4}" text-anchor="middle" font-size="12" fill="#6A5A55">+ ${places.length - 16}</text>`;
-    s += `</svg>`;
-    chaisesAvant = n;
-    return s;
+    s += tab + chaises + assiettes;
+    if (places.length > 12) s += `<text x="${W - 10}" y="${H - 8}" text-anchor="end" font-size="13" font-weight="700" fill="#6A5A55">+ ${places.length - 12}</text>`;
+    s += `</svg>`; chaisesAvant = n; return s;
   }
   function descJour() { const j = jourCourant(); if (!j) return ""; return `${j.n === 0 ? "aujourd'hui, " : j.n === 1 ? "demain, " : ""}${JOURS[j.wd]} ${j.d} ${MOIS[j.m - 1]}`; }
   function couverts() { const a = etat.adultes, e = etat.enfants; return `${a} adulte${a > 1 ? "s" : ""}${e ? ` + ${e} enfant${e > 1 ? "s" : ""}` : ""}${etat.chaises ? ` (${etat.chaises} chaise${etat.chaises > 1 ? "s" : ""} haute${etat.chaises > 1 ? "s" : ""})` : ""}`; }
-  function platsTexte() { return CONFIG.plats.filter(p => etat.plats[p.id]).map(p => `${etat.plats[p.id]} × ${p.nom}`); }
+  function platsTexte() { return CONFIG.plats.filter(p => etat.plats[p.id]).map(p => `${etat.plats[p.id]} × ${p.nom.replace(" (sur commande)", "")}`); }
   function noteTexte() { return [...etat.precisions, etat.remarque.trim()].filter(Boolean).join(" · "); }
   function texteBon() {
     const n = maintenant(); const L = [];
@@ -1109,42 +1267,27 @@ const CONFIG = {
     L.push(`SERVICE : ${etat.service ? CONFIG.services[etat.service].label : "?"} — arrivée ${etat.heure != null ? hTk(etat.heure) : "?"}`);
     L.push(`COUVERTS : ${couverts()}`);
     if (etat.occasion) L.push(`OCCASION : ${etat.occasion}`);
-    const pl = platsTexte();
-    if (pl.length || etat.temps) { L.push("--------------------------------"); L.push("EN CUISINE :"); pl.forEach(x => L.push(`  ${x}`)); if (etat.temps) L.push(`  Temps disponible : ${etat.temps}`); }
+    L.push("--------------------------------"); L.push("EN CUISINE :");
+    const pl = platsTexte(); if (pl.length) pl.forEach(x => L.push(`  ${x}`)); else L.push("  selon l'ardoise");
+    L.push(`  Temps disponible : ${etat.temps}`);
     L.push("--------------------------------");
     L.push(`NOM : ${etat.nom.trim()}`); L.push(`TÉL : ${telFmt(telPropre(etat.tel))}`);
     if (noteTexte()) L.push(`NOTE : ${noteTexte()}`);
-    L.push("--------------------------------");
-    L.push("Demande à confirmer par le restaurant.");
+    L.push("--------------------------------"); L.push("Demande à confirmer par le restaurant.");
     return L.join("\n");
   }
   function rendreTicket(anime) {
-    const vide = (s) => `<span class="vide">${esc(s)}</span>`;
-    const pl = platsTexte();
-    let h = `<h3>À l'Ours qui dort</h3><div class="num"><span>Bon de réservation n° ${etat.numero ? esc(etat.numero) : "— attribué à l'envoi"}</span><span>Démo</span></div>`;
-    h += planTable(anime);
+    const j = jourCourant(); const pl = platsTexte();
+    const quand = j && etat.heure != null ? `${Maj(j.n === 0 ? "aujourd'hui" : j.n === 1 ? "demain" : JOURS[j.wd] + " " + (j.d === 1 ? "1er" : j.d) + " " + MOIS[j.m - 1])} · ${hFr(etat.heure)}` : "Jour et heure à choisir";
+    const leg = [["#2E3537", "adulte"], etat.enfants - etat.chaises > 0 ? ["#4C6A3E", "enfant"] : null, etat.chaises ? ["#E09B3D", "chaise haute"] : null].filter(Boolean);
+    let h = `<div class="nappe"><div class="carton"><p class="res">Réservé</p><p class="nom${etat.nom.trim() ? "" : " vide"}">${etat.nom.trim() ? esc(etat.nom.trim()) : "votre nom"}</p><p class="quand">${esc(quand)}</p><p class="numero">${etat.numero ? "Demande n° " + esc(etat.numero) : "Démo · À l'Ours qui dort"}</p></div>${planTable(anime)}<p class="legende-plan">${leg.map(([c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join("")}</p></div>`;
     if (etat.envoye) h += `<div class="tampon">Demande prête<br><small>à confirmer</small></div>`;
-    h += `<dl><dt>Le</dt><dd>${etat.jour ? esc(Maj(descJour())) : vide("jour")}</dd><dt>Arrivée</dt><dd>${etat.service ? esc(CONFIG.services[etat.service].label.toLowerCase()) + " · " : ""}${etat.heure != null ? esc(hFr(etat.heure)) : vide("heure")}</dd><dt>Couverts</dt><dd>${esc(couverts())}</dd>${etat.occasion ? `<dt>Occasion</dt><dd>${esc(etat.occasion)}</dd>` : ""}</dl>`;
-    if (pl.length || etat.temps) h += `<hr><dl><dt>En cuisine</dt><dd>${pl.length ? pl.map(esc).join("<br>") : vide("—")}</dd>${etat.temps ? `<dt>Temps</dt><dd>${esc(etat.temps)}</dd>` : ""}</dl>`;
-    h += `<hr><dl><dt>Nom</dt><dd>${etat.nom.trim() ? esc(etat.nom.trim()) : vide("—")}</dd><dt>Tél.</dt><dd>${etat.tel.trim() ? esc(telFmt(telPropre(etat.tel))) : vide("—")}</dd>${noteTexte() ? `<dt>Note</dt><dd>${esc(noteTexte())}</dd>` : ""}</dl>`;
-    h += `<p class="pied">Demande confirmée par le restaurant, par téléphone.</p>`;
+    h += `<dl class="chev-infos"><dt>Couverts</dt><dd>${esc(couverts())}</dd>${etat.occasion ? `<dt>Occasion</dt><dd>${esc(etat.occasion)}</dd>` : ""}<dt>Cuisine</dt><dd>${pl.length ? pl.map(esc).join("<br>") : '<span class="gris">selon l\'ardoise</span>'}</dd><dt>Temps</dt><dd>${esc(Maj(libTemps()))}</dd><dt>Tél.</dt><dd>${etat.tel.trim() ? esc(telFmt(telPropre(etat.tel))) : '<span class="gris">à indiquer</span>'}</dd>${noteTexte() ? `<dt>Note</dt><dd>${esc(noteTexte())}</dd>` : ""}</dl>`;
     $("#ticket").innerHTML = h;
     const manque = valider();
     $("#envoyerMail").setAttribute("aria-disabled", manque.length ? "true" : "false");
-    majResumes();
-  }
-  function majResumes() {
-    const j = jourCourant();
-    const ok1 = !!(j && etat.heure != null);
-    const r1 = ok1 ? `${j.n === 0 ? "Aujourd'hui" : j.n === 1 ? "Demain" : Maj(JOURS[j.wd])} · ${hFr(etat.heure)}` : "";
-    const n = etat.adultes + etat.enfants; const ok2 = n >= 1 && n <= CONFIG.seuilGroupe;
-    const np = Object.values(etat.plats).reduce((a, b) => a + b, 0); const ok3 = np > 0 || !!etat.temps;
-    const ok4 = etat.nom.trim().length >= 2 && /^0\d{9}$/.test(telPropre(etat.tel));
-    [[1, ok1, r1], [2, ok2, `${n} couvert${n > 1 ? "s" : ""}`], [3, ok3, np ? `${np} part${np > 1 ? "s" : ""} réservée${np > 1 ? "s" : ""}` : (etat.temps || "")], [4, ok4, ok4 ? etat.nom.trim() : ""]].forEach(([i, ok, txt]) => {
-      const el = $(`#e${i} .n`); el.classList.toggle("fait", !!ok); el.textContent = ok ? "✓" : i; $(`#r${i}`).textContent = txt;
-    });
-    $("#e3 .legende-libre").hidden = ok3;
-    const b = $("#barreResa"); if (ok1 && ok4) { b.textContent = "Voir ma demande"; b.setAttribute("href", "#ticket"); } else { b.textContent = "Réserver"; b.setAttribute("href", "#reserver"); }
+    const b = $("#barreResa"); const okVous = etat.nom.trim().length >= 2 && /^0\d{9}$/.test(telPropre(etat.tel));
+    if (okVous && etat.heure != null) { b.textContent = "Voir ma demande"; b.setAttribute("href", "#ticket"); } else { b.textContent = "Réserver"; b.setAttribute("href", "#reserver"); }
   }
 
   function nouveauNumero() {
@@ -1154,7 +1297,10 @@ const CONFIG = {
   }
   function pret() {
     etat.tente = true; const manque = valider();
-    if (manque.length) { $("#retour").style.color = "var(--store-fonce)"; $("#retour").textContent = "Il manque : " + manque.join(", ") + "."; rendreTicket(); return false; }
+    if (manque.length) {
+      $("#retour").style.color = "var(--store-fonce)"; $("#retour").textContent = "Il manque : " + manque.join(", ") + ".";
+      rendreTicket(); const bad = $("[data-erreur] input"); if (bad) bad.focus(); return false;
+    }
     if (!etat.numero) etat.numero = nouveauNumero();
     try { if ($("#memo").checked) localStorage.setItem("demo-client", JSON.stringify({ nom: etat.nom.trim(), tel: etat.tel.trim() })); } catch (x) {}
     return true;
@@ -1178,6 +1324,7 @@ const CONFIG = {
     const repli = () => { const ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} ta.remove(); fini(); };
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(fini, repli); else repli();
   });
+  function rendreResa() { assurerChoix(); rendrePhrase(); rendrePanneau(false); rendrePrecisions(); rendreTicket(); }
 
   /* --- Événement : bandeau automatique --- */
   (function () {
@@ -1213,7 +1360,7 @@ const CONFIG = {
   function init() {
     majStatut(); majHoraires(); setInterval(majStatut, 30000);
     $("#avisListe").innerHTML = CONFIG.avis.map(a => `<figure class="avis reveal"><span class="exemple">Exemple</span><blockquote>${esc(a.texte)}</blockquote><figcaption>${esc(a.auteur)} · emplacement d'avis Google</figcaption></figure>`).join("");
-    rendreQuand(); rendreCompteurs(); rendreOccasions(); rendrePrecisions(); rendreTicket();
+    rendreResa();
     enteteSuit(); apparitions(); lancerScene();
   }
   init();
